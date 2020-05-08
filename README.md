@@ -1,4 +1,4 @@
-# _*Breaking Waves*_ *(Frontend)*
+# _*WAVES*_ *(Frontend)*
 
 ## _*Instructions how to start*_
 * Ask for API keys.
@@ -135,8 +135,8 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 ### *Git*
 The url to the repository and to the deployed project
 
-https://github.com/cgali/Breaking-waves-frontend
-https://github.com/cgali/breaking-waves-backend
+https://github.com/cgali/WAVE-frontend
+https://github.com/cgali/WAVE-backend
 
 [Deploy Link](http://heroku.com/)
 
