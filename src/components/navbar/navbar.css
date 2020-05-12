@@ -1,0 +1,38 @@
+.navbar-container {
+  display: flex;
+}
+
+.icon-button {
+  background-color: #067EED;
+  display: flex;
+  align-items: center;
+  border-color: black;
+}
+
+.icon-button:focus {
+  outline: none;
+}
+
+.icon-button:active {
+  background-color: white;
+}
+
+.icon-button > h3 {
+  margin-left: 0.3rem;
+}
+
+.surfers {
+  border-top-left-radius: 1rem;
+  border-right: 1px solid black;
+}
+
+.beaches {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+
+}
+
+.events {
+  border-top-right-radius: 1rem;
+  border-left: 1px solid black;
+}
