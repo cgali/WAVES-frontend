@@ -39,7 +39,7 @@ export default class Login extends Component {
           <img className="logo-waves" src="./logos/waves-logo.png" style={{ width: '20rem' }} alt="logo letters"/>
           <form className="login-form" onSubmit={this.handleSubmit}>
             <input
-              lassName="login-input"
+              className="login-input"
               type="text"
               name="email"
               id="email"

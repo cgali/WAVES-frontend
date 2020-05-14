@@ -4,11 +4,11 @@ import "../cart/cart.css";
 
 class Cart extends Component {
   render() {
-    const { img, name } = this.props;
+    const { img, name, secondaryName } = this.props;
     return(
       <div className="cart-container">
-          <img src={ img } alt="profile img"/>
-          <h2>{ name }</h2>
+          <img className="cart-image" src={ img } alt="profile img"/>
+          <h2>{ name } { secondaryName }</h2>
       </div>
     )
   }

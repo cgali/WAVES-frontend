@@ -41,6 +41,7 @@ class App extends Component {
     apiClient
       .login({ email, password })
       .then(({ data: user }) => {
+        console.log('app.js', user)
         this.setState({
           isLoggedIn: true,
           user,

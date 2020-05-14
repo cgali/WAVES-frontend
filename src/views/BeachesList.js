@@ -3,7 +3,7 @@ import Cart from "../components/cart/Cart";
 import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
 
-import "./css/surfersList.css"
+import "./css/beachesList.css"
 
 import apiClient from "../services/apiClient";
 
@@ -15,20 +15,20 @@ const STATUS = {
   ERROR: "❌ERROR❌",
 };
 
-class SurfersList extends Component {
+class BeachesList extends Component {
 
-  state = {
-    surfers: [],
+  state ={
+    beaches: [],
     status: STATUS.LOADING,
   }
 
-  loadSurfers = () => {
+  loadBeaches = () => {
     apiClient
       .surfersList()
       .then(( response ) => {
         console.log(response.data)
         this.setState({
-          surfers: response.data.surfers,
+          beaches: response.data,
           status: STATUS.LOADED,
         });
       })
@@ -42,14 +42,17 @@ class SurfersList extends Component {
   };
 
   componentDidMount() {
-    this.loadSurfers();
+    this.loadBeaches();
   }
 
-  listingSurfers = () => {
-    const { surfers } = this.state;
-    console.log(surfers)
-    return surfers.map((surfer, index) => {
-      return  <Cart key={ index } img={ surfer.image } name={ surfer.name } secondaryName={ surfer.surname }/>
+  listingBeaches = () => {
+    const { beaches } = this.state;
+    return beaches.map((beach, index) => {
+      return (
+        <div>
+          <Cart key={ index } img={ beach.image } name={ beach.name }/>
+        </div>
+      );
     });
   }
 
@@ -61,7 +64,7 @@ class SurfersList extends Component {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return this.listingSurfers();
+        return this.listingBeaches();
       case STATUS.ERROR:
         return <Error500 />
     }
@@ -69,4 +72,4 @@ class SurfersList extends Component {
 }
 
 
-export default SurfersList;
+export default BeachesList;
