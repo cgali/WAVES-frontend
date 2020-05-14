@@ -2,13 +2,13 @@
   display: flex;
   justify-content: space-between;
   background-color: #067EED;
-  width: 19rem;
+  width: 100%;
   border-bottom: 1px solid black;
 }
 
 .logos-box {
   background-color: #067EED;
-  border-color: #067EED;
+  border: none;
   padding: 0;
 }
 

@@ -1,0 +1,26 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.inside-top-part {
+  height: 50vh;
+  background-color: #067EED;
+}
+
+.outside-top-part {
+  height: 50vh;
+  background-color: white;
+  border-bottom-left-radius: 12.5rem;
+}
+
+.inside-bottom-part {
+  height: 50vh;
+  background-color: white;
+}
+
+.outisde-bottom-part {
+  height: 50vh;
+  background-color: #067EED;
+  border-top-right-radius: 12.5rem;
+}

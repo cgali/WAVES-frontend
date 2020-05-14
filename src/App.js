@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 import Login from "./views/Login";
 import Home from "./views/Home";
+import Loading from "./views/Loading";
 
 import { AnonRoute, PrivateRoute } from "./components";
 
@@ -56,7 +57,7 @@ class App extends Component {
     const { isLoggedIn, isLoading } = this.state;
     return (
       <div>
-        {isLoading && <div> Loading.......</div>}
+        {isLoading && <Loading />}
         {!isLoading && (
           <div className="App">
             <Switch>
