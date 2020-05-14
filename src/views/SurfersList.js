@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Cart from "../components/cart/Cart";
 import Loading from "../views/Loading";
+import Error500 from "../views/Error500";
 
 import "./css/surfersList.css"
 
@@ -15,7 +16,7 @@ const STATUS = {
 };
 
 class SurfersList extends Component {
-  
+
   state ={
     surfers: [],
     status: STATUS.LOADING,
@@ -24,9 +25,9 @@ class SurfersList extends Component {
   loadSurfers = () => {
     apiClient
       .surfersList()
-      .then(({ data }) => {
+      .then(({ response }) => {
         this.setState({
-          surfers: data,
+          surfers: response.data,
           status: STATUS.LOADED,
         });
       })
@@ -64,7 +65,7 @@ class SurfersList extends Component {
       case STATUS.LOADED:
         return this.listingSurfers();
       case STATUS.ERROR:
-        return <div>{ status }</div>;
+        return <Error500 />
     }
   }
 }
