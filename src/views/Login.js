@@ -19,7 +19,7 @@ export default class Login extends Component {
 
   cleanForm = () => {
     this.setState({
-      username: "",
+      email: "",
       password: "",
     });
   };
@@ -36,9 +36,10 @@ export default class Login extends Component {
     return (
       <div>
         <div className="login-container">
-          <img className="logo-waves" src="./logos/waves-logo.png" style={{ width: '23rem' }} alt="logo letters"/>
+          <img className="logo-waves" src="./logos/waves-logo.png" style={{ width: '20rem' }} alt="logo letters"/>
           <form className="login-form" onSubmit={this.handleSubmit}>
             <input
+              lassName="login-input"
               type="text"
               name="email"
               id="email"
@@ -47,6 +48,7 @@ export default class Login extends Component {
               onChange={this.handleChange}
             />
             <input
+              className="login-input"
               type="password"
               name="password"
               id="password"
@@ -57,8 +59,8 @@ export default class Login extends Component {
             <input className="input-button" type="submit" value="Enter" />
           </form>
           <p className="link-signup">No account yet?<br/>Sign up here!</p>
-          <div className="footer">
-          <img  style={{ width: '2rem' }} src="./logos/image-logo.gif" alt=""/>
+          <div className="login-footer">
+            <img  style={{ width: '2rem' }} src="./logos/image-logo.gif" alt=""/>
             <p>© WAVES Trademark</p>
           </div>
         </div>

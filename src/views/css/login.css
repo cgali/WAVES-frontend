@@ -4,17 +4,17 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  margin: 21% 0 0 4%;
+  margin: 25% 0 0 7%;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3rem;
+  margin-top: 5.5rem;
 }
 
-input {
+.login-input {
   border: 1px solid black;
   border-radius: 1rem;
   text-align: center;
@@ -43,10 +43,10 @@ input:first-child {
   color: white;
 }
 
-.footer {
+.login-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 0.8rem;
-  margin-top: 3rem;
+  margin-top: 3.6rem;
 }
