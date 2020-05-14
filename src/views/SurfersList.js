@@ -15,6 +15,7 @@ const STATUS = {
 };
 
 class SurfersList extends Component {
+  
   state ={
     surfers: [],
     status: STATUS.LOADING,
@@ -67,5 +68,6 @@ class SurfersList extends Component {
     }
   }
 }
+
 
 export default SurfersList;
