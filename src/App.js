@@ -4,11 +4,12 @@ import { Switch, Route } from "react-router-dom";
 import Login from "./views/Login";
 import Home from "./views/Home";
 import Loading from "./views/Loading";
+import Protected from "./views/Protected";
 
 import { AnonRoute, PrivateRoute } from "./components";
 
 import apiClient from "./services/apiClient";
-import Protected from "./views/Protected";
+
 
 class App extends Component {
   state = {
@@ -36,9 +37,9 @@ class App extends Component {
       });
   }
 
-  handleLogin = ({ username, password }) => {
+  handleLogin = ({ email, password }) => {
     apiClient
-      .login({ username, password })
+      .login({ email, password })
       .then(({ data: user }) => {
         this.setState({
           isLoggedIn: true,
