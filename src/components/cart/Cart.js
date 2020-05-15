@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import "../cart/cart.css";
-
+import { Link } from "react-router-dom";
 
 class Cart extends Component {
   render() {
-    const { img, name, secondaryName } = this.props;
+    const { img, name, secondaryName, date, link } = this.props;
     return(
       <div className="cart-container">
-          <img className="cart-image" src={ img } alt="profile img"/>
-          <h2>{ name } { secondaryName }</h2>
+        <Link to={ link } ><img className="cart-image" src={ img } alt="profile img"/></Link>
+        <Link to={ link } ><h2 className="cart-title">{ name } { secondaryName }</h2></Link>
+        
+        <h2>{ date }</h2>
       </div>
     )
   }

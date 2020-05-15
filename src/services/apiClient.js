@@ -95,7 +95,7 @@ class ApiClient {
     return this.apiClient.get("/events-list")
   }
 
-  eventsProfile(id) {
+  eventProfile(id) {
     return this.apiClient.get(`/events-list/${id}`);
   }
 

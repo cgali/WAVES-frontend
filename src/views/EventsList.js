@@ -3,7 +3,7 @@ import Cart from "../components/cart/Cart";
 import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
 
-import "./css/beachesList.css"
+import "./css/eventsList.css"
 
 import apiClient from "../services/apiClient";
 
@@ -15,25 +15,24 @@ const STATUS = {
   ERROR: "❌ERROR❌",
 };
 
-class BeachesList extends Component {
+class EventsList extends Component {
 
   state ={
-    beaches: [],
+    events: [],
     status: STATUS.LOADING,
   }
 
-  loadBeaches = () => {
+  loadEvents = () => {
     apiClient
-      .beachesList()
+      .eventsList()
       .then(( response ) => {
         console.log(response.data)
         this.setState({
-          beaches: response.data.beaches,
+          events: response.data.events,
           status: STATUS.LOADED,
         });
       })
       .catch((error) => {
-        console.log(error)
         this.setState({
           error: error.name,
           status: STATUS.ERROR,
@@ -42,15 +41,15 @@ class BeachesList extends Component {
   };
 
   componentDidMount() {
-    this.loadBeaches();
+    this.loadEvents();
   }
 
-  listingBeaches = () => {
-    const { beaches } = this.state;
-    return beaches.map((beach, index) => {
+  listingEvents = () => {
+    const { events } = this.state;
+    return events.map((event, index) => {
       return (
         <div>
-          <Cart key={ index } img={ beach.image } name={ beach.name }/>
+          <Cart key={ index } img={ event.image } name={ event.title } date={ event.date }/>
         </div>
       );
     });
@@ -64,7 +63,7 @@ class BeachesList extends Component {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return this.listingBeaches();
+        return this.listingEvents();
       case STATUS.ERROR:
         return <Error500 />
     }
@@ -72,4 +71,4 @@ class BeachesList extends Component {
 }
 
 
-export default BeachesList;
+export default EventsList;

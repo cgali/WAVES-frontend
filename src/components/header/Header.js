@@ -8,8 +8,8 @@ class Header extends Component {
     return (
       <div className="header-container">
         <button className="logos-box">
-          <img clasname="logos" style={{ width: "2.5rem", marginLeft: "0.5rem"}} src="./logos/image-logo.gif" alt="logo img"/>
-          <img clasname="logos" style={{ width: "6.5rem", marginLeft: "0.5rem"}} src="./logos/waves-logo.png" alt="logo letter"/>
+          <img clasname="logos" style={{ width: "2.5rem", marginLeft: "0.5rem"}} src="../logos/image-logo.gif" alt="logo img"/>
+          <img clasname="logos" style={{ width: "6.5rem", marginLeft: "0.5rem"}} src="../logos/waves-logo.png" alt="logo letter"/>
         </button>
         <button className="img-profile-box"><img src={ profileImage } alt="profile"/></button>
       </div>

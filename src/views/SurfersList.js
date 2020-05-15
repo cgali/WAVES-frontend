@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Cart from "../components/cart/Cart";
 import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
+import Navbar from "../components/navbar/Navbar";
+import Header from "../components/header/Header";
 
 import "./css/surfersList.css"
 
@@ -49,7 +51,7 @@ class SurfersList extends Component {
     const { surfers } = this.state;
     console.log(surfers)
     return surfers.map((surfer, index) => {
-      return  <Cart key={ index } img={ surfer.image } name={ surfer.name } secondaryName={ surfer.surname }/>
+      return <Cart key={ index } img={ surfer.image } name={ surfer.name } secondaryName={ surfer.surname } link={`/surfers-list/${surfer._id}`}/>
     });
   }
 
@@ -61,7 +63,11 @@ class SurfersList extends Component {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return this.listingSurfers();
+        return <div>
+          <Header />
+          { this.listingSurfers() }
+          <Navbar />
+        </div> 
       case STATUS.ERROR:
         return <Error500 />
     }

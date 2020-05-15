@@ -5,10 +5,13 @@ import Login from "./views/Login";
 import Home from "./views/Home";
 import Loading from "./views/Loading";
 import Protected from "./views/Protected";
+import SurfersList from "./views/SurfersList";
+import SurferProfile from "./views/SurferProfile";
 
 import { AnonRoute, PrivateRoute } from "./components";
 
 import apiClient from "./services/apiClient";
+
 
 
 class App extends Component {
@@ -67,9 +70,13 @@ class App extends Component {
               <AnonRoute exact path={"/login"} isLoggedIn={isLoggedIn}>
                 <Login onLogin={this.handleLogin} />
               </AnonRoute>
-              <PrivateRoute exact path={"/protected"} isLoggedIn={isLoggedIn}>
-                <Protected />
-              </PrivateRoute>
+              <PrivateRoute exact path={"/protected"} isLoggedIn={isLoggedIn} component={ Protected } />
+              <PrivateRoute exact path={"/surfers-list"} isLoggedIn={isLoggedIn} component={ SurfersList } />
+              <PrivateRoute exact path={"/surfers-list/:id"} isLoggedIn={isLoggedIn} component={ SurferProfile } />
+              <PrivateRoute exact path={"/beaches-list"} isLoggedIn={isLoggedIn} component={ BeachesList } />
+              <PrivateRoute exact path={"/beaches-list/:id"} isLoggedIn={isLoggedIn} component={ BeachProfile } />
+              <PrivateRoute exact path={"/events-list"} isLoggedIn={isLoggedIn} component={ EventsList } />
+              <PrivateRoute exact path={"/events-list/:id"} isLoggedIn={isLoggedIn} component={ EventProfile } />
             </Switch>
           </div>
         )}
