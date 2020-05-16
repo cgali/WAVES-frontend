@@ -66,7 +66,7 @@ class BeachesList extends Component {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return <div>
+        return <div className="beaches-list-container">
           { this.listingBeaches() }
       </div> 
       case STATUS.ERROR:

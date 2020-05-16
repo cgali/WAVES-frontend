@@ -46,7 +46,7 @@ class SurferProfile extends Component {
 
     if (surfer !== undefined) {
       return(
-        <div>
+        <div className="surfer-profile-container">
           <div>
             <img src={ surfer.image} alt="surfer"/>
             <section>

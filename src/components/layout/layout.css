@@ -1,0 +1,107 @@
+.layout-container {
+  position: fixed;
+  overflow: scroll;
+  width: 100%;
+  height: 100vh;
+  z-index: 2;
+}
+
+/*************
+*** HEADER ***
+*************/
+
+.header-box {
+  display: flex;
+  position: fixed;
+  height: 3.2rem;
+  justify-content: space-between;
+  background-color: #067EED;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+.logos-box {
+  display: flex;
+  align-items: center;
+  background-color: #067EED;
+  border: none;
+  padding: 0;
+}
+
+.logos-box:focus {
+  outline: none;
+}
+
+.logos-box:active {
+  background-color: white;
+  border-top-right-radius: 1rem;
+  border-color: white;
+}
+
+.logos {
+  background-color: #067EED;
+}
+
+/*************
+*** NAVBAR ***
+*************/
+
+.navbar-box {
+  display: flex;
+  width: 100%;
+  height: 2.5rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.img-profile-box {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 1.5rem;
+  margin: 0.25rem;
+  margin-right: 0.5rem;
+  border: 0;
+}
+
+.img-profile-box:focus {
+  outline: none;
+}
+
+.icon-button {
+  background-color: #067EED;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: black;
+  width: 100%;
+}
+
+.icon-button:focus {
+  outline: none;
+}
+
+.icon-button:active {
+  background-color: white;
+}
+
+.icon-button > h3 {
+  margin: 0.7rem 0 0.7rem 0.3rem;
+  font-size: 1rem;
+}
+
+.surfers {
+  border-top-left-radius: 1rem;
+  border-right: 1px solid black;
+}
+
+.beaches {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+
+}
+
+.events {
+  border-top-right-radius: 1rem;
+  border-left: 1px solid black;
+}

@@ -47,10 +47,11 @@ class SurfersList extends Component {
 
   listingSurfers = () => {
     const { surfers } = this.state;
-    console.log(surfers)
     return surfers.map((surfer, index) => {
-      return <Cart key={ index } img={ surfer.image } name={ surfer.name } secondaryName={ surfer.surname } link={`/surfers-list/${surfer._id}`}/>
-    });
+      return (<div>
+        <Cart key={ index } img={ surfer.image } name={ surfer.name } secondaryName={ surfer.surname } link={`/surfers-list/${surfer._id}`}/>
+        </div>
+    )});
   }
 
   render() {
@@ -61,7 +62,7 @@ class SurfersList extends Component {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return <div>
+        return <div className="surfers-list-container">
           { this.listingSurfers() }
         </div> 
       case STATUS.ERROR:

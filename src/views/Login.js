@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Background from '../components/background/Background';
 import './css/login.css';
+import { Link } from "react-router-dom";
 
 export default class Login extends Component {
   state = {
@@ -58,7 +59,7 @@ export default class Login extends Component {
             />
             <input className="input-button" type="submit" value="Enter" />
           </form>
-          <p className="link-signup">No account yet?<br/>Sign up here!</p>
+          <Link className="link-signup" to="/signup">No account yet?<br/>Sign up here!</Link>
           <div className="login-footer">
             <img  style={{ width: '2rem' }} src="./logos/image-logo.gif" alt=""/>
             <p>© WAVES Trademark</p>

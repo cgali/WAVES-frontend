@@ -65,7 +65,7 @@ class EventsList extends Component {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return <div>
+        return <div className="events-list-container">
           { this.listingEvents() }
         </div> 
       case STATUS.ERROR:

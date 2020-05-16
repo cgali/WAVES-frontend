@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Error500 from "../views/Error500";
-import Navbar from "../components/navbar/Navbar";
-import Header from "../components/header/Header";
 
 
 import "./css/surferProfile.css";
@@ -31,7 +29,7 @@ class BeachProfile extends Component {
       .then((response) => {
         console.log("data", response.data);
         this.setState({
-          surfer: response.data.beach,
+          beach: response.data.beach,
           status: STATUS.LOADED,
         });
       })
@@ -49,7 +47,6 @@ class BeachProfile extends Component {
     if (beach !== undefined) {
       return(
         <div>
-          <Header />
           <div>
             <img src={ beach.image} alt="beach"/>
             <section>
@@ -59,7 +56,7 @@ class BeachProfile extends Component {
                 <div>
                   <p><strong>Waves:</strong></p>
                   <ul>
-                    {beach.typeOfWaves.map((waves, i) => {
+                    {beach.typesOfWaves.map((waves, i) => {
                       return (
                         <li key={i}>
                           <p>{waves}</p>
@@ -68,14 +65,25 @@ class BeachProfile extends Component {
                     })}
                   </ul>
                 </div>
-                <p><strong>Background:</strong> { beach.beachBackground }.</p>
+                <div>
+                  <p><strong>Background:</strong></p>
+                  <ul>
+                      {beach.beachBackground.map((background, i) => {
+                        return (
+                          <li key={i}>
+                            <p>{background}</p>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                </div>
+               
                 <p><strong>Social Environment:</strong> { beach.socialEnvironment}.</p>
                 <p><strong>Beaches:</strong> { beach.description}</p>
               </div>
             </section>
           </div>
           <Link to="/beaches-list">Back</Link>
-          <Navbar />
         </div>
       ) 
     } 
@@ -89,8 +97,8 @@ class BeachProfile extends Component {
       case STATUS.LOADING:
         return <div>{ status }</div>;
       case STATUS.LOADED:
-        return <div>
-                { this.surferProfile() }
+        return <div className="beach-profile-container">
+                { this.beachProfile() }
               </div>
       case STATUS.ERROR:
         return <Error500 />;
