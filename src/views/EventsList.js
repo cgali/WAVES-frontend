@@ -47,9 +47,11 @@ class EventsList extends Component {
   listingEvents = () => {
     const { events } = this.state;
     return events.map((event, index) => {
+      const eventDate = new Date(event.date)
+      const formatDate = `${eventDate.getDate()} - ${eventDate.getMonth()} - ${eventDate.getFullYear()}`
       return (
         <div>
-          <Cart key={ index } img={ event.image } name={ event.title } date={ event.date }/>
+          <Cart key={ index } img={ event.image } name={ event.title } date={ formatDate } link={`/events-list/${event._id}`}/>
         </div>
       );
     });
@@ -63,7 +65,9 @@ class EventsList extends Component {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return this.listingEvents();
+        return <div>
+          { this.listingEvents() }
+        </div> 
       case STATUS.ERROR:
         return <Error500 />
     }

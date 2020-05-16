@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Error500 from "../views/Error500";
+import Navbar from "../components/navbar/Navbar";
+import Header from "../components/header/Header";
 
 
 import "./css/surferProfile.css";
@@ -15,21 +17,21 @@ const STATUS = {
   ERROR: "❌ERROR❌",
 };
 
-class SurferProfile extends Component {
+class BeachProfile extends Component {
   state = {
-    surfer: "",
+    beach: "",
     status: STATUS.LOADING,
   }
 
   componentDidMount() {
-    let surferId = this.props.match.params.id;
-    console.log(surferId)
+    let beachId = this.props.match.params.id;
+    console.log(beachId)
     apiClient
-      .surferProfile(surferId)
+      .beachProfile(beachId)
       .then((response) => {
         console.log("data", response.data);
         this.setState({
-          surfer: response.data.surfer,
+          surfer: response.data.beach,
           status: STATUS.LOADED,
         });
       })
@@ -41,23 +43,23 @@ class SurferProfile extends Component {
       });
   }
 
-  surferProfile = () => {
-    const { surfer } = this.state;
+  beachProfile = () => {
+    const { beach } = this.state;
 
-    if (surfer !== undefined) {
+    if (beach !== undefined) {
       return(
         <div>
+          <Header />
           <div>
-            <img src={ surfer.image} alt="surfer"/>
+            <img src={ beach.image} alt="beach"/>
             <section>
-              <h2>{ surfer.name} { surfer.surname }</h2>
+              <h2>{ beach.name}</h2>
+              <h2>Features</h2>
               <div>
-                <p><strong>Level:</strong> { surfer.level }.</p>
-                <p><strong>Favorite board:</strong> { surfer.favoriteBoard }.</p>
                 <div>
                   <p><strong>Waves:</strong></p>
                   <ul>
-                    {surfer.typeOfWaves.map((waves, i) => {
+                    {beach.typeOfWaves.map((waves, i) => {
                       return (
                         <li key={i}>
                           <p>{waves}</p>
@@ -66,34 +68,14 @@ class SurferProfile extends Component {
                     })}
                   </ul>
                 </div>
-                <div>
-                  <p><strong>Beaches:</strong></p>
-                  <ul>
-                    {surfer.frequentsBeaches.map((freqBeaches, i) => {
-                      return (
-                        <li key={i}>
-                          <p>{freqBeaches}</p>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-                <div>
-                  <p><strong>Events:</strong></p>
-                  <ul>
-                    {surfer.events.map((event, i) => {
-                      return (
-                        <li key={i}>
-                          <Link to={`/eventProfile/${event._id}`}>{event.title}</Link>
-                        </li>
-                      )
-                    })}
-                </ul>
-                </div>
+                <p><strong>Background:</strong> { beach.beachBackground }.</p>
+                <p><strong>Social Environment:</strong> { beach.socialEnvironment}.</p>
+                <p><strong>Beaches:</strong> { beach.description}</p>
               </div>
             </section>
           </div>
-          <Link to="/surfers-list">Back</Link>
+          <Link to="/beaches-list">Back</Link>
+          <Navbar />
         </div>
       ) 
     } 
@@ -116,4 +98,4 @@ class SurferProfile extends Component {
   }
 }
 
-export default SurferProfile;
+export default BeachProfile;

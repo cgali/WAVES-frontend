@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Cart from "../components/cart/Cart";
 import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
+import { withRouter } from 'react-router-dom'
 
 import "./css/beachesList.css"
 
@@ -50,7 +51,7 @@ class BeachesList extends Component {
     return beaches.map((beach, index) => {
       return (
         <div>
-          <Cart key={ index } img={ beach.image } name={ beach.name }/>
+          <Cart key={ index } img={ beach.image } name={ beach.name } link={`/beaches-list/${beach._id}`}/>
         </div>
       );
     });
@@ -58,13 +59,16 @@ class BeachesList extends Component {
 
   render() {
     const { status } = this.state;
+    console.log(this.props)
 
     // eslint-disable-next-line default-case
     switch (status) {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return this.listingBeaches();
+        return <div>
+          { this.listingBeaches() }
+      </div> 
       case STATUS.ERROR:
         return <Error500 />
     }
@@ -72,4 +76,4 @@ class BeachesList extends Component {
 }
 
 
-export default BeachesList;
+export default withRouter(BeachesList);
