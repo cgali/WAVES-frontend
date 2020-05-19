@@ -73,8 +73,9 @@ class EventProfile extends Component {
                       <ul>
                         {event.participants.map((participant, i) => {
                           return (
+                            console.log("PARTICIPANT:", participant),
                             <li key={i}>
-                              <p>{participant}</p>
+                              <p>{participant.name} { participant.surname }</p>
                             </li>
                           )
                         })}
