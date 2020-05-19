@@ -85,8 +85,8 @@ class ApiClient {
     return this.apiClient.post(`/beaches-list/${id}/update-rate/${_id}`, body);
   }
 
-  deleteBeachRate(id, _id, body) {
-    return this.apiClient.post(`/beaches-list/${id}/delete-rate/${_id}`, body);
+  deleteBeachRate(id, _id) {
+    return this.apiClient.post(`/beaches-list/${id}/delete-rate/${_id}`);
   }
 
 // EVENTS => ROUTES
@@ -117,7 +117,7 @@ class ApiClient {
     return this.apiClient.post(`/events-list/${id}/participant`, body);
   }
 
-// BEACHES => REVIEW ROUTES
+// EVENTS => REVIEW ROUTES
 
   createEventReview(id, body) {
     return this.apiClient.post(`/events-list/${id}/add-review`, body);
@@ -127,8 +127,8 @@ class ApiClient {
     return this.apiClient.post(`/events-list/${id}/update-review/${_id}`, body);
   }
 
-  deleteEventReview(id, _id, body) {
-    return this.apiClient.post(`/events-list/${id}/delete-review/${_id}`, body);
+  deleteEventReview(id, _id) {
+    return this.apiClient.post(`/events-list/${id}/delete-review/${_id}`);
   }
 }
 

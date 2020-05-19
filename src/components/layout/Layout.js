@@ -4,8 +4,16 @@ import { Link } from "react-router-dom";
 
 
 class Layout extends Component {
+
+  handleLayoutLogout = (e) => {
+    const { onLogout } = this.props;
+    e.preventDefault();
+    onLogout()
+
+  }
   render() {
-    const { profileImage, children, isLoggedIn, onLogout } = this.props;
+
+    const { user, children, isLoggedIn } = this.props;
     return (
       <div className="layout-container">
         { isLoggedIn && 
@@ -14,8 +22,8 @@ class Layout extends Component {
             <img clasname="logos" style={{ width: "2.5rem", marginLeft: "0.5rem"}} src="../logos/image-logo.gif" alt="logo img"/>
             <img clasname="logos" style={{ width: "6.5rem", marginLeft: "0.5rem"}} src="../logos/waves-logo.png" alt="logo letter"/>
           </button>
-          <button onClick={onLogout}>LOGOUT</button>
-          <button className="img-profile-box"><img src={ profileImage } alt="profile"/></button>
+          <button className="logout-button" onClick={this.handleLayoutLogout}>LOGOUT</button>
+          <button className="layout-profile-button" ><img className="img-profile-box" src={ user.data.image } alt="profile"/></button>
         </header>
         }
         { children }

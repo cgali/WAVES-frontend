@@ -1,0 +1,17 @@
+.event-profile-container {
+  margin-bottom: 4rem;
+}
+
+.event-join-button {
+  background-color: rgb(2, 114, 206);
+  border-radius: 1rem;
+  font-size: 1.3rem;
+}
+.event-join-button:active {
+  transform: scaleX(10px);
+  box-shadow: 0 0 2px 1px black;
+}
+
+.event-join-button:focus {
+  outline: none;
+}

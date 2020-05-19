@@ -11,8 +11,10 @@ import BeachesList from "./views/BeachesList";
 import BeachProfile from "./views/BeachProfile";
 import EventsList from "./views/EventsList";
 import EventProfile from "./views/EventProfile";
+import UserProfile from "./views/UserProfile";
 
 import { AnonRoute, PrivateRoute } from "./components";
+import { UserContext } from "./context/UserContext";
 
 import apiClient from "./services/apiClient";
 import Layout from "./components/layout/Layout";
@@ -87,18 +89,21 @@ class App extends Component {
           <div className="App">
             <Layout isLoggedIn={isLoggedIn} onLogout={this.handleLogout} user={user}> 
               <Switch>
-                <Route exact path={"/"} component={Home} />
-                <AnonRoute exact path={"/login"} isLoggedIn={isLoggedIn}>
-                  <Login onLogin={this.handleLogin} />
-                </AnonRoute>
-                <PrivateRoute exact path={"/protected"} isLoggedIn={isLoggedIn} component={ Protected } />
-                <PrivateRoute exact path={"/logout"} isLoggedIn={isLoggedIn} component={ Login } />
-                <PrivateRoute exact path={"/surfers-list"} isLoggedIn={isLoggedIn} component={ SurfersList } />
-                <PrivateRoute exact path={"/surfers-list/:id"} isLoggedIn={isLoggedIn} component={ SurferProfile } />
-                <PrivateRoute exact path={"/beaches-list"} isLoggedIn={isLoggedIn} component={ BeachesList } />
-                <PrivateRoute exact path={"/beaches-list/:id"} isLoggedIn={isLoggedIn} component={ BeachProfile } />
-                <PrivateRoute exact path={"/events-list"} isLoggedIn={isLoggedIn} component={ EventsList } />
-                <PrivateRoute exact path={"/events-list/:id"} isLoggedIn={isLoggedIn} component={ EventProfile } />
+                <UserContext.Provider value={{ user: this.state.user }}>
+                  <Route exact path={"/"} component={Home} />
+                  <AnonRoute exact path={"/login"} isLoggedIn={isLoggedIn}>
+                    <Login onLogin={this.handleLogin} />
+                  </AnonRoute>
+                  <PrivateRoute exact path={"/protected"} isLoggedIn={isLoggedIn} component={ Protected } />
+                  <PrivateRoute exact path={"/logout"} isLoggedIn={isLoggedIn} component={ Login } />
+                  <PrivateRoute exact path={"/profile"} isLoggedIn={isLoggedIn} component={ UserProfile } />
+                  <PrivateRoute exact path={"/surfers-list"} isLoggedIn={isLoggedIn} component={ SurfersList } />
+                  <PrivateRoute exact path={"/surfers-list/:id"} isLoggedIn={isLoggedIn} component={ SurferProfile } />
+                  <PrivateRoute exact path={"/beaches-list"} isLoggedIn={isLoggedIn} component={ BeachesList } />
+                  <PrivateRoute exact path={"/beaches-list/:id"} isLoggedIn={isLoggedIn} component={ BeachProfile } />
+                  <PrivateRoute exact path={"/events-list"} isLoggedIn={isLoggedIn} component={ EventsList } />
+                  <PrivateRoute exact path={"/events-list/:id"} isLoggedIn={isLoggedIn} component={ EventProfile } />
+                </UserContext.Provider>
               </Switch>
             </Layout>
           </div>

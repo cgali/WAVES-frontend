@@ -42,6 +42,22 @@
   background-color: #067EED;
 }
 
+.img-profile-box {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 1.5rem;
+  margin: 0.20rem 0.30rem 0.25rem 0.25rem;
+  object-fit: cover;
+}
+
+.img-profile-box:focus {
+  outline: none;
+}
+
+.layout-profile-button {
+  padding: 0;
+}
+
 /*************
 *** NAVBAR ***
 *************/
@@ -53,19 +69,6 @@
   position: fixed;
   left: 0;
   bottom: 0;
-}
-
-.img-profile-box {
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 1.5rem;
-  margin: 0.25rem;
-  margin-right: 0.5rem;
-  border: 0;
-}
-
-.img-profile-box:focus {
-  outline: none;
 }
 
 .icon-button {
