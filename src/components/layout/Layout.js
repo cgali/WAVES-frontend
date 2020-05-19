@@ -23,7 +23,7 @@ class Layout extends Component {
             <img clasname="logos" style={{ width: "6.5rem", marginLeft: "0.5rem"}} src="../logos/waves-logo.png" alt="logo letter"/>
           </button>
           <button className="logout-button" onClick={this.handleLayoutLogout}>LOGOUT</button>
-          <button className="layout-profile-button" ><img className="img-profile-box" src={ user.data.image } alt="profile"/></button>
+          <Link className="layout-profile-button" to="/profile" ><img className="img-profile-box" src={ user.data.image } alt="profile"/></Link>
         </header>
         }
         { children }

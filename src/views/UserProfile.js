@@ -27,7 +27,7 @@ class UserProfile extends Component {
       .then((response) => {
         console.log("data", response.data);
         this.setState({
-          user: response.data.user,
+          user: response.data,
           status: STATUS.LOADED,
         });
       })
