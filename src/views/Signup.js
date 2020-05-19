@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Background from '../components/background/Background';
 import "./css/signup.css";
-import apiClient from "../services/apiClient";
 
 
 
@@ -24,14 +23,15 @@ class Signup extends Component {
     const { history } = this.props;
     console.log(history);
     const { name, surname, email, password } = this.state;
-    const { onLogin } = this.props;
-    if (name !== "", surname !== "", email !== "" && password !== "") {
+    const { onSignup } = this.props;
+    if (name !== "" && surname !== "" && email !== "" && password !== "") {
       onSignup({ name, surname, email, password });
-  };
+    };
+  }
 
   render() {
     const { name, surname, email, password} = this.state;
-    return(
+    return (
       <div>
         <div className="signup-container">
           <h2 className="title">Sign up</h2>

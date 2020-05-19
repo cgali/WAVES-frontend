@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 
 import Login from "./views/Login";
 import Home from "./views/Home";
@@ -34,9 +34,9 @@ class App extends Component {
       .whoami()
       .then((user) => {
         this.setState({
+          user,
           isLoading: false,
           isLoggedIn: true,
-          user,
         });
       })
       .catch((error) => {
@@ -54,8 +54,8 @@ class App extends Component {
       .then(({ data: user }) => {
         console.log('app.js', user)
         this.setState({
-          isLoggedIn: true,
           user,
+          isLoggedIn: true,
         });
       })
       .catch((error) => {
@@ -91,6 +91,7 @@ class App extends Component {
         this.setState({
           isLoggedIn: false,
         });
+        this.props.history.push('/login')
       })
       .catch((error) => {
         console.log(error)
@@ -117,7 +118,6 @@ class App extends Component {
                     <Signup onSignup={this.handleSignup} />
                   </AnonRoute>
                   <PrivateRoute exact path={"/protected"} isLoggedIn={isLoggedIn} component={ Protected } />
-                  <PrivateRoute exact path={"/logout"} isLoggedIn={isLoggedIn} component={ Login } />
                   <PrivateRoute exact path={"/profile"} isLoggedIn={isLoggedIn} component={ UserProfile } />
                   <PrivateRoute exact path={"/surfers-list"} isLoggedIn={isLoggedIn} component={ SurfersList } />
                   <PrivateRoute exact path={"/surfers-list/:id"} isLoggedIn={isLoggedIn} component={ SurferProfile } />
@@ -135,4 +135,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

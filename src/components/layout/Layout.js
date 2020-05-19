@@ -16,18 +16,18 @@ class Layout extends Component {
     const { user, children, isLoggedIn } = this.props;
     return (
       <div className="layout-container">
-        { isLoggedIn && 
+        { (isLoggedIn && user) && 
           <header className="header-box">
           <button className="logos-box">
             <img clasname="logos" style={{ width: "2.5rem", marginLeft: "0.5rem"}} src="../logos/image-logo.gif" alt="logo img"/>
             <img clasname="logos" style={{ width: "6.5rem", marginLeft: "0.5rem"}} src="../logos/waves-logo.png" alt="logo letter"/>
           </button>
           <button className="logout-button" onClick={this.handleLayoutLogout}>LOGOUT</button>
-          <Link className="layout-profile-button" to="/profile" ><img className="img-profile-box" src={ user.data.image } alt="profile"/></Link>
+          <Link className="layout-profile-button" to="/profile" ><img className="img-profile-box" src={ user.data && user.data.image } alt="profile"/></Link>
         </header>
         }
         { children }
-        { isLoggedIn &&
+        { (isLoggedIn && user) &&
         <nav className="navbar-box">
           <Link className="icon-button surfers" to="surfers-list">
             <img style={{ width: "2rem"}} src="../logos/surfer-icon.png" alt="icon"/>

@@ -20,6 +20,7 @@ class EventProfile extends Component {
   state = {
     event: "",
     status: STATUS.LOADING,
+    user: "",
   }
 
   componentDidMount() {
@@ -43,6 +44,7 @@ class EventProfile extends Component {
 
   handleJoinIn = (id) => {
     console.log("working")
+    console.log(id)
     apiClient
     .AddRemoveParticipant(id)
     .then((response) => {
