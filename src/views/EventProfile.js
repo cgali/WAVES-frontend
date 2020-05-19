@@ -56,7 +56,7 @@ class EventProfile extends Component {
     const formatDate = `${eventDate.getDate()} - ${eventDate.getMonth()} - ${eventDate.getFullYear()}`
 
     if (event !== undefined) {
-      return(
+      return (
         <UserContext.Consumer>
           {({ user }) => (
             <div className="event-profile-container">

@@ -12,6 +12,7 @@ import BeachProfile from "./views/BeachProfile";
 import EventsList from "./views/EventsList";
 import EventProfile from "./views/EventProfile";
 import UserProfile from "./views/UserProfile";
+import Signup from "./views/Signup";
 
 import { AnonRoute, PrivateRoute } from "./components";
 import { UserContext } from "./context/UserContext";
@@ -65,6 +66,24 @@ class App extends Component {
       });
   };
 
+  handleSignup = ({ name, surname, email, password }) => {
+    apiClient
+      .signup({ name, surname, email, password })
+      .then(({ data: user }) => {
+        console.log('app.js', user)
+        this.setState({
+          isLoggedIn: true,
+          user,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          isLoggedIn: false,
+          user: null,
+        });
+      });
+  };
+
   handleLogout = () => {
     apiClient
       .logout()
@@ -93,6 +112,9 @@ class App extends Component {
                   <Route exact path={"/"} component={Home} />
                   <AnonRoute exact path={"/login"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} />
+                  </AnonRoute>
+                  <AnonRoute exact path={"/signup"} isLoggedIn={isLoggedIn}>
+                    <Signup onSignup={this.handleSignup} />
                   </AnonRoute>
                   <PrivateRoute exact path={"/protected"} isLoggedIn={isLoggedIn} component={ Protected } />
                   <PrivateRoute exact path={"/logout"} isLoggedIn={isLoggedIn} component={ Login } />

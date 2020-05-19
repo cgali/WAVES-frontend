@@ -19,7 +19,7 @@ class ApiClient {
     return this.apiClient.post("/login", body);
   }
 
-  signUp(body) {
+  signup(body) {
     return this.apiClient.post("/signup", body);
   }
 
