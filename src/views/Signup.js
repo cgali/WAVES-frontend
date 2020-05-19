@@ -22,15 +22,11 @@ class Signup extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { history } = this.props;
+    console.log(history);
     const { name, surname, email, password } = this.state;
-    apiClient
-      .signUp({ name, surname, email, password })
-      .then(() => {
-        history.push("/profile");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const { onLogin } = this.props;
+    if (name !== "", surname !== "", email !== "" && password !== "") {
+      onSignup({ name, surname, email, password });
   };
 
   render() {
