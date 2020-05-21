@@ -16,6 +16,8 @@ const STATUS = {
   ERROR: "❌ERROR❌",
 };
 
+let eventId = "";
+
 class EventProfile extends Component {
   state = {
     event: "",
@@ -24,7 +26,7 @@ class EventProfile extends Component {
   }
 
   componentDidMount() {
-    let eventId = this.props.match.params.id;
+    eventId = this.props.match.params.id;
     apiClient
       .eventProfile(eventId)
       .then((response) => {
@@ -42,11 +44,11 @@ class EventProfile extends Component {
       });
   }
 
-  handleJoinIn = (id) => {
-    console.log("working")
+  handleJoinIn = (id, participant) => {
     console.log(id)
+    console.log(participant)
     apiClient
-    .AddRemoveParticipant(id)
+    .AddRemoveParticipant(id, participant)
     .then((response) => {
       console.log("response:",response)
     })
@@ -55,7 +57,7 @@ class EventProfile extends Component {
   eventProfile = () => {
     const { event } = this.state;
     const eventDate = new Date(event.date);
-    const formatDate = `${eventDate.getDate()} - ${eventDate.getMonth()} - ${eventDate.getFullYear()}`
+    const formatEventDate = `${eventDate.getDate()}-${eventDate.getMonth()}-${eventDate.getFullYear()}`
 
     if (event !== undefined) {
       return (
@@ -67,7 +69,8 @@ class EventProfile extends Component {
                 <section>
                   <h2>{ event.name}</h2>
                   <div>
-                    <p><strong>Date:</strong> { formatDate }.</p>
+                    <p><strong>Creator:</strong> <Link to={`/surfers-list/${event.owner._id}`}>{ event.owner.name } { event.owner.surname }</Link></p>
+                    <p><strong>Date:</strong> { formatEventDate }.</p>
                     <p><strong>Beach:</strong> { event.beach }.</p>
                     <p><strong>Description:</strong> { event.description }.</p>
                     <div>
@@ -75,15 +78,32 @@ class EventProfile extends Component {
                       <ul>
                         {event.participants.map((participant, i) => {
                           return (
-                            console.log("PARTICIPANT:", participant),
                             <li key={i}>
-                              <p>{participant.name} { participant.surname }</p>
+                              <Link to={`/surfers-list/${participant._id}`}><p>{participant.name} { participant.surname }</p></Link>
                             </li>
                           )
                         })}
                       </ul>
                     </div>
-                    <button className="event-join-button" onClick={() => this.handleJoinIn(user.data._id) }>Join in</button>
+                    <div>
+                      <p><strong>Reviews:</strong></p>
+                      <ul>
+                        
+                        {event.reviews.map((review, i) => {
+                          const reviewDate = new Date(review.created_at);
+                          const formatReviewDate = `${reviewDate.getDate()}-${reviewDate.getMonth()}-${reviewDate.getFullYear()} // ${reviewDate.getHours()}:${reviewDate.getMinutes()}:${reviewDate.getSeconds()}`
+                          return (
+                            <li key={i}>
+                              <Link to={`/surfers-list/${review.owner._id}`}><h3><strong>{ review.owner.name } { review.owner.surname }</strong></h3></Link>
+                              <p><strong>{ review.title }</strong></p>
+                              <p>{ review.description }</p>
+                              <p>{ formatReviewDate }</p>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                    <button className="event-join-button" onClick={ () => this.handleJoinIn(eventId, user.data._id) }>Join in</button>
                   </div>
                 </section>
               </div>
