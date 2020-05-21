@@ -24,6 +24,8 @@
   display: flex;
   align-items: center;
   background-color: #067EED;
+  width: 10.5rem;
+  border-top-right-radius: 1rem;
   border: none;
   padding: 0;
 }
@@ -32,14 +34,16 @@
   outline: none;
 }
 
-.logos-box:active {
+.layout-burguer-menu {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  margin-top: 3.2rem;
+  padding: 0 3.11rem 1rem 2.5rem;
   background-color: white;
-  border-top-right-radius: 1rem;
-  border-color: white;
-}
-
-.logos {
-  background-color: #067EED;
+  line-height: 2rem;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 
 .img-profile-box {

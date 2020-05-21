@@ -8,7 +8,7 @@ function PrivateRoute({ component: Component, isLoggedIn, ...rest }) {
       {...rest}
       render={(props) =>
         isLoggedIn ? (
-          <Component {...props} />
+          <Component className="private-route-component" {...props} />
         ) : (
           <Redirect
             to={{
