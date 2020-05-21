@@ -51,7 +51,7 @@ class Layout extends Component {
         { children }
         { (isLoggedIn && user) &&
           <nav className="navbar-box">
-            <Link className="icon-button surfers" to="surfers-list">
+            <Link className="icon-button surfers" to="/surfers-list">
               <img style={{ width: "2rem"}} src="../logos/surfer-icon.png" alt="icon"/>
               <h3>Surfers</h3>
             </Link>

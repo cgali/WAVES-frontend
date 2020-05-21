@@ -56,9 +56,9 @@ class BeachProfile extends Component {
                 <div>
                   <p><strong>Waves:</strong></p>
                   <ul>
-                    {beach.typesOfWaves.map((waves, i) => {
+                    {beach.typesOfWaves.map((waves, index) => {
                       return (
-                        <li key={i}>
+                        <li key={`${waves}_${index}`}>
                           <p>{waves}</p>
                         </li>
                       )

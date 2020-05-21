@@ -50,8 +50,8 @@ class BeachesList extends Component {
     const { beaches } = this.state;
     return beaches.map((beach, index) => {
       return (
-        <div>
-          <Cart key={ index } img={ beach.image } name={ beach.name } link={`/beaches-list/${beach._id}`}/>
+        <div key={`${beach.name}_${index}`}>
+          <Cart img={ beach.image } name={ beach.name } link={`/beaches-list/${beach._id}`}/>
         </div>
       );
     });

@@ -48,8 +48,9 @@ class SurfersList extends Component {
   listingSurfers = () => {
     const { surfers } = this.state;
     return surfers.map((surfer, index) => {
-      return (<div>
-        <Cart key={ index } img={ surfer.image } name={ surfer.name } secondaryName={ surfer.surname } link={`/surfers-list/${surfer._id}`}/>
+      return (
+        <div key={`${surfer.name}_${index}`}>
+          <Cart img={ surfer.image } name={ surfer.name } secondaryName={ surfer.surname } link={`/surfers-list/${surfer._id}`}/>
         </div>
     )});
   }

@@ -22,7 +22,7 @@ class EventProfile extends Component {
   state = {
     event: "",
     status: STATUS.LOADING,
-    user: "",
+    updating: false,
   }
 
   componentDidMount() {
@@ -44,11 +44,11 @@ class EventProfile extends Component {
       });
   }
 
-  handleJoinIn = (id, participant) => {
-    console.log(id)
-    console.log(participant)
+  handleJoinIn = (eventId, userId) => {
+    console.log(eventId)
+    console.log('participant', userId)
     apiClient
-    .AddRemoveParticipant(id, participant)
+    .AddRemoveParticipant(eventId, { participant: userId })
     .then((response) => {
       console.log("response:",response)
     })
@@ -69,31 +69,35 @@ class EventProfile extends Component {
                 <section>
                   <h2>{ event.name}</h2>
                   <div>
-                    <p><strong>Creator:</strong> <Link to={`/surfers-list/${event.owner._id}`}>{ event.owner.name } { event.owner.surname }</Link></p>
+                    <p><strong>Created by:</strong> <Link to={`/surfers-list/${event.owner._id}`}>{ event.owner.name } { event.owner.surname }</Link></p>
                     <p><strong>Date:</strong> { formatEventDate }.</p>
                     <p><strong>Beach:</strong> { event.beach }.</p>
                     <p><strong>Description:</strong> { event.description }.</p>
                     <div>
                       <p><strong>Participants:</strong></p>
                       <ul>
-                        {event.participants.map((participant, i) => {
+                        {event.participants.map((participant, index) => {
                           return (
-                            <li key={i}>
+                            <li key={`${participant.name}_${index}`}>
                               <Link to={`/surfers-list/${participant._id}`}><p>{participant.name} { participant.surname }</p></Link>
                             </li>
                           )
                         })}
                       </ul>
                     </div>
+                  </div>
+                </section>
+                <section>
+                  <div>
                     <div>
                       <p><strong>Reviews:</strong></p>
                       <ul>
                         
-                        {event.reviews.map((review, i) => {
+                        {event.reviews.map((review, index) => {
                           const reviewDate = new Date(review.created_at);
                           const formatReviewDate = `${reviewDate.getDate()}-${reviewDate.getMonth()}-${reviewDate.getFullYear()} // ${reviewDate.getHours()}:${reviewDate.getMinutes()}:${reviewDate.getSeconds()}`
                           return (
-                            <li key={i}>
+                            <li key={`${review.owner.name}_${index}`}>
                               <Link to={`/surfers-list/${review.owner._id}`}><h3><strong>{ review.owner.name } { review.owner.surname }</strong></h3></Link>
                               <p><strong>{ review.title }</strong></p>
                               <p>{ review.description }</p>
@@ -103,9 +107,14 @@ class EventProfile extends Component {
                         })}
                       </ul>
                     </div>
-                    <button className="event-join-button" onClick={ () => this.handleJoinIn(eventId, user.data._id) }>Join in</button>
+                    <button className="event-join-button" onClick={ () => this.handleJoinIn(event._id, user.data._id) }>Join in</button>
                   </div>
                 </section>
+                { user.data._id === event.owner._id && ( 
+                    <>
+                      <button className="event-update-button" onClick="">Update</button>
+                      <button className="event-delete-button" onClick="">Delete</button>
+                    </> )}
               </div>
               <Link to="/events-list">Back</Link>
             </div>

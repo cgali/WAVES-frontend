@@ -48,10 +48,10 @@ class EventsList extends Component {
     const { events } = this.state;
     return events.map((event, index) => {
       const eventDate = new Date(event.date)
-      const formatDate = `${eventDate.getDate()} - ${eventDate.getMonth()} - ${eventDate.getFullYear()}`
+      const formatDate = `${eventDate.getDate()}-${eventDate.getMonth()}-${eventDate.getFullYear()}`
       return (
-        <div>
-          <Cart key={ index } img={ event.image } name={ event.title } date={ formatDate } link={`/events-list/${event._id}`}/>
+        <div key={`${event.name}_${index}`}>
+          <Cart  img={ event.image } name={ event.title } date={ formatDate } link={`/events-list/${event._id}`}/>
         </div>
       );
     });
