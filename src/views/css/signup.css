@@ -28,6 +28,10 @@ input {
   height: 1.7rem;
 }
 
+input:focus {
+  outline: none;
+}
+
 .input-button {
   margin-top: 3rem;
   border: 1px solid white;

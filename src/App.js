@@ -13,6 +13,7 @@ import EventsList from "./views/EventsList";
 import EventProfile from "./views/EventProfile";
 import UserProfile from "./views/UserProfile";
 import Signup from "./views/Signup";
+import EventAddForm from "./views/EventAddForm";
 
 import { AnonRoute, PrivateRoute } from "./components";
 import { UserContext } from "./context/UserContext";
@@ -125,6 +126,7 @@ class App extends Component {
                   <PrivateRoute exact path={"/beaches-list/:id"} isLoggedIn={isLoggedIn} component={ BeachProfile } />
                   <PrivateRoute exact path={"/events-list"} isLoggedIn={isLoggedIn} component={ EventsList } />
                   <PrivateRoute exact path={"/events-list/:id"} isLoggedIn={isLoggedIn} component={ EventProfile } />
+                  <PrivateRoute exact path={"/add-event"} isLoggedIn={isLoggedIn} component={ EventAddForm } />
                 </UserContext.Provider>
               </Switch>
             </Layout>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Error500 from "../views/Error500";
+import EventForm from "../components/eventForm/EventForm";
 
 
 import "./css/eventProfile.css";
@@ -23,6 +24,11 @@ class EventProfile extends Component {
     event: "",
     status: STATUS.LOADING,
     updating: false,
+    image: "",
+    title: "",
+    date: "",
+    beach: "",
+    description: "",
   }
 
   componentDidMount() {
@@ -33,6 +39,11 @@ class EventProfile extends Component {
         console.log("data:", response);
         this.setState({
           event: response.data.event,
+          image: response.data.event.image,
+          title: response.data.event.title,
+          date: response.data.event.date,
+          beach: response.data.event.beach,
+          description: response.data.event.description,
           status: STATUS.LOADED,
         });
       })
@@ -42,6 +53,24 @@ class EventProfile extends Component {
           status: STATUS.ERROR,
         });
       });
+  }
+
+  handleUpdating = () => {
+    this.setState({
+      updating: !this.state.updating,
+    })
+  }
+
+  handleDelete = () => {
+    const { event } = this.state;
+    apiClient
+      .deleteEvent(event._id)
+      .then (() => {
+        console.log('event deleted')
+      })
+      .catch((error) => {
+        console.log("THE ERROR IS:", error)
+      })
   }
 
   handleJoinIn = (eventId, userId) => {
@@ -54,10 +83,17 @@ class EventProfile extends Component {
     })
   }
 
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
   eventProfile = () => {
-    const { event } = this.state;
+    const { event, image, title, date, beach, description } = this.state;
     const eventDate = new Date(event.date);
     const formatEventDate = `${eventDate.getDate()}-${eventDate.getMonth()}-${eventDate.getFullYear()}`
+    const formatEventTime = `${eventDate.getHours()}:${eventDate.getMinutes()}`
 
     if (event !== undefined) {
       return (
@@ -65,14 +101,15 @@ class EventProfile extends Component {
           {({ user }) => (
             <div className="event-profile-container">
               <div>
-                <img src={ event.image} alt="event"/>
+                <img src={ event.image } alt="event"/>
                 <section>
-                  <h2>{ event.name}</h2>
+                  <h2>{ event.title }</h2>
                   <div>
-                    <p><strong>Created by:</strong> <Link to={`/surfers-list/${event.owner._id}`}>{ event.owner.name } { event.owner.surname }</Link></p>
+                    <p><strong>Created by:</strong><Link to={`/surfers-list/${event.owner._id}`}>{ event.owner.name } { event.owner.surname }.</Link></p>
                     <p><strong>Date:</strong> { formatEventDate }.</p>
+                    <p><strong>Start time:</strong> { formatEventTime }.</p>
                     <p><strong>Beach:</strong> { event.beach }.</p>
-                    <p><strong>Description:</strong> { event.description }.</p>
+                    <p><strong>Description:</strong> { event.description }</p>
                     <div>
                       <p><strong>Participants:</strong></p>
                       <ul>
@@ -112,10 +149,13 @@ class EventProfile extends Component {
                 </section>
                 { user.data._id === event.owner._id && ( 
                     <>
-                      <button className="event-update-button" onClick="">Update</button>
-                      <button className="event-delete-button" onClick="">Delete</button>
+                      <button className="event-update-button" onClick={ this.handleUpdating }>Update</button>
+                      <button className="event-delete-button" onClick={ this.handleDelete }>Delete</button>
                     </> )}
               </div>
+              { this.state.updating && (
+                <EventForm onSubmit={ this } image={ image } title={ title } date={ date } beach={ beach} description={ description } onChange={ this.handleChange }/>
+              )}
               <Link to="/events-list">Back</Link>
             </div>
           )}

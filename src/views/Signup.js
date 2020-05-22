@@ -53,7 +53,7 @@ class Signup extends Component {
               onChange={this.handleChange}
             />
             <input
-              type="text"
+              type="email"
               name="email"
               id="email"
               placeholder="📩Email"

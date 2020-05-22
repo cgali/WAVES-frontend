@@ -35,7 +35,7 @@ class Layout extends Component {
             {isVisible && (
               <div className="layout-burguer-menu">
                 <Link to="">Edit profile</Link>
-                <Link to="">New event</Link>
+                <Link to="/add-event">New event</Link>
                 <Link to="">About us</Link>
                 <button className="logout-button" onClick={this.handleLayoutLogout}>Logout</button>
               </div>

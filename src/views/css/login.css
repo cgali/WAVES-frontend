@@ -38,6 +38,10 @@ input:first-child {
   width: 5rem;
 }
 
+.input-button:focus {
+  outline: none;
+}
+
 .link-signup {
   text-align: center;
   color: white;
