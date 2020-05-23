@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import "../eventForm/eventForm.css";
+import "../eventsForm/eventUpdateForm.css";
 
 
 
-class EventForm extends Component {
+class EventUpdateForm extends Component {
   render() {
     const { onSubmit, image, title, date, beach, description, onChange } = this.props;
     return(
@@ -57,4 +57,4 @@ class EventForm extends Component {
 }
 
 
-export default EventForm;
+export default EventUpdateForm;

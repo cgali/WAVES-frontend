@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
-import EventForm from "../components/eventForm/EventForm";
+import EventUpdateForm from "../components/eventsForm/EventUpdateForm";
+import EventReviewAddForm from "../components/eventsForm/EventReviewAddForm";
 
 
 import "./css/eventProfile.css";
@@ -25,11 +26,14 @@ class EventProfile extends Component {
     event: "",
     status: STATUS.LOADING,
     updating: false,
+    addReview: false,
     image: "",
     title: "",
     date: "",
     beach: "",
     description: "",
+    reviewTitle: "",
+    reviewDescription: "",
   }
 
   componentDidMount() {
@@ -56,6 +60,17 @@ class EventProfile extends Component {
       });
   }
 
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+    console.log('COMPROBACION:', this.state.reviewTitle)
+  };
+
+  /******************** 
+   *** UPDATE EVENT ***
+   *******************/
+
   handleStateUpdating = () => {
     this.setState({
       updating: !this.state.updating,
@@ -75,6 +90,10 @@ class EventProfile extends Component {
       })
   }
 
+  /******************** 
+   *** DELETE EVENT ***
+   *******************/
+
   handleDelete = () => {
     const { event } = this.state;
     apiClient
@@ -88,6 +107,10 @@ class EventProfile extends Component {
       })
   }
 
+  /****************** 
+   *** JOIN EVENT ***
+   *****************/
+
   handleJoinIn = (eventId, userId) => {
     console.log(eventId)
     console.log('participant', userId)
@@ -98,14 +121,56 @@ class EventProfile extends Component {
     })
   }
 
-  handleChange = (e) => {
+  /****************** 
+   *** ADD REVIEW ***
+   *****************/
+
+  handleStateAddReview = () => {
     this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
+      addReview: !this.state.addReview,
+    })
+  }
+
+  handleAddReview = (e) => {
+    e.preventDefault();
+    const { reviewTitle, reviewDescription } = this.state;
+    apiClient
+      .createEventReview(eventId, { reviewDescription, reviewTitle })
+      .then(() => {
+        this.setState({ addReview: false })
+        this.props.history.push(`/events-list/${eventId}`)
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  }
+
+   /******************** 
+   *** UPDATE REVIEW ***
+   ********************/
+
+
+
+   /******************** 
+   *** DELETE REVIEW ***
+   ********************/
+
+  handleDeleteReview = (reviewId) => {
+    const { event } = this.state;
+    apiClient
+      .deleteEventReview(event._id, reviewId )
+      .then (() => {
+        console.log('event deleted')
+        this.props.history.push('/events-list')
+      })
+      .catch((error) => {
+        console.log("THE ERROR IS:", error)
+      })
+  }
+
 
   eventProfile = () => {
-    const { event, image, title, date, beach, description } = this.state;
+    const { event, image, title, date, beach, description, reviewTitle, reviewDescription } = this.state;
     const eventDate = new Date(event.date);
     const formatEventDate = `${eventDate.getDate()}-${eventDate.getMonth()}-${eventDate.getFullYear()}`
     const formatEventTime = `${eventDate.getHours()}:${eventDate.getMinutes()}`
@@ -144,7 +209,6 @@ class EventProfile extends Component {
                     <div>
                       <p><strong>Reviews:</strong></p>
                       <ul>
-                        
                         {event.reviews.map((review, index) => {
                           const reviewDate = new Date(review.created_at);
                           const formatReviewDate = `${reviewDate.getDate()}-${reviewDate.getMonth()}-${reviewDate.getFullYear()} // ${reviewDate.getHours()}:${reviewDate.getMinutes()}:${reviewDate.getSeconds()}`
@@ -154,22 +218,32 @@ class EventProfile extends Component {
                               <p><strong>{ review.title }</strong></p>
                               <p>{ review.description }</p>
                               <p>{ formatReviewDate }</p>
+                              { user.data._id === review.owner._id && (
+                                <div>
+                                  <button className="update-review-button" onClick={ this.handleUpdateReview }>Update</button>
+                                  <button className="delete-review-button" onClick={() => this.handleDeleteReview(review._id) }>Delete</button>
+                                </div>
+                              )}
                             </li>
                           )
                         })}
                       </ul>
                     </div>
+                    <button className="add-review-form-button" onClick={ this.handleStateAddReview }>Comment</button>
                     <button className="event-join-button" onClick={ () => this.handleJoinIn(event._id, user.data._id) }>Join in</button>
                   </div>
                 </section>
                 { user.data._id === event.owner._id && ( 
                     <>
-                      <button className="event-update-button" onClick={ this.handleStateUpdating }>Update</button>
-                      <button className="event-delete-button" onClick={ this.handleDelete }>Delete</button>
+                      <button className="update-event-button" onClick={ this.handleStateUpdating }>Update</button>
+                      <button className="delete-event-button" onClick={ this.handleDelete }>Delete</button>
                     </> )}
               </div>
+              { this.state.addReview && (
+                <EventReviewAddForm onSubmit={ this.handleAddReview } reviewTitle={ reviewTitle } reviewDescription={ reviewDescription } onChange={ this.handleChange }/>
+              )}
               { this.state.updating && (
-                <EventForm onSubmit={ this.handleUpdate } image={ image } title={ title } date={ date } beach={ beach} description={ description } onChange={ this.handleChange }/>
+                <EventUpdateForm onSubmit={ this.handleUpdate } image={ image } title={ title } date={ date } beach={ beach} description={ description } onChange={ this.handleChange }/>
               )}
               <Link to="/events-list">Back</Link>
             </div>

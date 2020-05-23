@@ -3,6 +3,9 @@ import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
 
 import apiClient from "../services/apiClient";
+import { withRouter } from "react-router-dom";
+
+import "./css/updateProfileForm.css";
 
 
 
@@ -16,13 +19,8 @@ class UpdateProfileForm extends Component {
 
 state = {
   status: STATUS.LOADING,
-  image: "",
-  name: "",
-  surname: "",
-  level: "",
-  favoriteBoard: "",
-  waves: [],
-  beaches: [],
+  userData: null,
+  userModified: {}
 }
 
 componentDidMount() {
@@ -31,14 +29,8 @@ componentDidMount() {
     .then((response) => {
       console.log("data", response.data);
       this.setState({
-        image: response.data.image,
-        name: response.data.name,
-        surname: response.data.surname,
-        level: response.data.level,
-        favoriteBoard: response.data.favoriteBoard,
-        waves: response.data.waves,
-        beaches: response.data.beaches,
         status: STATUS.LOADED,
+        userData: response.data,
       });
     })
     .catch((error) => {
@@ -51,16 +43,25 @@ componentDidMount() {
 
 handleChange = (e) => {
   this.setState({
-    [e.target.name]: e.target.value,
+    userModified: {
+      ...this.state.userModified,
+      [e.target.name]: e.target.value,
+    },
+    userData: {
+      ...this.state.userData,
+      [e.target.name]: e.target.value,
+    }
   });
 };
 
 handleUpdate = (e) => {
   e.preventDefault();
-  const { image, name, surname, level, favoriteBoard, waves, beaches } = this.state;
+  const { userModified } = this.state;
+  console.log(userModified)
   apiClient
-    .updateProfile({ image, name, surname, level, favoriteBoard, waves, beaches })
-    .then(() => {
+    .updateProfile(userModified)
+    .then((res) => {
+      console.log('PROFILE UPDATED', res)
       this.props.history.push('/profile')
     })
     .catch((error) => {
@@ -69,11 +70,11 @@ handleUpdate = (e) => {
 };
 
 renderForm = () => {
-  const { image, name, surname, level, favoriteBoard, waves, beaches } = this.state;
+  const { image, name, surname, level, favoriteBoard, typeOfWaves, frequentsBeaches } = this.state.userData;
   return (
-    <div>
-      <h2 className="profile-form-title">Update profile</h2>
-      <form className="signup-form" onSubmit={this.handleSubmit}>
+    <div className="update-profile-form-container">
+      <h2 className="update-profile-form-title">Update profile</h2>
+      <form className="signup-form" onSubmit={this.handleUpdate}>
         <input
           type="text"
           name="image"
@@ -116,18 +117,18 @@ renderForm = () => {
         />
         <input
           type="text"
-          name="waves"
-          id="waves"
+          name="typeOfWaves"
+          id="typeOfWaves"
           placeholder="🌊Waves"
-          value={waves}
+          value={typeOfWaves}
           onChange={ this.handleChange }
         />
         <input
           type="text"
-          name="beaches"
-          id="beaches"
+          name="frequentsBeaches"
+          id="frequentsBeaches"
           placeholder="🏖Beaches"
-          value={beaches}
+          value={frequentsBeaches}
           onChange={ this.handleChange }
         />
         <input className="input-button" type="submit" value="Update" />
@@ -153,4 +154,4 @@ renderForm = () => {
   }
 }
 
-export default UpdateProfileForm;
+export default withRouter(UpdateProfileForm);
