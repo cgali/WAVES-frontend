@@ -68,7 +68,7 @@ class Signup extends Component {
               value={password}
               onChange={this.handleChange}
             />
-            <input className="input-button" type="submit" value="Submit" />
+            <input className="signup-input-button" type="submit" value="Register" />
           </form>
           <div className="signup-footer">
             <img  style={{ width: '2rem' }} src="./logos/image-logo.gif" alt=""/>

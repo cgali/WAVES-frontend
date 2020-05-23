@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Error500 from "../views/Error500";
 
 
-import "./css/surferProfile.css";
+import "./css/beachProfile.css";
 
 import apiClient from "../services/apiClient";
 import { Link } from "react-router-dom";
@@ -46,9 +46,9 @@ class BeachProfile extends Component {
 
     if (beach !== undefined) {
       return(
-        <div>
+        <div className="beach-profile-container">
           <div>
-            <img src={ beach.image} alt="beach"/>
+            <img className="beach-profile-image" src={ beach.image} alt="beach"/>
             <section>
               <h2>{ beach.name}</h2>
               <h2>Features</h2>

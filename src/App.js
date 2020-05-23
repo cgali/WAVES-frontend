@@ -14,6 +14,7 @@ import EventProfile from "./views/EventProfile";
 import UserProfile from "./views/UserProfile";
 import Signup from "./views/Signup";
 import EventAddForm from "./views/EventAddForm";
+import UpdateProfileForm from "./views/UpdateProfileForm";
 
 import { AnonRoute, PrivateRoute } from "./components";
 import { UserContext } from "./context/UserContext";
@@ -52,7 +53,7 @@ class App extends Component {
   handleLogin = ({ email, password }) => {
     apiClient
       .login({ email, password })
-      .then(({ data: user }) => {
+      .then((user) => {
         console.log('app.js', user)
         this.setState({
           user,
@@ -120,6 +121,7 @@ class App extends Component {
                   </AnonRoute>
                   <PrivateRoute exact path={"/protected"} isLoggedIn={isLoggedIn} component={ Protected } />
                   <PrivateRoute exact path={"/profile"} isLoggedIn={isLoggedIn} component={ UserProfile } />
+                  <PrivateRoute exact path={"/profile-update"} isLoggedIn={isLoggedIn} component={ UpdateProfileForm } />
                   <PrivateRoute exact path={"/surfers-list"} isLoggedIn={isLoggedIn} component={ SurfersList } />
                   <PrivateRoute exact path={"/surfers-list/:id"} isLoggedIn={isLoggedIn} component={ SurferProfile } />
                   <PrivateRoute exact path={"/beaches-list"} isLoggedIn={isLoggedIn} component={ BeachesList } />

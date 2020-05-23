@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
 
 
@@ -48,7 +49,7 @@ class SurferProfile extends Component {
       return(
         <div className="surfer-profile-container">
           <div>
-            <img src={ surfer.image} alt="surfer"/>
+            <img className="surfer-profile-image" src={ surfer.image} alt="surfer"/>
             <section>
               <h2>{ surfer.name} { surfer.surname }</h2>
               <div>
@@ -105,7 +106,7 @@ class SurferProfile extends Component {
     // eslint-disable-next-line default-case
     switch (status) {
       case STATUS.LOADING:
-        return <div>{ status }</div>;
+        return <div><Loading /></div>;
       case STATUS.LOADED:
         return <div>
                 { this.surferProfile() }

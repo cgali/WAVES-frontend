@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
 import EventForm from "../components/eventForm/EventForm";
 
@@ -6,7 +7,7 @@ import EventForm from "../components/eventForm/EventForm";
 import "./css/eventProfile.css";
 
 import apiClient from "../services/apiClient";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { UserContext } from '../context/UserContext';
 
 
@@ -39,12 +40,12 @@ class EventProfile extends Component {
         console.log("data:", response);
         this.setState({
           event: response.data.event,
+          status: STATUS.LOADED,
           image: response.data.event.image,
           title: response.data.event.title,
           date: response.data.event.date,
           beach: response.data.event.beach,
           description: response.data.event.description,
-          status: STATUS.LOADED,
         });
       })
       .catch((error) => {
@@ -55,10 +56,23 @@ class EventProfile extends Component {
       });
   }
 
-  handleUpdating = () => {
+  handleStateUpdating = () => {
     this.setState({
       updating: !this.state.updating,
     })
+  }
+
+  handleUpdate = () => {
+    const { image, title, date, beach, description } = this.state;
+    apiClient
+      .updateEvent(eventId, { image, title, date, beach, description })
+      .then(() => {
+        console.log('EVENT UPDATED')
+        this.props.history.push(`/events-list/${eventId}`)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   handleDelete = () => {
@@ -67,6 +81,7 @@ class EventProfile extends Component {
       .deleteEvent(event._id)
       .then (() => {
         console.log('event deleted')
+        this.props.history.push('/events-list')
       })
       .catch((error) => {
         console.log("THE ERROR IS:", error)
@@ -101,7 +116,7 @@ class EventProfile extends Component {
           {({ user }) => (
             <div className="event-profile-container">
               <div>
-                <img src={ event.image } alt="event"/>
+                <img className="event-profile-image" src={ event.image } alt="event"/>
                 <section>
                   <h2>{ event.title }</h2>
                   <div>
@@ -149,12 +164,12 @@ class EventProfile extends Component {
                 </section>
                 { user.data._id === event.owner._id && ( 
                     <>
-                      <button className="event-update-button" onClick={ this.handleUpdating }>Update</button>
+                      <button className="event-update-button" onClick={ this.handleStateUpdating }>Update</button>
                       <button className="event-delete-button" onClick={ this.handleDelete }>Delete</button>
                     </> )}
               </div>
               { this.state.updating && (
-                <EventForm onSubmit={ this } image={ image } title={ title } date={ date } beach={ beach} description={ description } onChange={ this.handleChange }/>
+                <EventForm onSubmit={ this.handleUpdate } image={ image } title={ title } date={ date } beach={ beach} description={ description } onChange={ this.handleChange }/>
               )}
               <Link to="/events-list">Back</Link>
             </div>
@@ -170,7 +185,7 @@ class EventProfile extends Component {
     // eslint-disable-next-line default-case
     switch (status) {
       case STATUS.LOADING:
-        return <div>{ status }</div>;
+        return <div><Loading /></div>;
       case STATUS.LOADED:
         return <div>
                 { this.eventProfile() }
@@ -181,4 +196,4 @@ class EventProfile extends Component {
   }
 }
 
-export default EventProfile;
+export default withRouter(EventProfile);

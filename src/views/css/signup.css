@@ -42,6 +42,16 @@ input:focus {
   width: 5rem;
 }
 
+.signup-input-button {
+  margin-top: 3rem;
+  border: 1px solid white;
+  background-color: #0D66B9;
+  color: white;
+  font-size: 1.3em;
+  height: 2rem;
+  width: 6rem;
+}
+
 .signup-footer {
   display: flex;
   flex-direction: column;
