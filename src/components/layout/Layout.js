@@ -46,7 +46,7 @@ class Layout extends Component {
               <div className="layout-burguer-menu">
                 <Link onClick={this.handleOverlay} to="/profile-update">Edit profile</Link>
                 <Link onClick={this.handleOverlay} to="/add-event">New event</Link>
-                <Link onClick={this.handleOverlay} to="">About us</Link>
+                <Link onClick={this.handleOverlay} to="/about-us">About us</Link>
                 <button className="logout-button" onClick={this.handleLayoutLogout}>Logout</button>
               </div>
               </>

@@ -89,7 +89,7 @@ class SurferProfile extends Component {
                         </li>
                       )
                     })}
-                </ul>
+                  </ul>
                 </div>
               </div>
             </section>

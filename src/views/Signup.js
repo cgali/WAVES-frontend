@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Background from '../components/background/Background';
 import "./css/signup.css";
+import { Link } from 'react-router-dom';
 
 
 
@@ -70,6 +71,7 @@ class Signup extends Component {
             />
             <input className="signup-input-button" type="submit" value="Register" />
           </form>
+          <Link to="/login">Back</Link>
           <div className="signup-footer">
             <img  style={{ width: '2rem' }} src="./logos/image-logo.gif" alt=""/>
             <p>© WAVES Trademark</p>

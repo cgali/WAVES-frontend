@@ -4,14 +4,18 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  margin: 25% 0 0 7%;
+  margin: 15% 0 0 7%;
+}
+
+.logo-waves {
+  margin-top: 2rem;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5.5rem;
+  margin-top: 0.7rem;
 }
 
 .login-input {
@@ -52,5 +56,5 @@ input:first-child {
   flex-direction: column;
   align-items: center;
   font-size: 0.8rem;
-  margin-top: 3.6rem;
+  margin-top: 5rem;
 }

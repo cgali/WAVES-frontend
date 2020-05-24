@@ -1,0 +1,60 @@
+.about-us-container {
+  background-color: rgb(255, 255, 255);
+}
+
+.about-us-container, .about-us-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-us-header {
+  background-color: rgb(52, 180, 168);
+  width: 100vw;
+  margin-top: 3rem;
+  padding-bottom: 1rem;
+  border-bottom-left-radius: 11.5rem;
+}
+
+.about-us-title {
+  color: rgb(4, 46, 37);
+  font-size: 3rem;
+  text-decoration: underline;
+  margin: 0;
+}
+
+.about-us-image {
+  width: 10rem;
+  border-radius: 5rem;
+}
+
+.about-us-description-box {
+  width: 100%;
+  background-color: turquoise;
+  border-bottom-right-radius: 11.5rem;
+  border-top-left-radius: 11.5rem;
+}
+
+.separator-line {
+  padding: 1rem;
+}
+
+.about-us-description {
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.about-us-slogan-box {
+  background-color: rgb(72, 253, 235);
+  width: 100%;
+  border-top-right-radius: 11.5rem;
+  border-bottom-left-radius: 11.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.about-us-slogan {
+  font-size: 1.5rem;
+  padding: 4rem 3rem;
+  text-align: center;
+  font-weight: bolder;
+}

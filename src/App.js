@@ -15,6 +15,7 @@ import UserProfile from "./views/UserProfile";
 import Signup from "./views/Signup";
 import EventAddForm from "./views/EventAddForm";
 import UpdateProfileForm from "./views/UpdateProfileForm";
+import AboutUs from "./views/AboutUs";
 
 import { AnonRoute, PrivateRoute } from "./components";
 import { UserContext } from "./context/UserContext";
@@ -120,6 +121,7 @@ class App extends Component {
                     <Signup onSignup={this.handleSignup} />
                   </AnonRoute>
                   <PrivateRoute exact path={"/protected"} isLoggedIn={isLoggedIn} component={ Protected } />
+                  <PrivateRoute exact path={"/about-us"} isLoggedIn={isLoggedIn} component={ AboutUs } />
                   <PrivateRoute exact path={"/profile"} isLoggedIn={isLoggedIn} component={ UserProfile } />
                   <PrivateRoute exact path={"/profile-update"} isLoggedIn={isLoggedIn} component={ UpdateProfileForm } />
                   <PrivateRoute exact path={"/surfers-list"} isLoggedIn={isLoggedIn} component={ SurfersList } />
