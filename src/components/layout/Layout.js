@@ -7,6 +7,9 @@ class Layout extends Component {
   state = {
     isVisible: false,
     backgroundColor: '#067EED',
+    surfersActive: '#067EED',
+    beachesActive: '#067EED',
+    eventsActive: '#067EED',
   }
 
   handleLayoutLogout = (e) => {
@@ -30,11 +33,42 @@ class Layout extends Component {
     })
   }
 
+  handleSurfers = () => {
+    this.setState({
+      isVisible: false,
+      backgroundColor: '#067EED',
+      surfersActive: 'white',
+      beachesActive: '#067EED',
+      eventsActive: '#067EED',
+    })
+  }
+
+  handleBeaches = () => {
+    this.setState({
+      isVisible: false,
+      backgroundColor: '#067EED',
+      surfersActive: '#067EED',
+      beachesActive: 'white',
+      eventsActive: '#067EED',
+    })
+  }
+
+  handleEvents = () => {
+    
+    this.setState({
+      isVisible: false,
+      backgroundColor: '#067EED',
+      surfersActive: '#067EED',
+      beachesActive: '#067EED',
+      eventsActive: 'white',
+    })
+  }
+
 
   render() {
 
     const { user, children, isLoggedIn } = this.props;
-    const { isVisible, backgroundColor } = this.state;
+    const { isVisible, backgroundColor, surfersActive, beachesActive, eventsActive } = this.state;
     console.log('layout ', this.props)
     return (
       <div className="layout-container">
@@ -44,9 +78,9 @@ class Layout extends Component {
               <>
               <div className='overlay' onClick={this.handleOverlay} />
               <div className="layout-burguer-menu">
-                <Link onClick={this.handleOverlay} to="/profile-update">Edit profile</Link>
-                <Link onClick={this.handleOverlay} to="/add-event">New event</Link>
-                <Link onClick={this.handleOverlay} to="/about-us">About us</Link>
+                <Link className="burguer-menu-link" onClick={this.handleOverlay} to="/profile-update">Edit profile</Link>
+                <Link className="burguer-menu-link" onClick={this.handleOverlay} to="/add-event">New event</Link>
+                <Link className="burguer-menu-link" onClick={this.handleOverlay} to="/about-us">About us</Link>
                 <button className="logout-button" onClick={this.handleLayoutLogout}>Logout</button>
               </div>
               </>
@@ -62,15 +96,15 @@ class Layout extends Component {
         { children }
         { (isLoggedIn && user) &&
           <nav className="navbar-box">
-            <Link onClick={this.handleOverlay} className="icon-button surfers" to="/surfers-list">
+            <Link onClick={this.handleSurfers} style={{ backgroundColor: surfersActive }} className="icon-button surfers" to="/surfers-list">
               <img style={{ width: "2rem"}} src="../logos/surfer-icon.png" alt="icon"/>
               <h3>Surfers</h3>
             </Link>
-            <Link onClick={this.handleOverlay} className="icon-button beaches" to="/beaches-list">
+            <Link onClick={this.handleBeaches} style={{ backgroundColor: beachesActive }} className="icon-button beaches" to="/beaches-list">
               <img style={{ width: "2rem"}} src="../logos/beach-icon.png" alt="icon"/>
               <h3>Beaches</h3>
             </Link>
-            <Link onClick={this.handleOverlay} className="icon-button events" to="/events-list">
+            <Link onClick={this.handleEvents} style={{ backgroundColor: eventsActive }} className="icon-button events" to="/events-list">
               <img style={{ width: "2rem"}} src="../logos/event-icon.png" alt="icon"/>
               <h3>Events</h3>
             </Link>
