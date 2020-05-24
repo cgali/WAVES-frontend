@@ -4,12 +4,11 @@ import "../eventsForm/eventUpdateForm.css";
 
 
 
-class EventReviewAddForm extends Component {
+class ReviewForm extends Component {
   render() {
     const { onSubmit, reviewTitle, reviewDescription, onChange } = this.props;
     return(
-      <div className="event-form-container">
-          <h2 className="title">Add a review</h2>
+      <div className="review-form-container">
           <form className="signup-form" onSubmit={onSubmit}>
             <input
               type="text"
@@ -35,4 +34,4 @@ class EventReviewAddForm extends Component {
 }
 
 
-export default EventReviewAddForm;
+export default ReviewForm;

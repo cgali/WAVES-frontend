@@ -6,7 +6,7 @@ import "../eventsForm/eventUpdateForm.css";
 
 class EventUpdateForm extends Component {
   render() {
-    const { onSubmit, image, title, date, beach, description, onChange } = this.props;
+    const { onSubmit, image, title, date, description, onChange } = this.props;
     return(
       <div className="event-form-container">
           <h2 className="title">Update event</h2>
@@ -33,14 +33,17 @@ class EventUpdateForm extends Component {
               value={ date }
               onChange={ onChange }
             />
-            <input
-              type="text"
-              name="beach"
-              id="beach"
-              placeholder="🏖Beach"
-              value={ beach }
-              onChange={ onChange }
-            />
+            <select className="select-input" name="beach" id="beach" onChange={ this.handleChange }>
+            <option value="Barceloneta">Barceloneta</option>
+            <option value="Cabrera de Mar">Cabrera de Mar</option>
+            <option value="El Masnou">El Masnou</option>
+            <option value="Montgat">Montgat</option>
+            <option value="Ocata">Ocata</option>
+            <option value="Palamós">Palamós</option>
+            <option value="Salou">Salou</option>
+            <option value="Sitges">Sitges</option>
+            <option value="Vilassar de Mar">Vilassar de Mar</option>
+          </select>
             <textarea
               name="description"
               id="description"
