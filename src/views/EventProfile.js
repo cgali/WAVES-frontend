@@ -27,12 +27,13 @@ class EventProfile extends Component {
     status: STATUS.LOADING,
     updating: false,
     addReview: false,
-    updateReview: false,
     image: "",
     title: "",
     date: "",
     beach: "",
     description: "",
+    reviewTitle: "",
+    reviewDescription: "",
   }
 
   componentDidMount() {
@@ -65,7 +66,6 @@ class EventProfile extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    console.log('COMPROBACION:', this.state.reviewTitle)
   };
 
   /******************** 
@@ -75,6 +75,8 @@ class EventProfile extends Component {
   handleStateUpdating = () => {
     this.setState({
       updating: !this.state.updating,
+      addReview: false,
+      updateReview: false,
     })
   }
 
@@ -129,6 +131,8 @@ class EventProfile extends Component {
   handleStateAddReview = () => {
     this.setState({
       addReview: !this.state.addReview,
+      updating: false,
+      updateReview: false,
     })
   }
 
@@ -148,39 +152,15 @@ class EventProfile extends Component {
   }
 
    /******************** 
-   *** UPDATE REVIEW ***
-   ********************/
-
-  handleStateUpdateReview = () => {
-    this.setState({
-      updateReview: !this.state.updateReview,
-    })
-  }
-
-  handleUpdateReview = (reviewId) => {
-    const { reviewDescription, reviewTitle } = this.state;
-    apiClient
-      .updateEventReview(eventId, reviewId, { reviewTitle, reviewDescription })
-      .then(() => {
-        console.log('EVENT UPDATED')
-        this.props.history.push(`/events-list/${eventId}`)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-   /******************** 
    *** DELETE REVIEW ***
    ********************/
 
   handleDeleteReview = (reviewId) => {
-    const { event } = this.state;
     apiClient
-      .deleteEventReview(event._id, reviewId )
+      .deleteEventReview(eventId, reviewId )
       .then (() => {
-        console.log('event deleted')
-        this.props.history.push(`/events-list/${event._id}`)
+        console.log('REVIEW DELETED')
+        this.props.history.push(`/events-list/${eventId}`)
       })
       .catch((error) => {
         console.log("THE ERROR IS:", error)
@@ -189,7 +169,7 @@ class EventProfile extends Component {
 
 
   eventProfile = () => {
-    const { event, image, title, date, beach, description, reviewTitle, reviewDescription } = this.state;
+    const { event, image, title, date, beach, description } = this.state;
     const eventDate = new Date(event.date);
     const formatEventDate = `${eventDate.getDate()}-${eventDate.getMonth()}-${eventDate.getFullYear()}`
     const formatEventTime = `${eventDate.getHours()}:${eventDate.getMinutes()}`
@@ -238,16 +218,7 @@ class EventProfile extends Component {
                               <p>{ review.reviewDescription }</p>
                               <p>{ formatReviewDate }</p>
                               { user.data._id === review.owner._id && (
-                                <div>
-                                  <button className="update-review-button" onClick={ this.handleStateUpdateReview }>Update</button>
                                   <button className="delete-review-button" onClick={() => this.handleDeleteReview(review._id) }>Delete</button>
-                                </div>
-                              )}
-                              { this.state.updateReview && (
-                                <>
-                                <h2 className="title">Update the review</h2>
-                                <ReviewForm onSubmit={() => this.handleUpdateReview(review._id) } reviewTitle={ reviewTitle } reviewDescription={ reviewDescription } onChange={ this.handleChange }/>
-                                </>
                               )}
                             </li>
                           )
@@ -265,12 +236,26 @@ class EventProfile extends Component {
                     </> )}
               </div>
               { this.state.updating && (
-                <EventUpdateForm onSubmit={ this.handleUpdate } image={ image } title={ title } date={ date } beach={ beach} description={ description } onChange={ this.handleChange }/>
+                <EventUpdateForm
+                  onSubmit={ this.handleUpdate } 
+                  image={ image } 
+                  title={ title } 
+                  date={ date } 
+                  beach={ beach} 
+                  description={ description } 
+                  onChange={ this.handleChange }
+                />
               )}
               { this.state.addReview && (
                 <>
-                <h2 className="title">Add a review</h2>
-                <ReviewForm onSubmit={ this.handleAddReview } reviewTitle={ this.state.event.reviews.title } reviewDescription={ this.state.event.reviews.Description } onChange={ this.handleChange }/>
+                  <h2 className="title">Add a review</h2>
+                  <ReviewForm 
+                    onSubmit={ this.handleAddReview } 
+                    reviewTitle={ this.state.event.reviews.title } 
+                    reviewDescription={ this.state.event.reviews.description } 
+                    onChange={ this.handleChange } 
+                    buttonName="Add"
+                  />
                 </>
               )}
               <Link to="/events-list">Back</Link>

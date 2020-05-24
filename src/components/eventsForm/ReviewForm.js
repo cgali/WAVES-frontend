@@ -6,7 +6,7 @@ import "../eventsForm/eventUpdateForm.css";
 
 class ReviewForm extends Component {
   render() {
-    const { onSubmit, reviewTitle, reviewDescription, onChange } = this.props;
+    const { onSubmit, reviewTitle, reviewDescription, onChange, buttonName } = this.props;
     return(
       <div className="review-form-container">
           <form className="signup-form" onSubmit={onSubmit}>
@@ -26,7 +26,7 @@ class ReviewForm extends Component {
               value={ reviewDescription }
               onChange={ onChange }
             />
-            <input className="input-button" type="submit" value="Add" />
+            <input className="input-button" type="submit" value={buttonName} />
           </form>
         </div>
     )
