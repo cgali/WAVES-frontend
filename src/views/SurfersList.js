@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Cart from "../components/cart/Cart";
 import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
+import SearchBar from "../components/searchbar/Searchbar";
 
 import "./css/surfersList.css"
 
@@ -19,6 +20,7 @@ class SurfersList extends Component {
 
   state = {
     surfers: [],
+    surfersFilter: "",
     status: STATUS.LOADING,
   }
 
@@ -45,9 +47,18 @@ class SurfersList extends Component {
     this.loadSurfers();
   }
 
+  handleFilter = event => {
+    this.setState({
+      surfersFilter: event.target.value
+    })
+  }
+
   listingSurfers = () => {
-    const { surfers } = this.state;
-    return surfers.map((surfer, index) => {
+    const { surfers, surfersFilter } = this.state;
+    const filteredSurfers = surfers.filter((surfer) => {
+      return surfer.name.toLowerCase().indexOf( surfersFilter.toLowerCase() ) !== -1
+    })
+    return filteredSurfers.map((surfer, index) => {
       return (
         <div key={`${surfer.name}_${index}`}>
           <Cart img={ surfer.image } name={ surfer.name } secondaryName={ surfer.surname } link={`/surfers-list/${surfer._id}`}/>
@@ -56,7 +67,7 @@ class SurfersList extends Component {
   }
 
   render() {
-    const { status } = this.state;
+    const { status, surfersFilter } = this.state;
 
     // eslint-disable-next-line default-case
     switch (status) {
@@ -64,6 +75,7 @@ class SurfersList extends Component {
         return <Loading />;
       case STATUS.LOADED:
         return <div className="surfers-list-container">
+          <SearchBar inputValue={surfersFilter} inputOnChange={this.handleFilter}/>
           { this.listingSurfers() }
         </div> 
       case STATUS.ERROR:

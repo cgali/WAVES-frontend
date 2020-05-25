@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Cart from "../components/cart/Cart";
 import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
+import SearchBar from "../components/searchbar/Searchbar";
 
 import "./css/eventsList.css"
 
@@ -19,6 +20,7 @@ class EventsList extends Component {
 
   state ={
     events: [],
+    eventsFilter: "",
     status: STATUS.LOADING,
   }
 
@@ -44,9 +46,18 @@ class EventsList extends Component {
     this.loadEvents();
   }
 
+  handleFilter = event => {
+    this.setState({
+      eventsFilter: event.target.value
+    })
+  }
+
   listingEvents = () => {
-    const { events } = this.state;
-    return events.map((event, index) => {
+    const { events, eventsFilter } = this.state;
+    const filteredEvents = events.filter((event) => {
+      return event.title.toLowerCase().indexOf( eventsFilter.toLowerCase() ) !== -1
+    })
+    return filteredEvents.map((event, index) => {
       const eventDate = new Date(event.date)
       const formatDate = `${eventDate.getDate()}-${eventDate.getMonth()}-${eventDate.getFullYear()}`
       return (
@@ -58,7 +69,7 @@ class EventsList extends Component {
   }
 
   render() {
-    const { status } = this.state;
+    const { status, eventsFilter } = this.state;
 
     // eslint-disable-next-line default-case
     switch (status) {
@@ -66,6 +77,7 @@ class EventsList extends Component {
         return <Loading />;
       case STATUS.LOADED:
         return <div className="events-list-container">
+          <SearchBar inputValue={eventsFilter} inputOnChange={this.handleFilter}/>
           { this.listingEvents() }
         </div> 
       case STATUS.ERROR:

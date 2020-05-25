@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Cart from "../components/cart/Cart";
 import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
+import SearchBar from "../components/searchbar/Searchbar";
 import { withRouter } from 'react-router-dom'
 
 import "./css/beachesList.css"
@@ -20,6 +21,7 @@ class BeachesList extends Component {
 
   state ={
     beaches: [],
+    beachesFilter: "",
     status: STATUS.LOADING,
   }
 
@@ -46,9 +48,18 @@ class BeachesList extends Component {
     this.loadBeaches();
   }
 
+  handleFilter = event => {
+    this.setState({
+      beachesFilter: event.target.value
+    })
+  }
+
   listingBeaches = () => {
-    const { beaches } = this.state;
-    return beaches.map((beach, index) => {
+    const { beaches, beachesFilter } = this.state;
+    const filteredBeaches = beaches.filter((beach) => {
+      return beach.name.toLowerCase().indexOf( beachesFilter.toLowerCase() ) !== -1
+    })
+    return filteredBeaches.map((beach, index) => {
       return (
         <div key={`${beach.name}_${index}`}>
           <Cart img={ beach.image } name={ beach.name } link={`/beaches-list/${beach._id}`}/>
@@ -58,7 +69,7 @@ class BeachesList extends Component {
   }
 
   render() {
-    const { status } = this.state;
+    const { status, beachesFilter } = this.state;
     console.log(this.props)
 
     // eslint-disable-next-line default-case
@@ -67,6 +78,7 @@ class BeachesList extends Component {
         return <Loading />;
       case STATUS.LOADED:
         return <div className="beaches-list-container">
+          <SearchBar inputValue={beachesFilter} inputOnChange={this.handleFilter}/>
           { this.listingBeaches() }
       </div> 
       case STATUS.ERROR:

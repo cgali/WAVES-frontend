@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import Error500 from "../views/Error500";
 import Loading from "../views/Loading";
 import ReviewForm from "../components/eventsForm/ReviewForm";
-
+import Rating from "../components/rating/Rating";
+import RateForm from '../components/rateForm/RateForm';
 
 import "./css/beachProfile.css";
 
 import apiClient from "../services/apiClient";
 import { Link, withRouter } from "react-router-dom";
 import { UserContext } from '../context/UserContext';
+
 
 
 
@@ -25,8 +27,14 @@ class BeachProfile extends Component {
     status: STATUS.LOADING,
     beach: "",
     addReview: false,
+    addRate: false,
     reviewTitle: "",
     reviewDescription: "",
+    waveRate: "",
+    backgroundRate: "",
+    socialEnvironmentRate: "",
+
+
   }
 
   componentDidMount() {
@@ -55,15 +63,15 @@ class BeachProfile extends Component {
     });
   };
 
-    /****************** 
-   *** ADD REVIEW ***
-   *****************/
+  /*****************
+  *** ADD REVIEW ***
+  *****************/
 
   handleStateAddReview = () => {
     this.setState({
       addReview: !this.state.addReview,
-      updating: false,
       updateReview: false,
+      addRate: false,
     })
   }
 
@@ -82,11 +90,11 @@ class BeachProfile extends Component {
       });
   }
 
-   /******************** 
-   *** DELETE REVIEW ***
-   ********************/
+  /******************** 
+  *** DELETE REVIEW ***
+  ********************/
 
-  handleDeleteReview = (reviewId) => {
+ deleteBeachRate = (reviewId) => {
     apiClient
       .deleteBeachReview(beachId, reviewId )
       .then (() => {
@@ -97,6 +105,49 @@ class BeachProfile extends Component {
         console.log("THE ERROR IS:", error)
       })
   }
+
+  /*****************
+  *** ADD RATE ***
+  *****************/
+
+  handleStateAddRate = () => {
+    this.setState({
+    addRate: !this.state.addRate,
+    addReview: false,
+    updateReview: false,
+   })
+  }
+
+  handleAddRate = (e => {
+  e.preventDefault();
+  const { waveRate, backgroundRate, socialEnvironmentRate } = this.state;
+  apiClient
+    .createBeachRate(beachId, {waveRate, backgroundRate, socialEnvironmentRate })
+    .then(() => {
+      this.setState({ addRate: false })
+      this.props.history.push(`/beaches-list/${beachId}`)
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  })
+
+   /******************** 
+   *** DELETE REVIEW ***
+   ********************/
+
+  handleDeleteRate = (rateId) => {
+    apiClient
+      .deleteBeachRate(beachId, rateId )
+      .then (() => {
+        console.log('RATE DELETED')
+        this.props.history.push(`/beaches-list/${beachId}`)
+      })
+      .catch((error) => {
+        console.log("THE ERROR IS:", error)
+      })
+  }
+
 
   beachProfile = () => {
     const { beach } = this.state;
@@ -140,6 +191,36 @@ class BeachProfile extends Component {
                     <p><strong>Description:</strong> { beach.description}</p>
                   </div>
                   <section>
+                  <p><strong>Rates:</strong></p>
+                  <ul>
+                    <li>Waves:<Rating>3</Rating></li>
+                    <li>Background:<Rating>4</Rating></li>
+                    <li>Social environment:<Rating>5</Rating></li>
+                  </ul>
+                  <button className="add-rate-button" onClick={ this.handleStateAddRate }>Rate</button>
+                  { this.state.addRate && (
+                      <>
+                        <h2 className="title">Add a rate</h2>
+                        <RateForm 
+                          onSubmit={ this.handleAddRate } 
+                          waveRate={ beach.rate.waveRate } 
+                          backgroundRate={ beach.rate.backgroundRate }
+                          socialEnvironmentRate= { beach.rate.socialEnvironment }
+                          onChange={ this.handleChange } 
+                          buttonName="Rate"
+                        />
+                      </>
+                    )}
+                  </section>
+                  {beach.rate.map((rate, index) => {
+                    console.log("USER:", user.data._id, "OWNER:", rate.owner)
+                    return(
+                      user.data._id === rate.owner && (<button key={`${rate.owner.name}_${index}`} onClick={ () => this.handleDeleteRate(rate._id)}>Delete</button>)
+                      
+                    )
+
+                  })}
+                  <section>
                     <div>
                       <div>
                         <p><strong>Reviews:</strong></p>
@@ -168,8 +249,8 @@ class BeachProfile extends Component {
                         <h2 className="title">Add a review</h2>
                         <ReviewForm 
                           onSubmit={ this.handleAddReview } 
-                          reviewTitle={ this.state.beach.reviews.title } 
-                          reviewDescription={ this.state.beach.reviews.description } 
+                          reviewTitle={ beach.reviews.title } 
+                          reviewDescription={ beach.reviews.description } 
                           onChange={ this.handleChange } 
                           buttonName="Add"
                         />
