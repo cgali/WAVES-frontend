@@ -50,7 +50,7 @@ class SurferProfile extends Component {
         <div className="surfer-profile-container">
             <img className="surfer-profile-image" src={ surfer.image} alt="surfer"/>
             <section className="surfer-info-box">
-              <div  className="surfer-info-info">
+              <div className="surfer-info-info">
                 <h2 className="surfer-info-name">{ surfer.name} { surfer.surname }</h2>
                 <div>
                   <p className="surfer-info-title"><strong>Level:</strong> { surfer.level }.</p>

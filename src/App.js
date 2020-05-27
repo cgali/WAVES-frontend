@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, withRouter } from "react-router-dom";
 
 import Login from "./views/Login";
 import Loading from "./views/Loading";
@@ -111,9 +111,9 @@ class App extends Component {
             <Layout isLoggedIn={isLoggedIn} onLogout={this.handleLogout} user={user}> 
               <Switch>
                 <UserContext.Provider value={{ user: this.state.user }}>
-                  <Route exact path={"/"}>
-                  <Login onLogin={this.handleLogin} />
-                  </Route>
+                  <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
+                    <Login onLogin={this.handleLogin} />
+                  </AnonRoute>
                   <AnonRoute exact path={"/login"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} />
                   </AnonRoute>

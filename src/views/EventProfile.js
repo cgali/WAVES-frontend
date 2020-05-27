@@ -181,59 +181,80 @@ class EventProfile extends Component {
             <div className="event-profile-container">
               <div>
                 <img className="event-profile-image" src={ event.image } alt="event"/>
-                <section>
-                  <h2>{ event.title }</h2>
-                  <div>
-                    <p><strong>Created by:</strong><Link to={`/surfers-list/${event.owner._id}`}>{ event.owner.name } { event.owner.surname }.</Link></p>
-                    <p><strong>Date:</strong> { formatEventDate }.</p>
-                    <p><strong>Start time:</strong> { formatEventTime }.</p>
-                    <p><strong>Beach:</strong> { event.beach }.</p>
-                    <p><strong>Description:</strong> { event.description }</p>
-                    <div>
-                      <p><strong>Participants:</strong></p>
-                      <ul>
-                        {event.participants.map((participant, index) => {
-                          return (
-                            <li key={`${participant.name}_${index}`}>
-                              <Link to={`/surfers-list/${participant._id}`}><p>{participant.name} { participant.surname }</p></Link>
-                            </li>
-                          )
-                        })}
-                      </ul>
-                    </div>
+                <section className="event-profile-info">
+                  <div className="event-profile-info-header">
+                    <h2 className="event-profile-info-name">{ event.title }</h2>
+                    <button className="event-join-button" onClick={ () => this.handleJoinIn(event._id, user.data._id) }>Join in</button>
+                    <Link className="event-profile-back-button" to="/events-list">Back</Link>
                   </div>
+                  { user.data._id === event.owner._id && ( 
+                    <div className="event-profile-owner-buttons">
+                      <button className="update-event-button" onClick={ this.handleStateUpdating }>Update</button>
+                      <button className="delete-event-button" onClick={ this.handleDelete }>Delete</button>
+                    </div>
+                )}
+                  <p><strong>Created by:</strong><Link to={`/surfers-list/${event.owner._id}`}>{ event.owner.name } { event.owner.surname }.</Link></p>
+                  <p><strong>Date:</strong> { formatEventDate }.</p>
+                  <p><strong>Start time:</strong> { formatEventTime }.</p>
+                  <p><strong>Beach:</strong> { event.beach }.</p>
+                  <p><strong>Description:</strong> { event.description }</p>
+                </section>
+                <section className="event-profile-participants">     
+                  <p><strong>Participants:</strong></p>
+                  <ul>
+                    {event.participants.map((participant, index) => {
+                      return (
+                        <li key={`${participant.name}_${index}`}>
+                          <Link to={`/surfers-list/${participant._id}`}><p>{participant.name} { participant.surname }</p></Link>
+                        </li>
+                      )
+                    })}
+                  </ul>
                 </section>
                 <section>
                   <div>
                     <div>
                       <p><strong>Reviews:</strong></p>
-                      <ul>
-                        {event.reviews.map((review, index) => {
-                          const reviewDate = new Date(review.created_at);
-                          const formatReviewDate = `${reviewDate.getDate()}-${reviewDate.getMonth()}-${reviewDate.getFullYear()} // ${reviewDate.getHours()}:${reviewDate.getMinutes()}:${reviewDate.getSeconds()}`
-                          return (
-                            <li key={`${review.owner.name}_${index}`}>
-                              <Link to={`/surfers-list/${review.owner._id}`}><h3><strong>{ review.owner.name } { review.owner.surname }</strong></h3></Link>
-                              <p><strong>{ review.reviewTitle }</strong></p>
-                              <p>{ review.reviewDescription }</p>
-                              <p>{ formatReviewDate }</p>
-                              { user.data._id === review.owner._id && (
-                                  <button className="delete-review-button" onClick={() => this.handleDeleteReview(review._id) }>Delete</button>
-                              )}
-                            </li>
-                          )
-                        })}
-                      </ul>
+                      <button className="add-review-form-button" onClick={ this.handleStateAddReview }>Comment</button>
                     </div>
-                    <button className="add-review-form-button" onClick={ this.handleStateAddReview }>Comment</button>
-                    <button className="event-join-button" onClick={ () => this.handleJoinIn(event._id, user.data._id) }>Join in</button>
+                    { this.state.addReview && (
+                      <>
+                        <h2 className="title">Add a review</h2>
+                        <ReviewForm 
+                          onSubmit={ this.handleAddReview } 
+                          reviewTitle={ this.state.event.reviews.title } 
+                          reviewDescription={ this.state.event.reviews.description } 
+                          onChange={ this.handleChange } 
+                          buttonName="Send"
+                          onClick={ this.handleStateAddReview }
+                        />
+                      </>
+                    )}
+                    <ul>
+                      {event.reviews.map((review, index) => {
+                        const reviewDate = new Date(review.created_at);
+                        const formatReviewDate = `${reviewDate.getDate()}-${reviewDate.getMonth()}-${reviewDate.getFullYear()} // ${reviewDate.getHours()}:${reviewDate.getMinutes()}:${reviewDate.getSeconds()}`
+                        return (
+                          <li className="events-profile-single-review-box" key={`${review.owner.name}_${index}`}>
+                            <p><strong>{ review.reviewTitle }</strong></p>
+                            <p>{ review.reviewDescription }</p>
+                            <div>
+                            <p className="event-profile-single-review-footer-by-box"><strong>By:</strong>
+                              <Link to={`/surfers-list/${review.owner._id}`}>
+                                <h3><strong>{ review.owner.name } { review.owner.surname }</strong></h3>
+                              </Link>
+                              <p>{ formatReviewDate }</p>
+                            </p>
+                            </div>
+                            { user.data._id === review.owner._id && (
+                                <button className="delete-review-button" onClick={() => this.handleDeleteReview(review._id) }>Delete</button>
+                            )}
+                          </li>
+                        )
+                      })}
+                    </ul>
                   </div>
                 </section>
-                { user.data._id === event.owner._id && ( 
-                    <>
-                      <button className="update-event-button" onClick={ this.handleStateUpdating }>Update</button>
-                      <button className="delete-event-button" onClick={ this.handleDelete }>Delete</button>
-                    </> )}
               </div>
               { this.state.updating && (
                 <EventUpdateForm
@@ -246,19 +267,6 @@ class EventProfile extends Component {
                   onChange={ this.handleChange }
                 />
               )}
-              { this.state.addReview && (
-                <>
-                  <h2 className="title">Add a review</h2>
-                  <ReviewForm 
-                    onSubmit={ this.handleAddReview } 
-                    reviewTitle={ this.state.event.reviews.title } 
-                    reviewDescription={ this.state.event.reviews.description } 
-                    onChange={ this.handleChange } 
-                    buttonName="Add"
-                  />
-                </>
-              )}
-              <Link to="/events-list">Back</Link>
             </div>
           )}
         </UserContext.Consumer>

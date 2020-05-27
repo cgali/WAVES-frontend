@@ -46,52 +46,52 @@ class UserProfile extends Component {
     if (user !== undefined) {
       return(
         <div className="surfer-profile-container">
-          <div>
             <img className="surfer-profile-image" src={ user.image} alt="user"/>
-            <section>
-              <h2>{ user.name} { user.surname }</h2>
-              <div>
-                <p><strong>Level:</strong> { user.level }.</p>
-                <p><strong>Favorite board:</strong> { user.favoriteBoard }.</p>
+            <section className="surfer-info-box">
+            <div className="surfer-info-info">
+              <h2 className="surfer-info-name">{ user.name} { user.surname }</h2>
                 <div>
-                  <p><strong>Waves:</strong></p>
-                  <ul>
-                    {user.typeOfWaves.map((waves, i) => {
-                      return (
-                        <li key={i}>
-                          <p>{waves}</p>
-                        </li>
-                      )
-                    })}
+                  <p className="surfer-info-title"><strong>Level:</strong> { user.level }.</p>
+                  <p className="surfer-info-title"><strong>Favorite board:</strong> { user.favoriteBoard }.</p>
+                  <div>
+                    <p className="surfer-info-title"><strong>Waves:</strong></p>
+                    <ul>
+                      {user.typeOfWaves.map((waves, i) => {
+                        return (
+                          <li key={i}>
+                            <p>{waves}</p>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                  <div>
+                    <p><strong>Beaches:</strong></p>
+                    <ul>
+                      {user.frequentsBeaches.map((freqBeaches, i) => {
+                        return (
+                          <li key={i}>
+                            <p className="surfer-info-list">{freqBeaches}</p>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="surfer-info-title"><strong>Events:</strong></p>
+                    <ul>
+                      {user.events.map((event, i) => {
+                        return (
+                          <li key={i}>
+                            <Link className="surfer-info-list" to={`/eventProfile/${event._id}`}>{event.title}</Link>
+                          </li>
+                        )
+                      })}
                   </ul>
-                </div>
-                <div>
-                  <p><strong>Beaches:</strong></p>
-                  <ul>
-                    {user.frequentsBeaches.map((freqBeaches, i) => {
-                      return (
-                        <li key={i}>
-                          <p>{freqBeaches}</p>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-                <div>
-                  <p><strong>Events:</strong></p>
-                  <ul>
-                    {user.events.map((event, i) => {
-                      return (
-                        <li key={i}>
-                          <Link to={`/eventProfile/${event._id}`}>{event.title}</Link>
-                        </li>
-                      )
-                    })}
-                </ul>
+                  </div>
                 </div>
               </div>
             </section>
-          </div>
         </div>
       ) 
     } 
