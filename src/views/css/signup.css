@@ -8,8 +8,9 @@
 }
 
 .title {
+  font-family: Questrial;
   font-size: 5rem;
-  margin: 2rem 0 3rem 0;
+  margin: 3rem 0 3rem 0;
 }
 
 .signup-form {
@@ -18,13 +19,14 @@
   align-items: center;
 }
 
-input {
+.signup-input {
   border: 1px solid black;
   border-radius: 1rem;
   text-align: center;
   box-shadow: 0px 1px 3px 0px black;
   margin-top: 3rem;
   font-size: 1.1rem;
+  font-family: Mina;
   height: 1.7rem;
 }
 
@@ -32,24 +34,28 @@ input:focus {
   outline: none;
 }
 
-.input-button {
-  margin-top: 3rem;
-  border: 1px solid white;
-  background-color: #0D66B9;
+.input-signup-button {
+  margin-top: 1.5rem;
+  border: 2px solid white;
+  border-radius: 1rem;
+  background-color: #26afe6;
   color: white;
-  font-size: 1.3em;
-  height: 2rem;
-  width: 5rem;
-}
-
-.signup-input-button {
-  margin-top: 3rem;
-  border: 1px solid white;
-  background-color: #0D66B9;
-  color: white;
-  font-size: 1.3em;
+  font-size: 1.3rem;
+  font-family: Mina-Bold;
   height: 2rem;
   width: 6rem;
+}
+
+.signup-back-button {
+  border: 2px solid white;
+  background-color: #1d64e7;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-family: Mina-Bold;
+  padding: 0.1rem 0.7rem;
+  margin-top: 1rem;
 }
 
 .signup-footer {
@@ -57,5 +63,5 @@ input:focus {
   flex-direction: column;
   align-items: center;
   font-size: 0.8rem;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }

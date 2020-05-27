@@ -10,11 +10,16 @@ class SearchBar extends Component {
     return (
       <div>
         <div className="search-bar-box">
-          <label  htmlFor="filter"></label>
-          <input className="search-input" type="text" id="filter" 
-          value={inputValue} 
-          onChange={inputOnChange}
-          placeholder="🔎Search by name"/>
+          <label htmlFor="filter"></label>
+          <img className="input-image" src="../logos/search-logo.png" alt=""/>
+          <input 
+            className="search-input"
+            type="text"
+            id="filter" 
+            value={inputValue} 
+            onChange={inputOnChange}
+            placeholder="Search by name"
+          />
         </div>
       </div>
     )

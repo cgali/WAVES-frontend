@@ -13,3 +13,19 @@ code {
     monospace;
   font-size: 10px;
 }
+
+@font-face {
+  font-family: 'Mina';
+  src: local('Mina'), url(./fonts/Mina-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Mina-Bold';
+  src: local('Mina'), url(./fonts/Mina-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Questrial';
+  src: local('Questrial'), url(./fonts/Questrial-Regular.ttf) format('truetype');
+}
+

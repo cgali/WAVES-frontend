@@ -1,34 +1,40 @@
 import React, { Component } from 'react';
 
-import "../eventsForm/eventUpdateForm.css";
+import "../eventsForm/eventsForm.css";
 
 
 
 class ReviewForm extends Component {
   render() {
-    const { onSubmit, reviewTitle, reviewDescription, onChange, buttonName } = this.props;
+    const { onSubmit, reviewTitle, reviewDescription, onChange, buttonName, onClick } = this.props;
     return(
       <div className="review-form-container">
-          <form className="signup-form" onSubmit={onSubmit}>
-            <input
-              type="text"
-              name="reviewTitle"
-              id="reviewTitle"
-              placeholder="📣Title"
-              value={ reviewTitle }
-              onChange={ onChange }
-            />
-            <textarea
-              name="reviewDescription"
-              id="reviewDescription"
-              placeholder="📝Description"
-              rows="8" cols="25"
-              value={ reviewDescription }
-              onChange={ onChange }
-            />
-            <input className="input-button" type="submit" value={buttonName} />
-          </form>
-        </div>
+        <h2 className="review-form-title">Add a review</h2>
+        <form className="review-form" onSubmit={onSubmit}>
+          <input
+            className="review-form-input"
+            type="text"
+            name="reviewTitle"
+            id="reviewTitle"
+            placeholder="📣Title"
+            value={ reviewTitle }
+            onChange={ onChange }
+          />
+          <textarea
+            name="reviewDescription"
+            id="reviewDescription"
+            placeholder="📝Description"
+            rows="8" cols="25"
+            value={ reviewDescription }
+            onChange={ onChange }
+          />
+          <div className="review-form-buttons-box">
+            <input className="review-form-input-button" type="submit" value={buttonName} />
+            <button className="close-review-form-button" onClick={ onClick }>Close</button>
+          </div>
+          
+        </form>
+      </div>
     )
   }
 }

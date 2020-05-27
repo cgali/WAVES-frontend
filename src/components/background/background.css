@@ -5,7 +5,7 @@
 
 .inside-top-part {
   height: 50vh;
-  background-color: #067EED;
+  background-color: #51d9f1;
 }
 
 .outside-top-part {
@@ -21,6 +21,6 @@
 
 .outisde-bottom-part {
   height: 50vh;
-  background-color: #067EED;
+  background-color: #51d9f1;
   border-top-right-radius: 12.5rem;
 }

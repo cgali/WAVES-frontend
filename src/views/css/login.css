@@ -25,6 +25,7 @@
   box-shadow: 0px 1px 3px 0px black;
   margin-top: 4rem;
   font-size: 1.1rem;
+  font-family: Mina;
   height: 1.7rem;
 }
 
@@ -32,10 +33,12 @@ input:first-child {
   margin-top: 1.4rem;
 }
 
-.input-button {
+.input-login-button {
+  font-family: Mina-Bold;
   margin-top: 3rem;
-  border: 1px solid white;
-  background-color: #0D66B9;
+  border: 2px solid white;
+  border-radius: 1rem;
+  background-color: #26afe6;
   color: white;
   font-size: 1.3em;
   height: 2rem;
@@ -47,8 +50,12 @@ input:first-child {
 }
 
 .link-signup {
+  font-family: Questrial;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin-top: 1rem;
   text-align: center;
-  color: white;
+  color: #1d64e7;
 }
 
 .login-footer {
@@ -56,5 +63,5 @@ input:first-child {
   flex-direction: column;
   align-items: center;
   font-size: 0.8rem;
-  margin-top: 5rem;
+  margin-top: 4rem;
 }

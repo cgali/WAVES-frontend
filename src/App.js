@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 import Login from "./views/Login";
-import Home from "./views/Home";
 import Loading from "./views/Loading";
-import Protected from "./views/Protected";
 import SurfersList from "./views/SurfersList";
 import SurferProfile from "./views/SurferProfile";
 import BeachesList from "./views/BeachesList";
@@ -113,14 +111,15 @@ class App extends Component {
             <Layout isLoggedIn={isLoggedIn} onLogout={this.handleLogout} user={user}> 
               <Switch>
                 <UserContext.Provider value={{ user: this.state.user }}>
-                  <Route exact path={"/"} component={Home} />
+                  <Route exact path={"/"}>
+                  <Login onLogin={this.handleLogin} />
+                  </Route>
                   <AnonRoute exact path={"/login"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} />
                   </AnonRoute>
                   <AnonRoute exact path={"/signup"} isLoggedIn={isLoggedIn}>
                     <Signup onSignup={this.handleSignup} />
                   </AnonRoute>
-                  <PrivateRoute exact path={"/protected"} isLoggedIn={isLoggedIn} component={ Protected } />
                   <PrivateRoute exact path={"/about-us"} isLoggedIn={isLoggedIn} component={ AboutUs } />
                   <PrivateRoute exact path={"/profile"} isLoggedIn={isLoggedIn} component={ UserProfile } />
                   <PrivateRoute exact path={"/profile-update"} isLoggedIn={isLoggedIn} component={ UpdateProfileForm } />

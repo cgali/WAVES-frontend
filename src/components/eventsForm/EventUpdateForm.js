@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import "../eventsForm/eventUpdateForm.css";
+import "../eventsForm/eventsForm.css";
 
 
 
@@ -8,7 +8,7 @@ class EventUpdateForm extends Component {
   render() {
     const { onSubmit, image, title, date, description, onChange } = this.props;
     return(
-      <div className="event-form-container">
+      <div className="event-form-update-container">
           <h2 className="title">Update event</h2>
           <form className="signup-form" onSubmit={onSubmit}>
             <input

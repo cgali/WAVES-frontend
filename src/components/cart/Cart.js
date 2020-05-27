@@ -8,7 +8,7 @@ class Cart extends Component {
     return(
       <div className="cart-container">
         <Link to={ link } ><img className="cart-image" src={ img } alt="profile img"/></Link>
-        <Link to={ link } ><h2 className="cart-title">{ name } { secondaryName }</h2></Link>
+        <Link className="cart-title" to={ link } ><h2>{ name } { secondaryName }</h2></Link>
         <h2>{ date }</h2>
       </div>
     )

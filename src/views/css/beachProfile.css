@@ -1,5 +1,6 @@
 .beach-profile-container {
-  margin: 3.2rem 0 4rem 0;
+  padding: 1.6rem 0 1.25rem 0;
+  background-color: #48FEEB;
 }
 
 .beach-profile-image {
@@ -8,3 +9,153 @@
   border-bottom-right-radius: 6rem;
   object-fit: cover;
 }
+
+.beach-profile-info-box {
+  font-family: Mina;
+  font-size: 1.2rem;
+  background-color: #41E0D0;
+  border-top-right-radius: 6rem;
+  border-bottom-left-radius: 6rem;
+  padding: 1rem 0 4rem 2rem;
+}
+
+.beach-profile-info-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.beach-profile-back-button {
+  border: 2px solid white;
+  background-color: #1dc9e7;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-family: Mina-Bold;
+  padding: 0.2rem 0.7rem;
+  margin-left: 4rem;
+}
+
+.beach-profile-info-name {
+  font-family: Questrial;
+  font-size: 2.2rem;
+  color: white;
+}
+
+.beach-profile-info-title {
+  font-family: Questrial;
+  font-size: 1.6rem;
+  text-decoration: underline;
+}
+
+.beach-profile-rate-box {
+  font-family: Mina;
+  font-size: 1.2rem;
+  background-color: #3accbd;
+  border-top-left-radius: 6rem;
+  border-bottom-right-radius: 6rem;
+  padding: 1rem 0 2rem 2rem;
+}
+
+.beach-profile-rate-form {
+  background-color: #33b474;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  border-top-left-radius: 6rem;
+  border-bottom-right-radius: 6rem;
+}
+
+.add-rate-button, .add-review-button, .delete-rate-button {
+  border: 2px solid white;
+  background-color: #1dc9e7;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-family: Mina-Bold;
+  padding: 0.1rem 0.7rem;
+  margin-left: 7rem;
+  height: 2.5rem;
+}
+
+.add-rate-button:focus, .add-review-button:focus, .delete-rate-button:focus, .delete-review-button:focus {
+  outline: none;
+}
+
+.add-review-button {
+  margin-left: 4rem;
+}
+
+.delete-rate-button {
+  background-color: red;
+  margin-left: 1rem;
+}
+
+.beach-profile-reviews-box {
+  font-family: Mina;
+  font-size: 1.1rem;
+  background-color: #27b6a8;
+  border-top-right-radius: 6rem;
+  border-bottom-left-radius: 6rem;
+  padding: 1rem 0 2rem 2rem;
+}
+
+.beach-profile-reviews-header {
+  display: flex;
+  align-items: center;
+}
+
+.beach-profile-reviews-ul {
+  padding: 0;
+  margin-right: 2rem;
+  list-style: none;
+}
+
+.beach-profile-single-review-box {
+  background-color: #3eda8c;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  border-top-right-radius: 6rem;
+  border-bottom-left-radius: 6rem;
+}
+
+.beach-profile-single-review-box > p {
+  margin: 0;
+}
+
+.beach-profile-single-review-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-right: 0.8rem;
+}
+
+.beach-profile-single-review-footer > p {
+  display: flex;
+  margin: 0;
+  height: auto;
+}
+
+.beach-profile-single-review-footer-by-box {
+  display: flex;
+  align-items: center;
+}
+
+.beach-profile-single-review-owner {
+  text-decoration: none;
+  color: white;
+  margin: 0 0.2rem;
+}
+
+.delete-review-button {
+  margin-left: 15rem;
+  color: white;
+  background-color: red;
+  border-radius: 0.7rem;
+  font-family: Mina;
+  font-size: 0.8rem;
+  border: 2px solid white
+}
+

@@ -1,3 +1,21 @@
 .events-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding-top: 3.2rem;
+  background-color: #51d9f1;
+}
+
+.events-list-cart-container {
+  padding: 1rem 1rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: auto;
+  height: 20rem;
+  background-color: #e7c817cb;
+  border-top-right-radius: 8rem;
+  border-bottom-left-radius: 10rem;
 }

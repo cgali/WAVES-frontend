@@ -99,6 +99,14 @@ class ApiClient {
     return this.apiClient.get(`/events-list/${id}`);
   }
 
+  eventParticipants() {
+    return this.apiClient.get('events-list/participants');
+  }
+
+  eventOwner() {
+    return this.apiClient.get('events-list/owner');
+  }
+
   createEvent(body) {
     return this.apiClient.post(`/events-list`, body);
   }

@@ -48,53 +48,53 @@ class SurferProfile extends Component {
     if (surfer !== undefined) {
       return(
         <div className="surfer-profile-container">
-          <div>
             <img className="surfer-profile-image" src={ surfer.image} alt="surfer"/>
-            <section>
-              <h2>{ surfer.name} { surfer.surname }</h2>
-              <div>
-                <p><strong>Level:</strong> { surfer.level }.</p>
-                <p><strong>Favorite board:</strong> { surfer.favoriteBoard }.</p>
+            <section className="surfer-info-box">
+              <div  className="surfer-info-info">
+                <h2 className="surfer-info-name">{ surfer.name} { surfer.surname }</h2>
                 <div>
-                  <p><strong>Waves:</strong></p>
-                  <ul>
-                    {surfer.typeOfWaves.map((waves, i) => {
-                      return (
-                        <li key={i}>
-                          <p>{waves}</p>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-                <div>
-                  <p><strong>Beaches:</strong></p>
-                  <ul>
-                    {surfer.frequentsBeaches.map((freqBeaches, i) => {
-                      return (
-                        <li key={i}>
-                          <p>{freqBeaches}</p>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-                <div>
-                  <p><strong>Events:</strong></p>
-                  <ul>
-                    {surfer.events.map((event, i) => {
-                      return (
-                        <li key={i}>
-                          <Link to={`/eventProfile/${event._id}`}>{event.title}</Link>
-                        </li>
-                      )
-                    })}
-                  </ul>
+                  <p className="surfer-info-title"><strong>Level:</strong> { surfer.level }.</p>
+                  <p className="surfer-info-title"><strong>Favorite board:</strong><br/><span></span>{ surfer.favoriteBoard }.</p>
+                  <div>
+                    <p className="surfer-info-title"><strong>Waves:</strong></p>
+                    <ul>
+                      {surfer.typeOfWaves.map((waves, i) => {
+                        return (
+                          <li key={i}>
+                            <p className="surfer-info-list">{waves}</p>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="surfer-info-title"><strong>Beaches:</strong></p>
+                    <ul>
+                      {surfer.frequentsBeaches.map((freqBeaches, i) => {
+                        return (
+                          <li key={i}>
+                            <p className="surfer-info-list">{freqBeaches}</p>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="surfer-info-title"><strong>Events:</strong></p>
+                    <ul>
+                      {surfer.events.map((event, i) => {
+                        return (
+                          <li key={i}>
+                            <Link className="surfer-info-list" to={`/eventProfile/${event._id}`}>{event.title}</Link>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
                 </div>
               </div>
+              <Link className="surfer-profile-back-button" to="/surfers-list">Back</Link>
             </section>
-          </div>
-          <Link to="/surfers-list">Back</Link>
         </div>
       ) 
     } 

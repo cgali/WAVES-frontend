@@ -6,12 +6,16 @@ import "../rateForm/rateForm.css";
 
 class RateForm extends Component {
   render() {
-    const { onSubmit, waveRate, backgroundRate, socialEnvironmentRate, onChange, buttonName } = this.props;
+    const { onSubmit, waveRate, backgroundRate, socialEnvironmentRate, onChange, buttonName, onClick } = this.props;
     return(
       <div className="rate-form-container">
+        <h2 className="rate-form-title">Add a rate</h2>
+        <p className="rate-form-parameters">(min 0 and max 5)</p>
         <form className="rate-form" onSubmit={onSubmit}>
-          <label for="waveRate">Waves</label>
+          <div>
+            <label for="waveRate">Waves:</label>
             <input
+              className="rate-form-input"
               type="number"
               name="waveRate"
               id="waveRate"
@@ -20,8 +24,11 @@ class RateForm extends Component {
               value={ waveRate }
               onChange={ onChange }
             />
-            <label for="backgroundRate">Background</label>
+          </div>
+          <div>
+            <label for="backgroundRate">Background:</label>
             <input
+              className="rate-form-input"
               type="number"
               name="backgroundRate"
               id="backgroundRate"
@@ -30,8 +37,11 @@ class RateForm extends Component {
               value={ backgroundRate }
               onChange={ onChange }
             />
-            <label for="socialEnvironmentRate">Social Environment</label>
+          </div>
+          <div>
+            <label for="socialEnvironmentRate">Social environment:</label>
             <input
+              className="rate-form-input"
               type="number"
               name="socialEnvironmentRate"
               id="socialEnvironmentRate"
@@ -40,9 +50,13 @@ class RateForm extends Component {
               value={ socialEnvironmentRate }
               onChange={ onChange }
             />
-            <input className="input-button" type="submit" value={ buttonName } />
-          </form>
-        </div>
+          </div>
+          <div className="rate-form-buttons-box">
+            <input className="input-rate-form-button" type="submit" value={ buttonName } />
+            <button className="close-rate-form-button" onClick={ onClick }>Close</button>
+          </div>
+        </form>
+      </div>
     )
   }
 }

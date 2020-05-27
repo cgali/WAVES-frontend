@@ -6,10 +6,11 @@ class Layout extends Component {
 
   state = {
     isVisible: false,
-    backgroundColor: '#067EED',
-    surfersActive: '#067EED',
-    beachesActive: '#067EED',
-    eventsActive: '#067EED',
+    backgroundColor: '#26afe6',
+    boxShadow: 'none',
+    surfersActive: '#26afe6',
+    beachesActive: '#26afe6',
+    eventsActive: '#26afe6',
   }
 
   handleLayoutLogout = (e) => {
@@ -17,39 +18,45 @@ class Layout extends Component {
     e.preventDefault();
     onLogout()
     this.handleOverlay()
+    this.setState({
+      surfersActive: '#26afe6',
+      beachesActive: '#26afe6',
+      eventsActive: '#26afe6',
+    })
   }
 
   handleVisibility = () => {
     this.setState({
       isVisible: !this.state.isVisible,
-      backgroundColor: this.state.backgroundColor === '#067EED' ? 'white' : '#067EED',
+      backgroundColor: this.state.backgroundColor === '#26afe6' ? '#b7f5fa' : '#26afe6',
+      boxShadow: this.state.boxShadow === 'none' ? '0px 0px 1p 2px #e7c817cb' : 'none',
     })
   }
 
   handleOverlay = () => {
     this.setState({
       isVisible: false,
-      backgroundColor: '#067EED',
+      backgroundColor: '#26afe6',
     })
   }
 
   handleSurfers = () => {
     this.setState({
       isVisible: false,
-      backgroundColor: '#067EED',
-      surfersActive: 'white',
-      beachesActive: '#067EED',
-      eventsActive: '#067EED',
+      backgroundColor: '#26afe6',
+      surfersActive: '#b7f5fa',
+      beachesActive: '#26afe6',
+      eventsActive: '#26afe6',
     })
   }
 
   handleBeaches = () => {
     this.setState({
       isVisible: false,
-      backgroundColor: '#067EED',
-      surfersActive: '#067EED',
-      beachesActive: 'white',
-      eventsActive: '#067EED',
+      backgroundColor: '#26afe6',
+      surfersActive: '#26afe6',
+      beachesActive: '#b7f5fa',
+      eventsActive: '#26afe6',
     })
   }
 
@@ -57,10 +64,10 @@ class Layout extends Component {
     
     this.setState({
       isVisible: false,
-      backgroundColor: '#067EED',
-      surfersActive: '#067EED',
-      beachesActive: '#067EED',
-      eventsActive: 'white',
+      backgroundColor: '#26afe6',
+      surfersActive: '#26afe6',
+      beachesActive: '#26afe6',
+      eventsActive: '#b7f5fa',
     })
   }
 
@@ -68,13 +75,14 @@ class Layout extends Component {
   render() {
 
     const { user, children, isLoggedIn } = this.props;
-    const { isVisible, backgroundColor, surfersActive, beachesActive, eventsActive } = this.state;
+    const { isVisible, backgroundColor, boxShadow, surfersActive, beachesActive, eventsActive } = this.state;
     console.log('layout ', this.props)
     return (
       <div className="layout-container">
         { (isLoggedIn && user) && 
           <header className="header-box">
-            {isVisible && (
+            <div className="burger-menu-and-buttons-box">
+              {isVisible && (
               <>
               <div className='overlay' onClick={this.handleOverlay} />
               <div className="layout-burguer-menu">
@@ -84,11 +92,13 @@ class Layout extends Component {
                 <button className="logout-button" onClick={this.handleLayoutLogout}>Logout</button>
               </div>
               </>
-            )}
-            <button className="logos-box" style={{ backgroundColor: backgroundColor }} onClick={this.handleVisibility}>
-              <img clasname="logos" style={{ width: "2.5rem", marginLeft: "0.5rem" }} src="../logos/image-logo.gif" alt="logo img"/>
-              <img clasname="logos" style={{ width: "6.5rem", marginLeft: "0.5rem" }} src="../logos/waves-logo.png" alt="logo letter"/>
-            </button>
+              )}
+              <button className="logos-box" style={{ backgroundColor: backgroundColor, boxShadow: boxShadow }} onClick={this.handleVisibility}>
+                <img clasname="logos" style={{ width: "2.5rem", marginLeft: "0.5rem" }} src="../logos/image-logo.gif" alt="logo img"/>
+                <img clasname="logos" style={{ width: "6.5rem", marginLeft: "0.5rem" }} src="../logos/waves-logo.png" alt="logo letter"/>
+              </button>
+            </div>
+            
             
             <Link onClick={this.handleOverlay} className="layout-profile-button" to="/profile" ><img className="img-profile-box" src={ user.data.image } alt="profile"/></Link>
           </header>

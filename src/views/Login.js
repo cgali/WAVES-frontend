@@ -58,9 +58,9 @@ export default class Login extends Component {
               value={password}
               onChange={this.handleChange}
             />
-            <input className="input-button" type="submit" value="Enter" />
+            <input className="input-login-button" type="submit" value="Enter" />
           </form>
-          <Link className="link-signup" to="/signup">No account yet?<br/>Sign up here!</Link>
+          <Link className="link-signup" to="/signup">No account yet?<br/> <u>Sign up here!</u> </Link>
           <div className="login-footer">
             <img  style={{ width: '2rem' }} src="./logos/image-logo.gif" alt=""/>
             <p>© WAVES Trademark</p>

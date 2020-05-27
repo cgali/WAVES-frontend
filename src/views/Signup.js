@@ -38,6 +38,7 @@ class Signup extends Component {
           <h2 className="title">Sign up</h2>
           <form className="signup-form" onSubmit={this.handleSubmit}>
             <input
+              className="signup-input"
               type="text"
               name="name"
               id="name"
@@ -46,6 +47,7 @@ class Signup extends Component {
               onChange={this.handleChange}
             />
             <input
+              className="signup-input"
               type="text"
               name="surname"
               id="surname"
@@ -54,6 +56,7 @@ class Signup extends Component {
               onChange={this.handleChange}
             />
             <input
+              className="signup-input"
               type="email"
               name="email"
               id="email"
@@ -62,6 +65,7 @@ class Signup extends Component {
               onChange={this.handleChange}
             />
             <input
+              className="signup-input"
               type="password"
               name="password"
               id="password"
@@ -69,9 +73,9 @@ class Signup extends Component {
               value={password}
               onChange={this.handleChange}
             />
-            <input className="signup-input-button" type="submit" value="Register" />
+            <input className="input-signup-button" type="submit" value="Register" />
           </form>
-          <Link to="/login">Back</Link>
+          <Link className="signup-back-button" to="/login">Back</Link>
           <div className="signup-footer">
             <img  style={{ width: '2rem' }} src="./logos/image-logo.gif" alt=""/>
             <p>© WAVES Trademark</p>

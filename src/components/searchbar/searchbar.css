@@ -1,0 +1,29 @@
+.search-bar-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  border: 2px solid #FFCA28 ;
+  border-radius: 1rem;
+  margin: 1rem 0;
+  background-color: white;
+}
+
+.input-image {
+  width: 2.8rem;
+  background-color: #FFCA28 ;
+  border-radius: 0.8rem;
+  border: 3px solid #FFCA28 ;
+}
+
+.search-input {
+  width: 80%;
+  text-align: center;
+  font-size: 1.4rem;
+  font-family: Mina;
+  color: black;
+  padding: 0;
+  margin-right: 0.7rem;
+  border: none;
+}

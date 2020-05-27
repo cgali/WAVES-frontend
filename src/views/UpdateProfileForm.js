@@ -57,7 +57,8 @@ handleChange = (e) => {
 handleUpdate = (e) => {
   e.preventDefault();
   const { userModified } = this.state;
-  console.log(userModified)
+  userModified.frequentsBeaches && (userModified.frequentsBeaches = userModified.frequentsBeaches.split(','))
+  userModified.typeOfWaves && (userModified.typeOfWaves = userModified.typeOfWaves.split(','))
   apiClient
     .updateProfile(userModified)
     .then((res) => {
@@ -71,6 +72,7 @@ handleUpdate = (e) => {
 
 renderForm = () => {
   const { image, name, surname, level, favoriteBoard, typeOfWaves, frequentsBeaches } = this.state.userData;
+  console.log('waver', frequentsBeaches)
   return (
     <div className="update-profile-form-container">
       <h2 className="update-profile-form-title">Update profile</h2>

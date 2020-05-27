@@ -15,15 +15,20 @@
   position: fixed;
   height: 3.2rem;
   justify-content: space-between;
-  background-color: #067EED;
+  background-color: #26afe6;
   width: 100%;
   border-bottom: 1px solid black;
+}
+
+.burger-menu-and-buttons-box {
+  display: flex;
+  
 }
 
 .logos-box {
   display: flex;
   align-items: center;
-  background-color: #067EED;
+  background-color: #26afe6;
   width: 10.5rem;
   border-top-right-radius: 1rem;
   border: none;
@@ -47,17 +52,35 @@
   flex-direction: column;
   position: fixed;
   margin-top: 3.2rem;
-  padding: 0 3.11rem 1rem 2.5rem;
-  background-color: white;
+  padding: 0 2rem 1rem 2.35rem;
+  background-color: #b7f5fa;
   line-height: 2rem;
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
   z-index: 10;
 }
 
+.burguer-menu-link, .logout-button {
+  font-family: Questrial;
+  text-decoration: none;
+  color: #1d64e7;
+  font-size: 1.3rem;
+  margin-top: 0.3rem;
+}
+
+.logout-button{
+  text-align: left;
+  color: red;
+  padding: 0;
+  background-color: #b7f5fa;
+  border: none;
+}
+
 .img-profile-box {
   width: 2.75rem;
   height: 2.75rem;
+  border: 1px solid rgb(17, 118, 158);
+  box-shadow: 0 0 1px 1px #e7c817cb;
   border-radius: 1.5rem;
   margin: 0.20rem 0.30rem 0.25rem 0.25rem;
   object-fit: cover;
@@ -86,12 +109,13 @@
 }
 
 .icon-button {
-  background-color: #067EED;
+  background-color: #26afe6;
   display: flex;
   justify-content: center;
   align-items: center;
   border-color: black;
   width: 100%;
+  text-decoration: none;
 }
 
 .icon-button:focus {
@@ -99,12 +123,13 @@
 }
 
 .icon-button:active {
-  background-color: white;
+  background-color: #fad6b7;
 }
 
 .icon-button > h3 {
   margin: 0.7rem 0 0.7rem 0.3rem;
   font-size: 1rem;
+  color: black;
 }
 
 .surfers {

@@ -1,5 +1,6 @@
 .surfer-profile-container {
-  margin: 3.2rem 0 4rem 0;
+  margin-top: 3.2rem;
+  background-color: #48FEEB;
 }
 
 .surfer-profile-image {
@@ -7,4 +8,44 @@
   height: 12rem;
   border-bottom-right-radius: 6rem;
   object-fit: cover;
+}
+
+.surfer-info-box {
+  background-color: #41E0D0;
+  border-top-right-radius: 6rem;
+  padding: 1rem 0 4rem 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.surfer-info-info {
+  margin: 0 2rem;
+}
+
+.surfer-info-name {
+  font-family: Questrial;
+  font-size: 2.2rem;
+  color: white;
+}
+
+.surfer-info-title, .surfer-info-list {
+  font-family: Mina;
+  font-size: 1.2rem;
+}
+
+.surfer-info-title > span {
+  padding: 0.8rem;
+}
+
+
+.surfer-profile-back-button {
+  border: 2px solid white;
+  background-color: #1dc9e7;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-family: Mina-Bold;
+  padding: 0.1rem 0.7rem;
 }
