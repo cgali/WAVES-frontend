@@ -223,10 +223,10 @@ class BeachProfile extends Component {
                 <div>
                   <div>
                     <div className="beach-profile-reviews-header">
-                    <h2 className="beach-profile-info-title">Reviews:</h2>
-                    { !this.state.addReview && (
-                      <button className="add-review-button" onClick={ this.handleStateAddReview }>Comment</button>
-                    )}
+                      <h2 className="beach-profile-info-title">Reviews:</h2>
+                      { !this.state.addReview && (
+                        <button className="add-review-button" onClick={ this.handleStateAddReview }>Comment</button>
+                      )}
                     </div>
                     { this.state.addReview && (
                         <ReviewForm 
@@ -247,7 +247,8 @@ class BeachProfile extends Component {
                             <p><strong>{ review.reviewTitle }</strong></p>
                             <p className="beach-profile-single-review-description">{ review.reviewDescription }</p>
                             <div className="beach-profile-single-review-footer">
-                              <p className="beach-profile-single-review-footer-by-box"><strong>By:</strong>
+                              <p className="beach-profile-single-review-footer-by-box">
+                                <strong>By:</strong>
                                 <Link className="beach-profile-single-review-owner" to={`/surfers-list/${review.owner._id}`}>
                                     <strong>{ review.owner.name } { review.owner.surname }</strong>
                                 </Link>

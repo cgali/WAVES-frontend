@@ -1,5 +1,6 @@
 .event-profile-container {
-  margin: 3.2rem 0 4rem 0;
+  padding: 3.2rem 0 2.5rem 0;
+  background-color: #48FEEB;
 }
 
 .event-profile-image {
@@ -9,16 +10,171 @@
   object-fit: cover;
 }
 
-.event-join-button {
-  background-color: rgb(2, 114, 206);
-  border-radius: 1rem;
-  font-size: 1.3rem;
-}
-.event-join-button:active {
-  transform: scaleX(10px);
-  box-shadow: 0 0 2px 1px black;
+.event-profile-info-box {
+  font-family: Mina;
+  font-size: 1.2rem;
+  background-color: #41E0D0;
+  border-top-right-radius: 6rem;
+  padding: 1rem 0 1rem 0;
+
 }
 
-.event-join-button:focus {
+.event-profile-info-continue-box {
+  font-family: Mina;
+  font-size: 1.2rem;
+  background-color: #41E0D0;
+  border-bottom-left-radius: 6rem;
+  padding: 1rem 0 2rem 2rem;
+}
+
+.event-profile-info-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-profile-info-name {
+  font-family: Questrial;
+  font-size: 2.5rem;
+  color: white;
+  padding-left: 2rem;
+  margin-top: 1rem;
+}
+
+.event-profile-header-buttons, .event-profile-owner-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.event-profile-header-buttons {
+ padding-left: 1rem;
+}
+
+.event-profile-owner-buttons {
+  margin-top: 0;
+}
+
+.event-join-button, .event-profile-back-button, .update-event-button,
+.delete-event-button, .add-review-form-button {
+  border: 2px solid white;
+  background-color: #1dc9e7;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-family: Mina-Bold;
+  padding: 0.2rem 0.7rem;
+}
+
+.event-profile-back-button {
+  margin-left: 1rem;
+}
+
+.update-event-button {
+  background-color: salmon;
+  margin-left: 1rem;
+}
+
+.delete-event-button {
+  background-color: red;
+  margin-left: 1rem;
+}
+
+.event-join-button {
+  background-color: #1de782;
+}
+
+.add-review-form-button {
+  margin-left: 4rem;
+}
+
+.event-join-button:focus, .delete-event-button:focus, .update-event-button:focus, 
+.event-profile-back-button:focus, .add-review-form-button:focus {
   outline: none;
+}
+
+.event-profile-info-owner, .event-profile-participants-name {
+  font-family: Mina;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: white;
+}
+
+.event-profile-participants-box {
+  font-family: Mina;
+  font-size: 1.2rem;
+  background-color: #3accbd;
+  border-top-left-radius: 6rem;
+  border-bottom-right-radius: 6rem;
+  padding: 1rem 0 2rem 2rem;
+}
+
+.event-profile-title {
+  font-family: Questrial;
+  font-size: 1.6rem;
+  text-decoration: underline;
+}
+
+.event-profile-participants-name {
+ font-size: 1.3rem;
+}
+
+.event-profile-reviews-box {
+  font-family: Mina;
+  font-size: 1.1rem;
+  background-color: #27b6a8;
+  border-top-right-radius: 6rem;
+  border-bottom-left-radius: 6rem;
+  padding: 1rem 0 2rem 2rem;
+}
+
+.event-profile-reviews-header {
+  display: flex;
+  align-items: center;
+}
+
+.event-profile-reviews-ul {
+  padding: 0;
+  margin-right: 2rem;
+  list-style: none;
+}
+
+.event-profile-single-review-box {
+  background-color: #3eda8c;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  border-top-right-radius: 6rem;
+  border-bottom-left-radius: 6rem;
+}
+
+.event-profile-single-review-description {
+  padding: 0 0.7rem;
+}
+
+.event-profile-single-review-box > p {
+  margin: 0;
+}
+
+.event-profile-single-review-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-right: 0.8rem;
+}
+
+.event-profile-single-review-footer > p {
+  display: flex;
+  margin: 0;
+}
+
+.event-profile-single-review-footer-by-box {
+  display: flex;
+  align-items: center;
+}
+
+.event-profile-single-review-owner {
+  text-decoration: none;
+  color: white;
+  margin: 0.5rem 0.2rem 0.1rem 0.2rem;
+  padding-bottom: 0.4rem;
 }

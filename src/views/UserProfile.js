@@ -59,14 +59,14 @@ class UserProfile extends Component {
                       {user.typeOfWaves.map((waves, i) => {
                         return (
                           <li key={i}>
-                            <p>{waves}</p>
+                            <p className="surfer-info-list">{waves}</p>
                           </li>
                         )
                       })}
                     </ul>
                   </div>
                   <div>
-                    <p><strong>Beaches:</strong></p>
+                    <p className="surfer-info-title"><strong>Beaches:</strong></p>
                     <ul>
                       {user.frequentsBeaches.map((freqBeaches, i) => {
                         return (
