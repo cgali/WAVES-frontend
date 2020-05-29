@@ -34,6 +34,13 @@
   font-size: 1.2rem;
 }
 
+.surfer-info-events-list {
+  color: white;
+  font-family: Mina;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
 .surfer-info-title > span {
   padding: 0.8rem;
 }

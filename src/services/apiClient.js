@@ -121,8 +121,12 @@ class ApiClient {
 
 // EVENTS => PARTICIPANT ROUTES
 
-  AddRemoveParticipant(id, body) {
-    return this.apiClient.post(`/events-list/${id}/participant`, body);
+  AddParticipant(id) {
+    return this.apiClient.post(`/events-list/${id}/add-participant`);
+  }
+
+  RemoveParticipant(id) {
+    return this.apiClient.post(`/events-list/${id}/remove-participant`);
   }
 
 // EVENTS => REVIEW ROUTES

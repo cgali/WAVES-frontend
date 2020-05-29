@@ -73,12 +73,17 @@ class BeachProfile extends Component {
     e.preventDefault();
     const beachId = this.props.match.params.id;
     const { reviewTitle, reviewDescription } = this.state;
-    console.log("COMPROBACION STATE:", reviewTitle, reviewDescription)
     apiClient
       .createBeachReview(beachId, { reviewDescription, reviewTitle })
-      .then(() => {
-        this.setState({ addReview: false })
-        this.props.history.push(`/beaches-list/${beachId}`)
+      .then((response) => {
+        console.log('REVIEW ADDED:', response)
+        this.setState({ 
+          addReview: false,
+          beach: {
+            ...this.state.beach,
+            reviews: response.data.reviews
+          }
+         })
       })
       .catch((error) => {
         console.log(error)
@@ -93,9 +98,14 @@ class BeachProfile extends Component {
   const beachId = this.props.match.params.id;
     apiClient
       .deleteBeachReview(beachId, reviewId )
-      .then (() => {
-        console.log('REVIEW DELETED')
-        this.props.history.push(`/beaches-list/${beachId}`)
+      .then ((response) => {
+        console.log('REVIEW DELETED:', response)
+        this.setState({
+          beach: {
+            ...this.state.beach,
+            reviews: response.data.reviews
+          }
+         })
       })
       .catch((error) => {
         console.log("THE ERROR IS:", error)
@@ -120,9 +130,15 @@ class BeachProfile extends Component {
   const { waveRate, backgroundRate, socialEnvironmentRate } = this.state;
   apiClient
     .createBeachRate(beachId, {waveRate, backgroundRate, socialEnvironmentRate })
-    .then(() => {
-      this.setState({ addRate: false })
-      this.props.history.push(`/beaches-list/${beachId}`)
+    .then((response) => {
+      console.log('RATE ADDED', response.data)
+      this.setState({ 
+        addRate: false,
+        beach: {
+          ...this.state.beach,
+          rate: response.data.rate
+        }
+      })
     })
     .catch((error) => {
       console.log(error)
@@ -136,16 +152,33 @@ class BeachProfile extends Component {
   handleDeleteRate = (rateId) => {
     const beachId = this.props.match.params.id;
     apiClient
-      .deleteBeachRate(beachId, rateId )
-      .then (() => {
-        console.log('RATE DELETED')
-        this.props.history.push(`/beaches-list/${beachId}`)
+      .deleteBeachRate(beachId, rateId)
+      .then ((response) => {
+        console.log('RATE DELETED', response.data)
+        this.setState({
+          addRate: false,
+          beach: {
+            ...this.state.beach,
+            rate: response.data.rate
+          }
+        })
       })
       .catch((error) => {
         console.log("THE ERROR IS:", error)
       })
   }
 
+  // calcRate = () => {
+  //   const result = this.state.beach.rate.reduce((acc, rate) => acc + rate.WavesRate, 0)
+  //   return <div>{result / this.state.beach.rate.length}</div>
+  // }
+
+  // calcRate = item => {
+  //   const result = this.state.beach.rate.reduce((acc, rate) => acc + rate[item], 0)
+  //   return <div>{result / this.state.beach.rate.length}</div>
+  // }
+
+  calcRate = item => this.state.beach.rate.reduce((acc, rate) => acc + rate[item], 0) / this.state.beach.rate.length
 
   beachProfile = () => {
     const { beach } = this.state;
@@ -192,9 +225,9 @@ class BeachProfile extends Component {
               <section className="beach-profile-rate-box">
                 <h2 className="beach-profile-info-title">Rates:</h2>
                 <ul>
-                  <li>Waves:<Rating>3</Rating></li>
-                  <li>Background:<Rating>4</Rating></li>
-                  <li>Social environment:<Rating>5</Rating></li>
+                  <li>Waves:<Rating>{this.calcRate('waveRate')}</Rating></li>
+                  <li>Background:<Rating>{this.calcRate('backgroundRate')}</Rating></li>
+                  <li>Social environment:<Rating>{this.calcRate('socialEnvironmentRate')}</Rating></li>
                 </ul>
                 { !this.state.addRate && (
                 <button className="add-rate-button" onClick={ this.handleStateAddRate }>Rate</button>
@@ -214,8 +247,8 @@ class BeachProfile extends Component {
                       console.log("USER:", user.data._id, "OWNER:", rate.owner)
                       return(
                         user.data._id === rate.owner && (<button className="delete-rate-button" key={`${rate.owner.name}_${index}`} onClick={ () => this.handleDeleteRate(rate._id)}>Delete</button>)
-                      )
-                    })}
+                        )
+                      })}
                   </>
                 )}
               </section>
@@ -239,7 +272,7 @@ class BeachProfile extends Component {
                         />
                     )}
                     <ul className="beach-profile-reviews-ul">
-                      {beach.reviews.map((review, index) => {
+                      { beach.reviews.map((review, index) => {
                         const reviewDate = new Date(review.created_at);
                         const formatReviewDate = `${reviewDate.getDate()}-${reviewDate.getMonth()}-${reviewDate.getFullYear()} // ${reviewDate.getHours()}:${reviewDate.getMinutes()}:${reviewDate.getSeconds()}`
                         return (
@@ -256,7 +289,7 @@ class BeachProfile extends Component {
                               <p>{ formatReviewDate }</p>
                             </div>
                             { user.data._id === review.owner._id && (
-                                <button className="delete-review-button" onClick={() => this.handleDeleteReview(review._id) }>Delete</button>
+                              <button className="delete-review-button" onClick={ () => this.handleDeleteReview(review._id) }>Delete</button>
                             )}
                           </li>
                         )

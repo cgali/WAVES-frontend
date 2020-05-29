@@ -1,13 +1,59 @@
-.add-event {
-  margin-bottom: 5rem;
+.add-event-form-container {
+  padding: 2.8rem 0 2rem 0;
+  height: 100%;
 }
 
-.select-input {
+.add-event-form-title {
+  font-family: Questrial;
+  font-size: 2.4rem;
+  padding: 1rem;
+  margin: 0;
+  color: white;
+}
+
+.add-event-form-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(20, 113, 220, 0.616);
+  margin: 3rem;
+  border-radius: 2rem;
+}
+
+.add-event-form-label {
+  font-family: Questrial;
+  font-size: 1.3rem;
+  margin: 0;
+  color: white;
+}
+
+.add-event-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.add-event-form-input, .add-event-form-select-input, .add-event-form-textarea-input {
   border: 1px solid black;
   border-radius: 1rem;
   text-align: center;
   box-shadow: 0px 1px 3px 0px black;
-  margin-top: 3rem;
   font-size: 1.1rem;
-  height: 1.7rem;
+  font-family: Mina;
+  margin-bottom: 1rem;
+  width: 15rem;
+}
+
+.add-event-input-button {
+  border: 2px solid white;
+  background-color: #1dc9e7;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-family: Mina-Bold;
+  padding: 0.1rem 0.7rem;
+  height: 2.5rem;
+  margin-top: 1.4rem;
 }

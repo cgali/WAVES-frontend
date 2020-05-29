@@ -72,69 +72,88 @@ handleUpdate = (e) => {
 
 renderForm = () => {
   const { image, name, surname, level, favoriteBoard, typeOfWaves, frequentsBeaches } = this.state.userData;
-  console.log('waver', frequentsBeaches)
+  const Background = 'https://k62.kn3.net/taringa/7/7/E/1/F/B/Nosha/550x978_1E3.jpg'
   return (
-    <div className="update-profile-form-container">
-      <h2 className="update-profile-form-title">Update profile</h2>
-      <form className="signup-form" onSubmit={this.handleUpdate}>
-        <input
-          type="text"
-          name="image"
-          id="image"
-          placeholder="📷Image"
-          value={image}
-          onChange={ this.handleChange }
-        />
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="🏄‍♂️Name"
-          value={name}
-          onChange={ this.handleChange }
-        />
-        <input
-          type="text"
-          name="surname"
-          id="surname"
-          placeholder="🤙Surname"
-          value={surname}
-          onChange={ this.handleChange }
-        />
-        <input
-          type="text"
-          name="level"
-          id="level"
-          placeholder="✨Level"
-          value={level}
-          onChange={ this.handleChange }
-        />
-        <input
-          type="text"
-          name="favoriteBoard"
-          id="FavoriteBoard"
-          placeholder="🛹Favorite board"
-          value={favoriteBoard}
-          onChange={ this.handleChange }
-        />
-        <input
-          type="text"
-          name="typeOfWaves"
-          id="typeOfWaves"
-          placeholder="🌊Waves"
-          value={typeOfWaves}
-          onChange={ this.handleChange }
-        />
-        <input
-          type="text"
-          name="frequentsBeaches"
-          id="frequentsBeaches"
-          placeholder="🏖Beaches"
-          value={frequentsBeaches}
-          onChange={ this.handleChange }
-        />
-        <input className="input-button" type="submit" value="Update" />
-      </form>
+    <div className="update-profile-form-container" style={{ backgroundImage: `url(${Background})`}}>
+      <div className="update-profile-form-box">
+        <h2 className="update-profile-form-title">Update profile</h2>
+        <form className="update-profile-form" onSubmit={this.handleUpdate}>
+          <label className="update-profile-form-label" htmlFor="image"><strong>Image:</strong></label>
+          <input
+            className="update-profile-form-input"
+            type="text"
+            name="image"
+            id="image"
+            placeholder="📷Image"
+            value={image}
+            onChange={ this.handleChange }
+          />
+          <label className="update-profile-form-label" htmlFor="name"><strong>Name:</strong></label>
+          <input
+            className="update-profile-form-input"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="🏄‍♂️Name"
+            value={name}
+            onChange={ this.handleChange }
+          />
+          <label className="update-profile-form-label" htmlFor="surname"><strong>Surname:</strong></label>
+          <input
+            className="update-profile-form-input"
+            type="text"
+            name="surname"
+            id="surname"
+            placeholder="🤙Surname"
+            value={surname}
+            onChange={ this.handleChange }
+          />
+          <label className="update-profile-form-label" htmlFor="level"><strong>Level:</strong></label>
+          <input
+            className="update-profile-form-input with-paragraph"
+            type="text"
+            name="level"
+            id="level"
+            placeholder="✨Level"
+            value={level}
+            onChange={ this.handleChange }
+          />
+          <p className="update-profile-form-paragraph">(amateur, experienced, expert or professional)</p>
+          <label className="update-profile-form-label" htmlFor="favoriteBoard"><strong>Favorite board:</strong></label>
+          <input
+            className="update-profile-form-input"
+            type="text"
+            name="favoriteBoard"
+            id="FavoriteBoard"
+            placeholder="🛹Favorite board"
+            value={favoriteBoard}
+            onChange={ this.handleChange }
+          />
+          <label className="update-profile-form-label" htmlFor="typeOfWaves"> <strong>Type of waves:</strong></label>
+          <input
+            className="update-profile-form-input with-paragraph"
+            type="text"
+            name="typeOfWaves"
+            id="typeOfWaves"
+            placeholder="🌊Waves"
+            value={typeOfWaves}
+            onChange={ this.handleChange }
+          />
+          <p className="update-profile-form-paragraph">(small, medium, big or super big)</p>
+          <label className="update-profile-form-label" htmlFor="frequentsBeaches"><strong>Frequents beaches:</strong></label>
+          <input
+            className="update-profile-form-input"
+            type="text"
+            name="frequentsBeaches"
+            id="frequentsBeaches"
+            placeholder="🏖Beaches"
+            value={frequentsBeaches}
+            onChange={ this.handleChange }
+          />
+          <input className="update-profile-input-button" type="submit" value="Update" />
+        </form>
+      </div>
+      
     </div>
   )
 }

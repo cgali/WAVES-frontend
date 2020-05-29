@@ -21,6 +21,7 @@ class ReviewForm extends Component {
             onChange={ onChange }
           />
           <textarea
+            className="review-form-input"
             name="reviewDescription"
             id="reviewDescription"
             placeholder="📝Description"

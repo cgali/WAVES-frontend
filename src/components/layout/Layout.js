@@ -40,6 +40,16 @@ class Layout extends Component {
     })
   }
 
+  handleStateBurguer = () => {
+    this.setState({
+      isVisible: false,
+      backgroundColor: '#26afe6',
+      surfersActive: '#26afe6',
+      beachesActive: '#26afe6',
+      eventsActive: '#26afe6',
+    })
+  }
+
   handleSurfers = () => {
     this.setState({
       isVisible: false,
@@ -86,9 +96,9 @@ class Layout extends Component {
               <>
               <div className='overlay' onClick={this.handleOverlay} />
               <div className="layout-burguer-menu">
-                <Link className="burguer-menu-link" onClick={this.handleOverlay} to="/profile-update">Edit profile</Link>
-                <Link className="burguer-menu-link" onClick={this.handleOverlay} to="/add-event">New event</Link>
-                <Link className="burguer-menu-link" onClick={this.handleOverlay} to="/about-us">About us</Link>
+                <Link className="burguer-menu-link" onClick={this.handleStateBurguer} to="/profile-update">Edit profile</Link>
+                <Link className="burguer-menu-link" onClick={this.handleStateBurguer} to="/add-event">New event</Link>
+                <Link className="burguer-menu-link" onClick={this.handleStateBurguer} to="/about-us">About us</Link>
                 <button className="logout-button" onClick={this.handleLayoutLogout}>Logout</button>
               </div>
               </>

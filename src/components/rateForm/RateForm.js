@@ -13,7 +13,7 @@ class RateForm extends Component {
         <p className="rate-form-parameters">(min 0 and max 5)</p>
         <form className="rate-form" onSubmit={onSubmit}>
           <div>
-            <label for="waveRate">Waves:</label>
+            <label htmlFor="waveRate">Waves:</label>
             <input
               className="rate-form-input"
               type="number"
@@ -26,7 +26,7 @@ class RateForm extends Component {
             />
           </div>
           <div>
-            <label for="backgroundRate">Background:</label>
+            <label htmlFor="backgroundRate">Background:</label>
             <input
               className="rate-form-input"
               type="number"
@@ -39,7 +39,7 @@ class RateForm extends Component {
             />
           </div>
           <div>
-            <label for="socialEnvironmentRate">Social environment:</label>
+            <label htmlFor="socialEnvironmentRate">Social environment:</label>
             <input
               className="rate-form-input"
               type="number"

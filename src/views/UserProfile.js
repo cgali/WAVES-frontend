@@ -19,6 +19,8 @@ const STATUS = {
 class UserProfile extends Component {
   state = {
     user: "",
+    eventOwner: "",
+    eventParticipants: "",
     status: STATUS.LOADING,
   }
 
@@ -29,7 +31,6 @@ class UserProfile extends Component {
         console.log("data", response.data);
         this.setState({
           user: response.data,
-          status: STATUS.LOADED,
         });
       })
       .catch((error) => {
@@ -38,10 +39,27 @@ class UserProfile extends Component {
           status: STATUS.ERROR,
         });
       });
+    apiClient
+      .eventOwner()
+      .then((response) => {
+        console.log("EVENT OWNER:", response.data.events)
+        this.setState({
+          eventOwner: response.data
+        })
+      })
+    apiClient
+      .eventParticipants()
+      .then((response) => {
+        console.log("EVENT PARTICIPANTS:", response.data)
+        this.setState({
+          eventParticipants: response.data,
+          status: STATUS.LOADED,
+        })
+      })
   }
 
   userProfile = () => {
-    const { user } = this.state;
+    const { user, eventOwner, eventParticipants } = this.state;
 
     if (user !== undefined) {
       return(
@@ -78,16 +96,28 @@ class UserProfile extends Component {
                     </ul>
                   </div>
                   <div>
-                    <p className="surfer-info-title"><strong>Events:</strong></p>
+                    <p className="surfer-info-title"><strong>Own events:</strong></p>
                     <ul>
-                      {user.events.map((event, i) => {
+                      {eventOwner.events.map((event, i) => {
                         return (
                           <li key={i}>
-                            <Link className="surfer-info-list" to={`/eventProfile/${event._id}`}>{event.title}</Link>
+                            <Link className="surfer-info-events-list" to={`/events-list/${event._id}`}>{event.title}</Link>
                           </li>
                         )
                       })}
-                  </ul>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="surfer-info-title"><strong>Events where participates:</strong></p>
+                    <ul>
+                      {eventParticipants.events.map((event, i) => {
+                        return (
+                          <li key={i}>
+                            <Link className="surfer-info-events-list" to={`/events-list/${event._id}`}>{event.title}</Link>
+                          </li>
+                        )
+                      })}
+                    </ul>
                   </div>
                 </div>
               </div>

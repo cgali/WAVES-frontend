@@ -19,7 +19,6 @@ const STATUS = {
   ERROR: "❌ERROR❌",
 };
 
-let eventId = "";
 
 class EventProfile extends Component {
   state = {
@@ -37,7 +36,7 @@ class EventProfile extends Component {
   }
 
   componentDidMount() {
-    eventId = this.props.match.params.id;
+    const eventId = this.props.match.params.id;
     apiClient
       .eventProfile(eventId)
       .then((response) => {
@@ -81,12 +80,23 @@ class EventProfile extends Component {
   }
 
   handleUpdate = () => {
+    const eventId = this.props.match.params.id;
     const { image, title, date, beach, description } = this.state;
     apiClient
       .updateEvent(eventId, { image, title, date, beach, description })
-      .then(() => {
+      .then((response) => {
         console.log('EVENT UPDATED')
-        this.props.history.push(`/events-list/${eventId}`)
+        this.setState({
+          updating: false,
+          event: {
+            ...this.state.event,
+            image: response.data.image,
+            title: response.data.title,
+            date: response.data.date,
+            beach: response.data.beach,
+            description: response.data.description,
+          }
+         })
       })
       .catch((error) => {
         console.log(error)
@@ -98,9 +108,9 @@ class EventProfile extends Component {
    *******************/
 
   handleDelete = () => {
-    const { event } = this.state;
+    const eventId = this.props.match.params.id;
     apiClient
-      .deleteEvent(event._id)
+      .deleteEvent(eventId)
       .then (() => {
         console.log('event deleted')
         this.props.history.push('/events-list')
@@ -114,13 +124,34 @@ class EventProfile extends Component {
    *** JOIN EVENT ***
    *****************/
 
-  handleJoinIn = (eventId, userId) => {
-    console.log(eventId)
-    console.log('participant', userId)
+  handleJoinIn = () => {
+    const eventId = this.props.match.params.id;
     apiClient
-    .AddRemoveParticipant(eventId, { participant: userId })
+    .AddParticipant(eventId)
     .then((response) => {
-      console.log("response:",response)
+      console.log("JOIN:",response)
+      this.setState({
+        event: {
+          ...this.state.event,
+          participants: response.data.participants
+        }
+      })
+    })
+  }
+
+  handleDisjoin = () => {
+    const eventId = this.props.match.params.id;
+    apiClient
+    .RemoveParticipant(eventId)
+    .then((response) => {
+      console.log("DISJOIN:",response)
+      this.setState({
+        event: {
+          ...this.state.event,
+          participants: response.data.participants
+          
+        }
+      })
     })
   }
 
@@ -138,13 +169,19 @@ class EventProfile extends Component {
 
   handleAddReview = (e) => {
     e.preventDefault();
+    const eventId = this.props.match.params.id;
     const { reviewTitle, reviewDescription } = this.state;
-    console.log("COMPROBACION STATE:", reviewTitle, reviewDescription)
     apiClient
       .createEventReview(eventId, { reviewDescription, reviewTitle })
-      .then(() => {
-        this.setState({ addReview: false })
-        this.props.history.push(`/events-list/${eventId}`)
+      .then((response) => {
+        console.log("REVIEW ADDED:",response)
+        this.setState({ 
+          addReview: false,
+          event: {
+            ...this.state.event,
+            reviews: response.data.reviews
+          }
+         })
       })
       .catch((error) => {
         console.log(error)
@@ -156,11 +193,17 @@ class EventProfile extends Component {
    ********************/
 
   handleDeleteReview = (reviewId) => {
+    const eventId = this.props.match.params.id;
     apiClient
       .deleteEventReview(eventId, reviewId )
-      .then (() => {
-        console.log('REVIEW DELETED')
-        this.props.history.push(`/events-list/${eventId}`)
+      .then ((response) => {
+        this.setState({
+          event: {
+            ...this.state.event,
+            reviews: response.data.reviews
+          }
+         })
+        console.log('REVIEW DELETED:', response.data)
       })
       .catch((error) => {
         console.log("THE ERROR IS:", error)
@@ -186,14 +229,21 @@ class EventProfile extends Component {
                     <h2 className="event-profile-info-name">{ event.title }</h2>
                     { !this.state.updating && ( 
                       <div className="event-profile-header-buttons">
-                        <button className="event-join-button" onClick={ () => this.handleJoinIn(event._id, user.data._id) }>Join in</button>
-                        <Link className="event-profile-back-button" to="/events-list">Back</Link>
+                        { user.data._id !== event.owner._id && (
+                          <>
+                          { event.participants.map(u => u._id).includes(user.data._id)
+                              ? <button className="event-disjoin-button" onClick={ this.handleDisjoin }>Disjoin</button>
+                              : <button className="event-join-button" onClick={ this.handleJoinIn }>Join in</button>
+                          }
+                          </>
+                        )}
                         { user.data._id === event.owner._id && ( 
                           <div className="event-profile-owner-buttons">
                             <button className="update-event-button" onClick={ this.handleStateUpdating }>Update</button>
                             <button className="delete-event-button" onClick={ this.handleDelete }>Delete</button>
                           </div>
                         )}
+                        <Link className="event-profile-back-button" to="/events-list">Back</Link>
                       </div>
                     )}
                   </div>
@@ -203,7 +253,7 @@ class EventProfile extends Component {
                       image={ image } 
                       title={ title } 
                       date={ date } 
-                      beach={ beach} 
+                      beach={ beach } 
                       description={ description } 
                       onChange={ this.handleChange }
                       onClick= { this.handleStateUpdating }
@@ -216,7 +266,7 @@ class EventProfile extends Component {
                       <p className="event-profile-title"><strong>Information:</strong></p>
                       <p><strong>Created by:</strong> <Link className="event-profile-info-owner" to={`/surfers-list/${event.owner._id}`}>{ event.owner.name } { event.owner.surname }.</Link></p>
                       <p><strong>Date:</strong> { formatEventDate }.</p>
-                      <p><strong>Start time:</strong> { formatEventTime }.</p>
+                      <p><strong>Start time:</strong> { formatEventTime }:00.</p>
                       <p><strong>Beach:</strong> { event.beach }.</p>
                       <p><strong>Description:</strong> { event.description }</p>
                     </div>
@@ -240,8 +290,8 @@ class EventProfile extends Component {
                       { this.state.addReview && (
                         <ReviewForm 
                           onSubmit={ this.handleAddReview } 
-                          reviewTitle={ this.state.event.reviews.title } 
-                          reviewDescription={ this.state.event.reviews.description } 
+                          reviewTitle={ event.reviews.title } 
+                          reviewDescription={ event.reviews.description } 
                           onChange={ this.handleChange } 
                           buttonName="Send"
                           onClick={ this.handleStateAddReview }
