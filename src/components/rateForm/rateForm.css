@@ -11,11 +11,12 @@
   font-weight: Questrial;
   text-align: end;
   font-size: 1.5rem;
-  text-decoration: underline;
+  color: #505357;
 }
 
 .rate-form-parameters {
   font-size: 1rem;
+  color: #505357;
   text-align: end;
   margin: 0;
 }
@@ -24,12 +25,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  color: #505357;
 }
 
 .rate-form-input {
   border-radius: 1rem;
   width: 1.5rem;
-  border: 1px solid rgb(0, 140, 255);
+  border: 1px solid #008cff;
   text-align: center;
 }
 

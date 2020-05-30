@@ -19,6 +19,11 @@
   align-items: center;
 }
 
+.surfer-info-list-style {
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
 .surfer-info-info {
   margin: 0 2rem;
 }
@@ -30,6 +35,7 @@
 }
 
 .surfer-info-title, .surfer-info-list {
+  color: #505357;
   font-family: Mina;
   font-size: 1.2rem;
 }

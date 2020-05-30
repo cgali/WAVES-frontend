@@ -31,7 +31,7 @@ class Rating extends Component {
   render() {
     const { children } = this.props;
     return (
-      <div className="rating-container">
+      <div className="rating-container" style={{ color: "#008cff", paddingLeft: "1rem" }}>
         { this.showStars(children) }
       </div>
     )

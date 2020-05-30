@@ -27,11 +27,24 @@ class UserProfile extends Component {
   componentDidMount() {
     apiClient
       .profile()
-      .then((response) => {
-        console.log("data", response.data);
-        this.setState({
-          user: response.data,
-        });
+      .then((responseUser) => {
+        console.log("data", responseUser.data);
+        apiClient
+          .eventOwner()
+          .then((responseOwner) => {
+            console.log("EVENT OWNER:", responseOwner.data.events)
+            apiClient
+              .eventParticipants()
+              .then((responseParticipants) => {
+                console.log("EVENT PARTICIPANTS:", responseParticipants.data)
+                this.setState({
+                  user: responseUser.data,
+                  eventOwner: responseOwner.data,
+                  eventParticipants: responseParticipants.data,
+                  status: STATUS.LOADED
+                })
+              })
+          })
       })
       .catch((error) => {
         this.setState({
@@ -39,23 +52,6 @@ class UserProfile extends Component {
           status: STATUS.ERROR,
         });
       });
-    apiClient
-      .eventOwner()
-      .then((response) => {
-        console.log("EVENT OWNER:", response.data.events)
-        this.setState({
-          eventOwner: response.data
-        })
-      })
-    apiClient
-      .eventParticipants()
-      .then((response) => {
-        console.log("EVENT PARTICIPANTS:", response.data)
-        this.setState({
-          eventParticipants: response.data,
-          status: STATUS.LOADED,
-        })
-      })
   }
 
   userProfile = () => {
@@ -74,7 +70,7 @@ class UserProfile extends Component {
                   <div>
                     <p className="surfer-info-title"><strong>Waves:</strong></p>
                     <ul>
-                      {user.typeOfWaves.map((waves, i) => {
+                      { user.typeOfWaves.map((waves, i) => {
                         return (
                           <li key={i}>
                             <p className="surfer-info-list">{waves}</p>
@@ -86,7 +82,7 @@ class UserProfile extends Component {
                   <div>
                     <p className="surfer-info-title"><strong>Beaches:</strong></p>
                     <ul>
-                      {user.frequentsBeaches.map((freqBeaches, i) => {
+                      { user.frequentsBeaches.map((freqBeaches, i) => {
                         return (
                           <li key={i}>
                             <p className="surfer-info-list">{freqBeaches}</p>
@@ -98,7 +94,7 @@ class UserProfile extends Component {
                   <div>
                     <p className="surfer-info-title"><strong>Own events:</strong></p>
                     <ul>
-                      {eventOwner.events.map((event, i) => {
+                      { eventOwner.events.map((event, i) => {
                         return (
                           <li key={i}>
                             <Link className="surfer-info-events-list" to={`/events-list/${event._id}`}>{event.title}</Link>

@@ -22,9 +22,10 @@
 .event-profile-info-continue-box {
   font-family: Mina;
   font-size: 1.2rem;
+  color: #505357;
   background-color: #41E0D0;
   border-bottom-left-radius: 6rem;
-  padding: 1rem 0 2rem 2rem;
+  padding: 1rem 2rem 2rem 2rem;
 }
 
 .event-profile-info-header {
@@ -96,6 +97,17 @@
   outline: none;
 }
 
+.event-profile-title, .event-profile-information-title {
+  color: #505357;
+  font-family: Questrial;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.event-profile-information-title {
+  margin: 0;
+}
+
 .event-profile-info-owner, .event-profile-participants-name {
   font-family: Mina;
   font-size: 1.5rem;
@@ -109,13 +121,11 @@
   background-color: #3accbd;
   border-top-left-radius: 6rem;
   border-bottom-right-radius: 6rem;
-  padding: 1rem 0 2rem 2rem;
+  padding: 2rem 0 2rem 2rem;
 }
 
-.event-profile-title {
-  font-family: Questrial;
-  font-size: 1.6rem;
-  text-decoration: underline;
+.event-profile-participants-box > ul {
+  list-style: none;
 }
 
 .event-profile-participants-name {
@@ -144,6 +154,7 @@
 
 .event-profile-single-review-box {
   background-color: #3eda8c;
+  color: #505357;
   padding: 0.5rem;
   margin-top: 1rem;
   border-top-right-radius: 6rem;

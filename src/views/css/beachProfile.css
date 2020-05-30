@@ -12,11 +12,16 @@
 
 .beach-profile-info-box {
   font-family: Mina;
+  color: #505357;
   font-size: 1.2rem;
   background-color: #41E0D0;
   border-top-right-radius: 6rem;
   border-bottom-left-radius: 6rem;
   padding: 1rem 0 4rem 2rem;
+}
+
+.beach-profile-info-box > div > ul {
+  list-style: none;
 }
 
 .beach-profile-info-header {
@@ -46,10 +51,11 @@
 .beach-profile-info-title {
   font-family: Questrial;
   font-size: 1.6rem;
-  text-decoration: underline;
+  color: #505357;
 }
 
 .beach-profile-rate-box {
+  color: #505357;
   font-family: Mina;
   font-size: 1.2rem;
   background-color: #3accbd;
@@ -58,8 +64,14 @@
   padding: 1rem 0 2rem 2rem;
 }
 
+.beach-profile-rate-box > ul {
+  list-style: none;
+  padding-left: 1.5rem;
+}
+
 .beach-profile-rate-form {
   background-color: #33b474;
+  color: #505357;
   padding: 0.5rem;
   margin-top: 1rem;
   border-top-left-radius: 6rem;
@@ -93,6 +105,7 @@
 }
 
 .beach-profile-reviews-box {
+  color: #505357;
   font-family: Mina;
   font-size: 1.1rem;
   background-color: #27b6a8;

@@ -82,25 +82,34 @@ class EventProfile extends Component {
   handleUpdate = () => {
     const eventId = this.props.match.params.id;
     const { image, title, date, beach, description } = this.state;
-    apiClient
-      .updateEvent(eventId, { image, title, date, beach, description })
-      .then((response) => {
-        console.log('EVENT UPDATED')
-        this.setState({
-          updating: false,
-          event: {
-            ...this.state.event,
-            image: response.data.image,
-            title: response.data.title,
-            date: response.data.date,
-            beach: response.data.beach,
-            description: response.data.description,
-          }
-         })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    if(title.length === 0) {
+      return ( <p>El campo no puede estar vacío</p> )
+    } else if (description.length === 0) {
+      
+    } else {
+      this.setState({ status: STATUS.LOADING })
+      apiClient
+        .updateEvent(eventId, { image, title, date, beach, description })
+        .then((response) => {
+          this.setState({
+            updating: false,
+            event: {
+              ...this.state.event,
+              image: response.data.image,
+              title: response.data.title,
+              date: response.data.date,
+              beach: response.data.beach,
+              description: response.data.description,
+            },
+            status: STATUS.LOADED
+          })
+          console.log('EVENT UPDATED')
+        })
+        .catch((error) => {
+          this.setState({ status: STATUS.ERROR })
+          console.log(error)
+        })
+    }
   }
 
   /******************** 
@@ -109,13 +118,16 @@ class EventProfile extends Component {
 
   handleDelete = () => {
     const eventId = this.props.match.params.id;
+    this.setState({ status: STATUS.LOADING })
     apiClient
       .deleteEvent(eventId)
       .then (() => {
-        console.log('event deleted')
+        this.setState({ status: STATUS.LOADED })
         this.props.history.push('/events-list')
+        console.log('event deleted')
       })
       .catch((error) => {
+        this.setState({ status: STATUS.ERROR })
         console.log("THE ERROR IS:", error)
       })
   }
@@ -126,33 +138,44 @@ class EventProfile extends Component {
 
   handleJoinIn = () => {
     const eventId = this.props.match.params.id;
+    this.setState({ status: STATUS.LOADING })
     apiClient
     .AddParticipant(eventId)
     .then((response) => {
-      console.log("JOIN:",response)
       this.setState({
         event: {
           ...this.state.event,
           participants: response.data.participants
-        }
+        },
+        status: STATUS.LOADED
       })
+      console.log("JOIN IN:",response)
     })
+    .catch((error) => {
+      this.setState({ status: STATUS.ERROR })
+      console.log(error)
+    });
   }
 
   handleDisjoin = () => {
     const eventId = this.props.match.params.id;
+    this.setState({ status: STATUS.LOADING })
     apiClient
     .RemoveParticipant(eventId)
     .then((response) => {
-      console.log("DISJOIN:",response)
       this.setState({
         event: {
           ...this.state.event,
           participants: response.data.participants
-          
-        }
+        },
+        status: STATUS.LOADED
       })
+      console.log("DISJOIN:",response)
     })
+    .catch((error) => {
+      this.setState({ status: STATUS.ERROR })
+      console.log(error)
+    });
   }
 
   /****************** 
@@ -171,19 +194,22 @@ class EventProfile extends Component {
     e.preventDefault();
     const eventId = this.props.match.params.id;
     const { reviewTitle, reviewDescription } = this.state;
+    this.setState({ status: STATUS.LOADING })
     apiClient
       .createEventReview(eventId, { reviewDescription, reviewTitle })
       .then((response) => {
-        console.log("REVIEW ADDED:",response)
         this.setState({ 
           addReview: false,
           event: {
             ...this.state.event,
             reviews: response.data.reviews
-          }
+          },
+          status: STATUS.LOADED
          })
+         console.log("REVIEW ADDED:",response)
       })
       .catch((error) => {
+        this.setState({ status: STATUS.ERROR })
         console.log(error)
       });
   }
@@ -194,18 +220,22 @@ class EventProfile extends Component {
 
   handleDeleteReview = (reviewId) => {
     const eventId = this.props.match.params.id;
+    this.setState({ status: STATUS.LOADING })
     apiClient
       .deleteEventReview(eventId, reviewId )
       .then ((response) => {
+        console.log(response.data)
         this.setState({
           event: {
             ...this.state.event,
-            reviews: response.data.reviews
-          }
+            reviews: response.data.reviews,
+          },
+          status: STATUS.LOADED
          })
         console.log('REVIEW DELETED:', response.data)
       })
       .catch((error) => {
+        this.setState({ status: STATUS.ERROR })
         console.log("THE ERROR IS:", error)
       })
   }
@@ -263,7 +293,7 @@ class EventProfile extends Component {
                 { !this.state.updating && (
                   <div>
                     <div className="event-profile-info-continue-box">
-                      <p className="event-profile-title"><strong>Information:</strong></p>
+                      <p className="event-profile-information-title"><strong>Information:</strong></p>
                       <p><strong>Created by:</strong> <Link className="event-profile-info-owner" to={`/surfers-list/${event.owner._id}`}>{ event.owner.name } { event.owner.surname }.</Link></p>
                       <p><strong>Date:</strong> { formatEventDate }.</p>
                       <p><strong>Start time:</strong> { formatEventTime }:00.</p>
@@ -334,7 +364,7 @@ class EventProfile extends Component {
 
   render() {
     const { status } = this.state;
-
+    console.log('status:', status)
     // eslint-disable-next-line default-case
     switch (status) {
       case STATUS.LOADING:

@@ -73,19 +73,22 @@ class BeachProfile extends Component {
     e.preventDefault();
     const beachId = this.props.match.params.id;
     const { reviewTitle, reviewDescription } = this.state;
+    this.setState({ status: STATUS.LOADING })
     apiClient
       .createBeachReview(beachId, { reviewDescription, reviewTitle })
       .then((response) => {
-        console.log('REVIEW ADDED:', response)
         this.setState({ 
           addReview: false,
           beach: {
             ...this.state.beach,
             reviews: response.data.reviews
-          }
+          },
+          status: STATUS.LOADED
          })
+         console.log('REVIEW ADDED:', response)
       })
       .catch((error) => {
+        this.setState({ status: STATUS.ERROR })
         console.log(error)
       });
   }
@@ -96,18 +99,21 @@ class BeachProfile extends Component {
 
  handleDeleteReview = (reviewId) => {
   const beachId = this.props.match.params.id;
+  this.setState({ status: STATUS.LOADING })
     apiClient
       .deleteBeachReview(beachId, reviewId )
       .then ((response) => {
-        console.log('REVIEW DELETED:', response)
         this.setState({
           beach: {
             ...this.state.beach,
             reviews: response.data.reviews
-          }
+          },
+          status: STATUS.LOADED
          })
+         console.log('REVIEW DELETED:', response)
       })
       .catch((error) => {
+        this.setState({ status: STATUS.ERROR })
         console.log("THE ERROR IS:", error)
       })
   }
@@ -128,19 +134,22 @@ class BeachProfile extends Component {
   e.preventDefault();
   const beachId = this.props.match.params.id;
   const { waveRate, backgroundRate, socialEnvironmentRate } = this.state;
+  this.setState({ status: STATUS.LOADING })
   apiClient
     .createBeachRate(beachId, {waveRate, backgroundRate, socialEnvironmentRate })
     .then((response) => {
-      console.log('RATE ADDED', response.data)
       this.setState({ 
         addRate: false,
         beach: {
           ...this.state.beach,
           rate: response.data.rate
-        }
+        },
+        status: STATUS.LOADED
       })
+      console.log('RATE ADDED', response.data)
     })
     .catch((error) => {
+      this.setState({ status: STATUS.ERROR })
       console.log(error)
     });
   })
@@ -151,17 +160,19 @@ class BeachProfile extends Component {
 
   handleDeleteRate = (rateId) => {
     const beachId = this.props.match.params.id;
+    this.setState({ status: STATUS.LOADING })
     apiClient
       .deleteBeachRate(beachId, rateId)
       .then ((response) => {
-        console.log('RATE DELETED', response.data)
         this.setState({
           addRate: false,
           beach: {
             ...this.state.beach,
             rate: response.data.rate
-          }
+          },
+          status: STATUS.LOADED
         })
+        console.log('RATE DELETED', response.data)
       })
       .catch((error) => {
         console.log("THE ERROR IS:", error)

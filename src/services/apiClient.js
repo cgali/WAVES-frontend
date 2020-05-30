@@ -107,6 +107,14 @@ class ApiClient {
     return this.apiClient.get('events-list/owner');
   }
 
+  eventSurferParticipants(id) {
+    return this.apiClient.post('events-list/surfer-participants', {id});
+  }
+
+  eventSurferOwner(id) {
+    return this.apiClient.post('events-list/surfer-owner', {id});
+  }
+
   createEvent(body) {
     return this.apiClient.post(`/events-list`, body);
   }

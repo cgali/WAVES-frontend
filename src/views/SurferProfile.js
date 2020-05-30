@@ -19,8 +19,8 @@ const STATUS = {
 class SurferProfile extends Component {
   state = {
     surfer: "",
-    eventOwner: "",
-    eventParticipants: "",
+    eventOwner: [],
+    eventParticipants: [],
     status: STATUS.LOADING,
   }
 
@@ -29,11 +29,24 @@ class SurferProfile extends Component {
     console.log(surferId)
     apiClient
       .surferProfile(surferId)
-      .then((response) => {
-        console.log("data", response.data);
-        this.setState({
-          surfer: response.data.surfer,
-        });
+      .then((responseSurfer) => {
+        console.log("data", responseSurfer.data);
+        apiClient
+          .eventSurferOwner(surferId)
+          .then((responseOwner) => {
+            console.log("EVENT OWNER:", responseOwner)
+            apiClient
+              .eventSurferParticipants(surferId)
+              .then((responseParticipants) => {
+                console.log("EVENT PARTICIPANTS:", responseParticipants.data)
+                this.setState({
+                  surfer: responseSurfer.data.surfer,
+                  eventOwner: responseOwner.data,
+                  eventParticipants: responseParticipants.data,
+                  status: STATUS.LOADED,
+                })
+              })
+          })
       })
       .catch((error) => {
         this.setState({
@@ -41,23 +54,8 @@ class SurferProfile extends Component {
           status: STATUS.ERROR,
         });
       });
-    apiClient
-      .eventOwner()
-      .then((response) => {
-        console.log("EVENT OWNER:", response.data.events)
-        this.setState({
-          eventOwner: response.data
-        })
-      })
-    apiClient
-      .eventParticipants()
-      .then((response) => {
-        console.log("EVENT PARTICIPANTS:", response.data)
-        this.setState({
-          eventParticipants: response.data,
-          status: STATUS.LOADED,
-        })
-      })
+    
+    
   }
 
   surferProfile = () => {
@@ -75,7 +73,7 @@ class SurferProfile extends Component {
                   <p className="surfer-info-title"><strong>Favorite board:</strong><br/><span></span>{ surfer.favoriteBoard }.</p>
                   <div>
                     <p className="surfer-info-title"><strong>Waves:</strong></p>
-                    <ul>
+                    <ul className="surfer-info-list-style">
                       {surfer.typeOfWaves.map((waves, i) => {
                         return (
                           <li key={i}>
@@ -87,7 +85,7 @@ class SurferProfile extends Component {
                   </div>
                   <div>
                     <p className="surfer-info-title"><strong>Beaches:</strong></p>
-                    <ul>
+                    <ul className="surfer-info-list-style">
                       {surfer.frequentsBeaches.map((freqBeaches, i) => {
                         return (
                           <li key={i}>
@@ -99,7 +97,7 @@ class SurferProfile extends Component {
                   </div>
                   <div>
                     <p className="surfer-info-title"><strong>Own events:</strong></p>
-                    <ul>
+                    <ul className="surfer-info-list-style">
                       {eventOwner.events.map((event, i) => {
                         return (
                           <li key={i}>
@@ -111,7 +109,7 @@ class SurferProfile extends Component {
                   </div>
                   <div>
                     <p className="surfer-info-title"><strong>Events where participates:</strong></p>
-                    <ul>
+                    <ul className="surfer-info-list-style">
                       {eventParticipants.events.map((event, i) => {
                         return (
                           <li key={i}>
