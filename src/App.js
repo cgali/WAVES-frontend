@@ -63,6 +63,7 @@ class App extends Component {
         this.setState({
           user,
           isLoggedIn: true,
+          appLoginNotification: null,
         });
       })
       .catch((error) => {
@@ -106,6 +107,12 @@ class App extends Component {
         console.log(error)
       });
   };
+
+  handleAppLoginNotification = () => {
+    this.setState({
+      appLoginNotification: null,
+    })
+  }
   
 
   render() {
@@ -133,10 +140,10 @@ class App extends Component {
                     appLoginNotification: appLoginNotification
                    }}>
                   <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
-                    <Login onLogin={this.handleLogin} />
+                    <Login onLogin={this.handleLogin} handleAppLoginNotification={this.handleAppLoginNotification}/>
                   </AnonRoute>
                   <AnonRoute exact path={"/login"} isLoggedIn={isLoggedIn}>
-                    <Login onLogin={this.handleLogin} />
+                    <Login onLogin={this.handleLogin} handleAppLoginNotification={this.handleAppLoginNotification}/>
                   </AnonRoute>
                   <AnonRoute exact path={"/signup"} isLoggedIn={isLoggedIn}>
                     <Signup onSignup={this.handleSignup} />

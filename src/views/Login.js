@@ -34,10 +34,9 @@ export default class Login extends Component {
           loginNotification: null,
         })
         onLogin({ email, password });
+        this.cleanForm();
     }
   };
-
-  
 
   cleanForm = () => {
     this.setState({
@@ -45,6 +44,11 @@ export default class Login extends Component {
       password: "",
     });
   };
+
+  handleAppState = () => {
+    const { handleAppLoginNotification } = this.props;
+    handleAppLoginNotification()
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -81,11 +85,11 @@ export default class Login extends Component {
                   value={password}
                   onChange={this.handleChange}
                 />
-                { !loginNotification && (appLoginNotification)  }
+                { !loginNotification && ( appLoginNotification )  }
                 { loginNotification }
                 <input className="input-login-button" type="submit" value="Enter" />
               </form>
-              <Link className="link-signup" to="/signup">No account yet?<br/> <u>Sign up here!</u> </Link>
+              <Link onClick={this.handleAppState} className="link-signup" to="/signup">No account yet?<br/> <u>Sign up here!</u></Link>
               <div className="login-footer">
                 <img  style={{ width: '2rem' }} src="./logos/image-logo.gif" alt=""/>
                 <p>© WAVES Trademark</p>

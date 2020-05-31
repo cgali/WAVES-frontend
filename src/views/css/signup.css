@@ -40,7 +40,7 @@ input:focus {
   border-radius: 1rem;
   background-color: #26afe6;
   color: white;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-family: Mina-Bold;
   height: 2rem;
   width: 6rem;
@@ -48,7 +48,7 @@ input:focus {
 
 .signup-back-button {
   border: 2px solid white;
-  background-color: #1d64e7;
+  background-color: #ff8800;
   border-radius: 1rem;
   color: white;
   text-decoration: none;

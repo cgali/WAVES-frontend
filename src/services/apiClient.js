@@ -15,7 +15,6 @@ class ApiClient {
   }
 
   login(body) {
-    console.log(body)
     return this.apiClient.post("/login", body);
   }
 
