@@ -78,6 +78,16 @@
   border-bottom-right-radius: 6rem;
 }
 
+.rate-form-notification {
+  font-size: 1.1rem;
+  font-family: Mina;
+  border-radius: 1rem;
+  background-color: #d12929;
+  color: white;
+  text-align: center;
+  padding: 0.3rem;
+}
+
 .add-rate-button, .add-review-button, .delete-rate-button {
   border: 2px solid white;
   background-color: #1dc9e7;

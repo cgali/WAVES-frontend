@@ -71,12 +71,13 @@ handleUpdate = (e) => {
 };
 
 renderForm = () => {
-  const { image, name, surname, level, favoriteBoard, typeOfWaves, frequentsBeaches } = this.state.userData;
+  const { image, name, surname, level, favoriteBoard, typeOfWaves, frequentsBeaches, eventUpdateNotification } = this.state.userData;
   const Background = 'https://k62.kn3.net/taringa/7/7/E/1/F/B/Nosha/550x978_1E3.jpg'
   return (
     <div className="update-profile-form-container" style={{ backgroundImage: `url(${Background})`}}>
       <div className="update-profile-form-box">
         <h2 className="update-profile-form-title">Update profile</h2>
+        { eventUpdateNotification }
         <form className="update-profile-form" onSubmit={this.handleUpdate}>
           <label className="update-profile-form-label" htmlFor="image"><strong>Image:</strong></label>
           <input

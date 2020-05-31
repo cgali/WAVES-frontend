@@ -161,6 +161,16 @@
   border-bottom-left-radius: 6rem;
 }
 
+.review-form-notification, .update-event-form-notification {
+  font-size: 1.1rem;
+  font-family: Mina;
+  border-radius: 1rem;
+  background-color: #d12929;
+  color: white;
+  text-align: center;
+  padding: 0.3rem;
+}
+
 .event-profile-single-review-description {
   padding: 0 0.7rem;
 }

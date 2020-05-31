@@ -11,6 +11,16 @@
   color: white;
 }
 
+.create-event-form-notification {
+  font-size: 1.1rem;
+  font-family: Mina;
+  border-radius: 1rem;
+  background-color: #d12929;
+  color: white;
+  text-align: center;
+  padding: 0.3rem;
+}
+
 .add-event-form-box {
   display: flex;
   flex-direction: column;
@@ -23,6 +33,7 @@
 .add-event-form-label {
   font-family: Questrial;
   font-size: 1.3rem;
+  letter-spacing: 0.1rem;
   margin: 0;
   color: white;
 }
@@ -43,6 +54,10 @@
   font-family: Mina;
   margin-bottom: 1rem;
   width: 15rem;
+}
+
+.add-event-form-select-input:focus, .add-event-form-textarea-input:focus {
+  outline: none;
 }
 
 .add-event-input-button {

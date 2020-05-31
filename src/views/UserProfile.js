@@ -69,7 +69,7 @@ class UserProfile extends Component {
                   <p className="surfer-info-title"><strong>Favorite board:</strong> { user.favoriteBoard }.</p>
                   <div>
                     <p className="surfer-info-title"><strong>Waves:</strong></p>
-                    <ul>
+                    <ul className="surfer-info-list-style">
                       { user.typeOfWaves.map((waves, i) => {
                         return (
                           <li key={i}>
@@ -81,7 +81,7 @@ class UserProfile extends Component {
                   </div>
                   <div>
                     <p className="surfer-info-title"><strong>Beaches:</strong></p>
-                    <ul>
+                    <ul className="surfer-info-list-style">
                       { user.frequentsBeaches.map((freqBeaches, i) => {
                         return (
                           <li key={i}>
@@ -93,7 +93,7 @@ class UserProfile extends Component {
                   </div>
                   <div>
                     <p className="surfer-info-title"><strong>Own events:</strong></p>
-                    <ul>
+                    <ul className="surfer-info-list-style">
                       { eventOwner.events.map((event, i) => {
                         return (
                           <li key={i}>
@@ -105,7 +105,7 @@ class UserProfile extends Component {
                   </div>
                   <div>
                     <p className="surfer-info-title"><strong>Events where participates:</strong></p>
-                    <ul>
+                    <ul className="surfer-info-list-style">
                       {eventParticipants.events.map((event, i) => {
                         return (
                           <li key={i}>

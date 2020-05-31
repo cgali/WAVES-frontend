@@ -6,10 +6,11 @@ import "../eventsForm/eventsForm.css";
 
 class ReviewForm extends Component {
   render() {
-    const { onSubmit, reviewTitle, reviewDescription, onChange, buttonName, onClick } = this.props;
+    const { onSubmit, reviewTitle, reviewNotification, reviewDescription, onChange, buttonName, onClick } = this.props;
     return(
       <div className="review-form-container">
         <h2 className="review-form-title">Add a review</h2>
+        { reviewNotification }
         <form className="review-form" onSubmit={onSubmit}>
           <input
             className="review-form-input"

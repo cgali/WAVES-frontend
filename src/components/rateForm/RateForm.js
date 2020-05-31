@@ -6,11 +6,12 @@ import "../rateForm/rateForm.css";
 
 class RateForm extends Component {
   render() {
-    const { onSubmit, waveRate, backgroundRate, socialEnvironmentRate, onChange, buttonName, onClick } = this.props;
+    const { onSubmit, rateNotification, waveRate, backgroundRate, socialEnvironmentRate, onChange, buttonName, onClick } = this.props;
     return(
       <div className="rate-form-container">
         <h2 className="rate-form-title">Add a rate</h2>
-        <p className="rate-form-parameters">(min 0 and max 5)</p>
+        <p className="rate-form-parameters">(min 1 and max 5)</p>
+        { rateNotification }
         <form className="rate-form" onSubmit={onSubmit}>
           <div>
             <label htmlFor="waveRate">Waves:</label>
@@ -19,7 +20,7 @@ class RateForm extends Component {
               type="number"
               name="waveRate"
               id="waveRate"
-              min="0"
+              min="1"
               max="5"
               value={ waveRate }
               onChange={ onChange }
@@ -32,7 +33,7 @@ class RateForm extends Component {
               type="number"
               name="backgroundRate"
               id="backgroundRate"
-              min="0"
+              min="1"
               max="5"
               value={ backgroundRate }
               onChange={ onChange }

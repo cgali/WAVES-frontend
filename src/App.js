@@ -28,6 +28,9 @@ class App extends Component {
     isLoggedIn: false,
     user: null,
     isLoading: true,
+    surfersActive: '#26afe6',
+    beachesActive: '#26afe6',
+    eventsActive: '#26afe6',
   };
 
   componentDidMount() {
@@ -46,6 +49,7 @@ class App extends Component {
           isLoggedIn: false,
           user: null,
         });
+        console.log(error)
       });
   }
 
@@ -64,6 +68,7 @@ class App extends Component {
           isLoggedIn: false,
           user: null,
         });
+        console.log(error)
       });
   };
 
@@ -98,19 +103,31 @@ class App extends Component {
         console.log(error)
       });
   };
-
   
 
   render() {
-    const { isLoggedIn, isLoading, user } = this.state;
+    const { isLoggedIn, isLoading, user, surfersActive, beachesActive, eventsActive } = this.state;
     return (
       <div>
         {isLoading && <Loading />}
         {!isLoading && (
           <div className="App">
-            <Layout isLoggedIn={isLoggedIn} onLogout={this.handleLogout} user={user}> 
+            <Layout
+              isLoggedIn={ isLoggedIn }
+              onLogout={ this.handleLogout }
+              user={ user }
+              surfersActive={ surfersActive }
+              beachesActive={ beachesActive }
+              eventsActive= { eventsActive }
+            >
               <Switch>
-                <UserContext.Provider value={{ user: this.state.user }}>
+                <UserContext.Provider 
+                  value={{ 
+                    user: this.state.user,
+                    surfersActive: this.state.surfersActive,
+                    beachesActive: this.state.beachesActive,
+                    eventsActive: this.state.eventsActive,
+                   }}>
                   <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} />
                   </AnonRoute>

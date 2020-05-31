@@ -54,14 +54,13 @@ class SurferProfile extends Component {
           status: STATUS.ERROR,
         });
       });
-    
-    
   }
+  
 
   surferProfile = () => {
     const { surfer, eventOwner, eventParticipants } = this.state;
 
-    if (surfer !== undefined) {
+    if (surfer) {
       return(
         <div className="surfer-profile-container">
             <img className="surfer-profile-image" src={ surfer.image} alt="surfer"/>
@@ -101,7 +100,7 @@ class SurferProfile extends Component {
                       {eventOwner.events.map((event, i) => {
                         return (
                           <li key={i}>
-                            <Link className="surfer-info-events-list" to={`/events-list/${event._id}`}>{event.title}</Link>
+                            <Link className="surfer-info-events-list" to={`/events-list/${event._id}`} onClick={ this.handleBeachButtonState }>{event.title}</Link>
                           </li>
                         )
                       })}
@@ -113,7 +112,7 @@ class SurferProfile extends Component {
                       {eventParticipants.events.map((event, i) => {
                         return (
                           <li key={i}>
-                            <Link className="surfer-info-events-list" to={`/events-list/${event._id}`}>{event.title}</Link>
+                            <Link className="surfer-info-events-list" to={`/events-list/${event._id}`} onClick={ this.handleBeachButtonState }>{event.title}</Link>
                           </li>
                         )
                       })}

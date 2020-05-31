@@ -33,6 +33,8 @@ class EventProfile extends Component {
     description: "",
     reviewTitle: "",
     reviewDescription: "",
+    reviewNotification: null,
+    eventUpdateNotification: null,
   }
 
   componentDidMount() {
@@ -82,10 +84,22 @@ class EventProfile extends Component {
   handleUpdate = () => {
     const eventId = this.props.match.params.id;
     const { image, title, date, beach, description } = this.state;
-    if(title.length === 0) {
-      return ( <p>El campo no puede estar vacío</p> )
-    } else if (description.length === 0) {
-      
+    if(title === undefined || title.length === 0) {
+      this.setState({
+        eventUpdateNotification: <p className="update-event-form-notification">The <strong style={{ color: "#14a714"}}>TITLE</strong> field cannot be empty</p>,
+      })
+    } else if (date === undefined || date.length === 0) {
+        this.setState({
+          eventUpdateNotification: <p className="update-event-form-notification">The <strong style={{ color: "#14a714"}}>DATE</strong> field cannot be empty</p>,
+        })
+    } else if (beach === undefined || beach.length === 0) {
+        this.setState({
+          eventUpdateNotification: <p className="update-event-form-notification">The <strong style={{ color: "#14a714"}}>BEACH</strong> field cannot be empty</p>,
+        })
+    } else if (description === undefined || description.length === 0) {
+        this.setState({
+          eventUpdateNotification: <p className="update-event-form-notification">The <strong style={{ color: "#14a714"}}>DESCRIPTION</strong> field cannot be empty</p>,
+        })
     } else {
       this.setState({ status: STATUS.LOADING })
       apiClient
@@ -138,7 +152,6 @@ class EventProfile extends Component {
 
   handleJoinIn = () => {
     const eventId = this.props.match.params.id;
-    this.setState({ status: STATUS.LOADING })
     apiClient
     .AddParticipant(eventId)
     .then((response) => {
@@ -147,7 +160,6 @@ class EventProfile extends Component {
           ...this.state.event,
           participants: response.data.participants
         },
-        status: STATUS.LOADED
       })
       console.log("JOIN IN:",response)
     })
@@ -159,7 +171,6 @@ class EventProfile extends Component {
 
   handleDisjoin = () => {
     const eventId = this.props.match.params.id;
-    this.setState({ status: STATUS.LOADING })
     apiClient
     .RemoveParticipant(eventId)
     .then((response) => {
@@ -168,7 +179,6 @@ class EventProfile extends Component {
           ...this.state.event,
           participants: response.data.participants
         },
-        status: STATUS.LOADED
       })
       console.log("DISJOIN:",response)
     })
@@ -187,6 +197,9 @@ class EventProfile extends Component {
       addReview: !this.state.addReview,
       updating: false,
       updateReview: false,
+      reviewNotification: null,
+      reviewDescription: "",
+      reviewTitle: "",
     })
   }
 
@@ -194,29 +207,42 @@ class EventProfile extends Component {
     e.preventDefault();
     const eventId = this.props.match.params.id;
     const { reviewTitle, reviewDescription } = this.state;
-    this.setState({ status: STATUS.LOADING })
-    apiClient
-      .createEventReview(eventId, { reviewDescription, reviewTitle })
-      .then((response) => {
-        this.setState({ 
-          addReview: false,
-          event: {
-            ...this.state.event,
-            reviews: response.data.reviews
-          },
-          status: STATUS.LOADED
-         })
-         console.log("REVIEW ADDED:",response)
+    if(reviewTitle === undefined || reviewTitle.length === 0 ) {
+      this.setState({
+        reviewNotification: <p className="review-form-notification">The <strong style={{ color: "#14a714"}}>TITLE</strong> field cannot be empty</p>,
       })
-      .catch((error) => {
-        this.setState({ status: STATUS.ERROR })
-        console.log(error)
-      });
+    } else if (reviewDescription === undefined || reviewDescription.length === 0) {
+        this.setState({
+          reviewNotification: <p className="review-form-notification">The <strong style={{ color: "#14a714"}}>DESCRIPTION</strong> field cannot be empty</p>,
+        })
+    } else {
+        this.setState({ status: STATUS.LOADING })
+        apiClient
+          .createEventReview(eventId, { reviewDescription, reviewTitle })
+          .then((response) => {
+            this.setState({ 
+              addReview: false,
+              reviewNotification: null,
+              event: {
+                ...this.state.event,
+                reviews: response.data.reviews
+              },
+              reviewDescription: "",
+              reviewTitle: "",
+              status: STATUS.LOADED
+            })
+            console.log("REVIEW ADDED:", response)
+          })
+        .catch((error) => {
+          this.setState({ status: STATUS.ERROR })
+          console.log(error)
+        });
+    }
   }
 
-   /******************** 
-   *** DELETE REVIEW ***
-   ********************/
+  /******************** 
+  *** DELETE REVIEW ***
+  ********************/
 
   handleDeleteReview = (reviewId) => {
     const eventId = this.props.match.params.id;
@@ -242,12 +268,12 @@ class EventProfile extends Component {
 
 
   eventProfile = () => {
-    const { event, image, title, date, beach, description } = this.state;
+    const { event, image, title, date, beach, description, reviewNotification, eventUpdateNotification } = this.state;
     const eventDate = new Date(event.date);
     const formatEventDate = `${eventDate.getDate()}-${eventDate.getMonth()}-${eventDate.getFullYear()}`
     const formatEventTime = `${eventDate.getHours()}:${eventDate.getMinutes()}`
 
-    if (event !== undefined) {
+    if (event) {
       return (
         <UserContext.Consumer>
           {({ user }) => (
@@ -280,6 +306,7 @@ class EventProfile extends Component {
                   { this.state.updating && (
                     <EventUpdateForm
                       onSubmit={ this.handleUpdate } 
+                      eventUpdateNotification={ eventUpdateNotification }
                       image={ image } 
                       title={ title } 
                       date={ date } 
@@ -320,7 +347,8 @@ class EventProfile extends Component {
                       { this.state.addReview && (
                         <ReviewForm 
                           onSubmit={ this.handleAddReview } 
-                          reviewTitle={ event.reviews.title } 
+                          reviewTitle={ event.reviews.title }
+                          reviewNotification={ reviewNotification }
                           reviewDescription={ event.reviews.description } 
                           onChange={ this.handleChange } 
                           buttonName="Send"

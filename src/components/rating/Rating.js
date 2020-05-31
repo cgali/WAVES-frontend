@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "../rating/rating.css";
 
 
 class Rating extends Component {
@@ -31,7 +32,7 @@ class Rating extends Component {
   render() {
     const { children } = this.props;
     return (
-      <div className="rating-container" style={{ color: "#008cff", paddingLeft: "1rem" }}>
+      <div className="rating-container">
         { this.showStars(children) }
       </div>
     )

@@ -25,6 +25,7 @@ class EventAddForm extends Component {
     date: "",
     beach: "",
     description: "",
+    eventCreateNotification: null,
   }
 
   componentDidMount() {
@@ -34,14 +35,32 @@ class EventAddForm extends Component {
   handleCreate = (e) => {
     e.preventDefault();
     const { user, image, title, date, beach, description } = this.state;
-    apiClient
-      .createEvent({ user, image, title, date, beach, description })
-      .then(() => {
-        this.props.history.push('/events-list')
+    if(title === undefined || title.length === 0) {
+      this.setState({
+        eventCreateNotification: <p className="create-event-form-notification">The <strong style={{ color: "#14a714"}}>TITLE</strong> field cannot be empty</p>,
       })
-      .catch((error) => {
-        console.log(error)
-      });
+    } else if (date === undefined || date.length === 0) {
+        this.setState({
+          eventCreateNotification: <p className="create-event-form-notification">The <strong style={{ color: "#14a714"}}>DATE</strong> field cannot be empty</p>,
+        })
+    } else if (beach === undefined || beach.length === 0) {
+        this.setState({
+          eventCreateNotification: <p className="create-event-form-notification">The <strong style={{ color: "#14a714"}}>BEACH</strong> field cannot be empty</p>,
+        })
+    } else if (description === undefined || description.length === 0) {
+        this.setState({
+          eventCreateNotification: <p className="create-event-form-notification">The <strong style={{ color: "#14a714"}}>DESCRIPTION</strong> field cannot be empty</p>,
+        })
+    } else {
+        apiClient
+          .createEvent({ user, image, title, date, beach, description })
+          .then(() => {
+            this.props.history.push('/events-list')
+          })
+          .catch((error) => {
+            console.log(error)
+          });
+    }
   };
 
   handleChange = (e) => {
@@ -51,13 +70,14 @@ class EventAddForm extends Component {
   };
 
   renderForm = () => {
-    const { image, title, date, description } = this.state;
+    const { image, title, date, description, eventCreateNotification } = this.state;
     const Background = 'https://k62.kn3.net/taringa/5/5/D/B/2/A/Nosha/550x977_957.jpg';
     
     return(
       <div className="add-event-form-container" style={{ backgroundImage: `url(${Background})`}}>
         <div className="add-event-form-box">
           <h2 className="add-event-form-title">Create event</h2>
+          { eventCreateNotification }
           <form className="add-event-form" onSubmit={this.handleCreate}>
             <label className="add-event-form-label" htmlFor="image"><strong>Image:</strong></label>
             <input
@@ -90,6 +110,7 @@ class EventAddForm extends Component {
             />
             <label className="add-event-form-label" htmlFor="beach"><strong>Beach:</strong></label>
             <select className="add-event-form-select-input" name="beach" id="beach" onChange={ this.handleChange }>
+              <option value=""></option>
               <option value="Barceloneta">Barceloneta</option>
               <option value="Cabrera de Mar">Cabrera de Mar</option>
               <option value="El Masnou">El Masnou</option>
