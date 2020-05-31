@@ -20,7 +20,8 @@ class UpdateProfileForm extends Component {
 state = {
   status: STATUS.LOADING,
   userData: null,
-  userModified: {}
+  userModified: {},
+  updateProfileNotification: null,
 }
 
 componentDidMount() {
@@ -56,28 +57,47 @@ handleChange = (e) => {
 
 handleUpdate = (e) => {
   e.preventDefault();
-  const { userModified } = this.state;
+  const { userModified, userData } = this.state;
   userModified.frequentsBeaches && (userModified.frequentsBeaches = userModified.frequentsBeaches.split(','))
   userModified.typeOfWaves && (userModified.typeOfWaves = userModified.typeOfWaves.split(','))
-  apiClient
-    .updateProfile(userModified)
-    .then((res) => {
-      console.log('PROFILE UPDATED', res)
-      this.props.history.push('/profile')
+  if ((userData.name === undefined || userData.name.length === 0)
+    && (userModified.name === undefined || userModified.name.length === 0)) {
+    this.setState ({
+      updateProfileNotification: <p className="update-profile-form-notification">The <strong style={{ color: "#14a714"}}>NAME</strong> field cannot be empty</p>,
     })
-    .catch((error) => {
-      console.log(error)
-    });
+  } else if ((userData.surname === undefined || userData.surname.length === 0)
+    && (userModified.surname === undefined || userModified.surname.length === 0)) {
+      this.setState ({
+        updateProfileNotification: <p className="update-profile-form-notification">The <strong style={{ color: "#14a714"}}>SURNAME</strong> field cannot be empty</p>,
+      })
+  } else if ((userData.level === undefined || userData.level === "")
+    && (userModified.level === undefined || userModified.level === "")) {
+      this.setState ({
+        updateProfileNotification: <p className="update-profile-form-notification">The <strong style={{ color: "#14a714"}}>LEVEL</strong> field cannot be empty</p>,
+      })
+  } else {
+      apiClient
+      .updateProfile(userModified)
+      .then((res) => {
+        console.log('PROFILE UPDATED', res)
+        this.props.history.push('/profile')
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  }
+  
 };
 
 renderForm = () => {
-  const { image, name, surname, level, favoriteBoard, typeOfWaves, frequentsBeaches, eventUpdateNotification } = this.state.userData;
+  const { updateProfileNotification } = this.state;
+  const { image, name, surname, level, favoriteBoard, typeOfWaves, frequentsBeaches } = this.state.userData;
   const Background = 'https://k62.kn3.net/taringa/7/7/E/1/F/B/Nosha/550x978_1E3.jpg'
   return (
     <div className="update-profile-form-container" style={{ backgroundImage: `url(${Background})`}}>
       <div className="update-profile-form-box">
         <h2 className="update-profile-form-title">Update profile</h2>
-        { eventUpdateNotification }
+        { updateProfileNotification }
         <form className="update-profile-form" onSubmit={this.handleUpdate}>
           <label className="update-profile-form-label" htmlFor="image"><strong>Image:</strong></label>
           <input
@@ -110,7 +130,7 @@ renderForm = () => {
             onChange={ this.handleChange }
           />
           <label className="update-profile-form-label" htmlFor="level"><strong>Level:</strong></label>
-          <input
+          <select
             className="update-profile-form-input with-paragraph"
             type="text"
             name="level"
@@ -118,7 +138,13 @@ renderForm = () => {
             placeholder="✨Level"
             value={level}
             onChange={ this.handleChange }
-          />
+          >
+            <option value=""></option>
+            <option value="amateur">Amateur</option>
+            <option value="experienced">Experienced</option>
+            <option value="expert">Expert</option>
+            <option value="professional">Professional</option>
+          </select>
           <p className="update-profile-form-paragraph">(amateur, experienced, expert or professional)</p>
           <label className="update-profile-form-label" htmlFor="favoriteBoard"><strong>Favorite board:</strong></label>
           <input

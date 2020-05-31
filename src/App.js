@@ -31,6 +31,8 @@ class App extends Component {
     surfersActive: '#26afe6',
     beachesActive: '#26afe6',
     eventsActive: '#26afe6',
+    appLoginNotification: null,
+    signupNotification: null,
   };
 
   componentDidMount() {
@@ -65,6 +67,7 @@ class App extends Component {
       })
       .catch((error) => {
         this.setState({
+          appLoginNotification: <p className="login-form-notification">Incorrect <strong style={{ color: "#29d1d1"}}>EMAIL</strong> or <strong style={{ color: "#29d1d1"}}>PASSWORD</strong></p>,
           isLoggedIn: false,
           user: null,
         });
@@ -106,7 +109,7 @@ class App extends Component {
   
 
   render() {
-    const { isLoggedIn, isLoading, user, surfersActive, beachesActive, eventsActive } = this.state;
+    const { isLoggedIn, isLoading, user, surfersActive, beachesActive, eventsActive, appLoginNotification } = this.state;
     return (
       <div>
         {isLoading && <Loading />}
@@ -123,10 +126,11 @@ class App extends Component {
               <Switch>
                 <UserContext.Provider 
                   value={{ 
-                    user: this.state.user,
-                    surfersActive: this.state.surfersActive,
-                    beachesActive: this.state.beachesActive,
-                    eventsActive: this.state.eventsActive,
+                    user: user,
+                    surfersActive: surfersActive,
+                    beachesActive: beachesActive,
+                    eventsActive: eventsActive,
+                    appLoginNotification: appLoginNotification
                    }}>
                   <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} />

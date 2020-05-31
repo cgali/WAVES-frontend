@@ -26,7 +26,6 @@ class Layout extends Component {
   }
 
   handleVisibility = () => {
-    console.log("HEY I'M HERE:", this.props.surfersActive)
     this.setState({
       isVisible: !this.state.isVisible,
       backgroundColor: this.state.backgroundColor === '#26afe6' ? '#b7f5fa' : '#26afe6',

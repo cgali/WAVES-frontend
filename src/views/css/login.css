@@ -33,6 +33,18 @@ input:first-child {
   margin-top: 1.4rem;
 }
 
+.login-form-notification {
+  font-size: 1rem;
+  font-family: Mina;
+  border-radius: 1rem;
+  background-color: #d12929;
+  box-shadow: 0px 1px 3px 0px black;
+  color: white;
+  text-align: center;
+  padding: 0.3rem;
+  margin: 2rem 0 0 0;
+}
+
 .input-login-button {
   font-family: Mina-Bold;
   margin-top: 3rem;

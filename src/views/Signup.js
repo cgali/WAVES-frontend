@@ -11,6 +11,7 @@ class Signup extends Component {
     surname: "",
     email: "",
     password: "",
+    signupNotification: null,
   };
 
   handleChange = (e) => {
@@ -19,19 +20,30 @@ class Signup extends Component {
     });
   };
 
+  validateEmail = (email)  => {
+    // eslint-disable-next-line no-useless-escape
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { history } = this.props;
     console.log(history);
     const { name, surname, email, password } = this.state;
     const { onSignup } = this.props;
-    if (name !== "" && surname !== "" && email !== "" && password !== "") {
-      onSignup({ name, surname, email, password });
-    };
+    // if (name !== "" && surname !== "" && email !== "" && password !== "") {
+    //   onSignup({ name, surname, email, password });
+    // };
+    if (!this.validateEmail(email)) {
+      this.setState({
+        signupNotification: <p className="login-form-notification">The <strong style={{ color: "#29d1d1"}}>EMAIL</strong> format isn't correct.</p>
+      })
+    }
   }
 
   render() {
-    const { name, surname, email, password} = this.state;
+    const { name, surname, email, password, signupNotification} = this.state;
     return (
       <div>
         <div className="signup-container">
@@ -73,6 +85,7 @@ class Signup extends Component {
               value={password}
               onChange={this.handleChange}
             />
+            { signupNotification }
             <input className="input-signup-button" type="submit" value="Register" />
           </form>
           <Link className="signup-back-button" to="/login">Back</Link>

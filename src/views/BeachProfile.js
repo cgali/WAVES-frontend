@@ -19,6 +19,7 @@ const STATUS = {
 };
 
 class BeachProfile extends Component {
+  
   state = {
     status: STATUS.LOADING,
     beach: "",
@@ -223,9 +224,9 @@ class BeachProfile extends Component {
       })
   }
 
-  /**************************
-  *** MOUNT BEACH PROFILE ***
-  **************************/
+  /*****************************
+  *** BEACH PROFILE FUNCTION ***
+  *****************************/
 
   beachProfile = () => {
     const { beach, reviewNotification, rateNotification } = this.state;

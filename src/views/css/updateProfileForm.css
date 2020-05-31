@@ -11,6 +11,16 @@
   color: white;
 }
 
+.update-profile-form-notification {
+  font-size: 1.1rem;
+  font-family: Mina;
+  border-radius: 1rem;
+  background-color: #d12929;
+  color: white;
+  text-align: center;
+  padding: 0.3rem;
+}
+
 .update-profile-form-box {
   display: flex;
   flex-direction: column;
@@ -32,6 +42,7 @@
   font-size: 1.3rem;
   margin: 0;
   color: white;
+  letter-spacing: 0.1rem;
 }
 
 .update-profile-form-input {
@@ -43,6 +54,9 @@
   font-family: Mina;
   margin-bottom: 1rem;
   width: 15rem;
+}
+.update-profile-form-input:focus {
+  outline: none;
 }
 
 .with-paragraph {
