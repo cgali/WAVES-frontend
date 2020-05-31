@@ -32,7 +32,7 @@ class App extends Component {
     beachesActive: '#26afe6',
     eventsActive: '#26afe6',
     appLoginNotification: null,
-    signupNotification: null,
+    appSignupNotification: null,
   };
 
   componentDidMount() {
@@ -88,6 +88,7 @@ class App extends Component {
       })
       .catch((error) => {
         this.setState({
+          appSignupNotification: <p className="signup-form-notification">This <strong style={{ color: "#29d1d1"}}>EMAIL</strong>  already registered</p>,
           isLoggedIn: false,
           user: null,
         });
@@ -108,15 +109,26 @@ class App extends Component {
       });
   };
 
-  handleAppLoginNotification = () => {
+  handleAppStateNotification = () => {
     this.setState({
       appLoginNotification: null,
+      appSignupNotification: null
     })
   }
   
 
   render() {
-    const { isLoggedIn, isLoading, user, surfersActive, beachesActive, eventsActive, appLoginNotification } = this.state;
+    const { 
+      isLoggedIn,
+      isLoading,
+      user,
+      surfersActive,
+      beachesActive,
+      eventsActive,
+      appLoginNotification,
+      appSignupNotification 
+    } = this.state;
+
     return (
       <div>
         {isLoading && <Loading />}
@@ -137,16 +149,17 @@ class App extends Component {
                     surfersActive: surfersActive,
                     beachesActive: beachesActive,
                     eventsActive: eventsActive,
-                    appLoginNotification: appLoginNotification
+                    appLoginNotification: appLoginNotification,
+                    appSignupNotification: appSignupNotification
                    }}>
                   <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
-                    <Login onLogin={this.handleLogin} handleAppLoginNotification={this.handleAppLoginNotification}/>
+                    <Login onLogin={this.handleLogin} handleAppStateNotification={this.handleAppStateNotification}/>
                   </AnonRoute>
                   <AnonRoute exact path={"/login"} isLoggedIn={isLoggedIn}>
-                    <Login onLogin={this.handleLogin} handleAppLoginNotification={this.handleAppLoginNotification}/>
+                    <Login onLogin={this.handleLogin} handleAppStateNotification={this.handleAppStateNotification}/>
                   </AnonRoute>
                   <AnonRoute exact path={"/signup"} isLoggedIn={isLoggedIn}>
-                    <Signup onSignup={this.handleSignup} />
+                    <Signup onSignup={this.handleSignup} handleAppStateNotification={this.handleAppStateNotification}/>
                   </AnonRoute>
                   <PrivateRoute exact path={"/about-us"} isLoggedIn={isLoggedIn} component={ AboutUs } />
                   <PrivateRoute exact path={"/profile"} isLoggedIn={isLoggedIn} component={ UserProfile } />

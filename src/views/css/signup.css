@@ -34,6 +34,18 @@ input:focus {
   outline: none;
 }
 
+.signup-form-notification {
+  font-size: 1.1rem;
+  font-family: Mina;
+  border-radius: 1rem;
+  background-color: #d12929;
+  color: white;
+  text-align: center;
+  padding: 0.3rem;
+  margin: 2rem 0 0 0;
+  width: 15rem;
+}
+
 .input-signup-button {
   margin-top: 1.5rem;
   border: 2px solid white;

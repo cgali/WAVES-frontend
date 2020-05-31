@@ -46,8 +46,8 @@ export default class Login extends Component {
   };
 
   handleAppState = () => {
-    const { handleAppLoginNotification } = this.props;
-    handleAppLoginNotification()
+    const { handleAppStateNotification } = this.props;
+    handleAppStateNotification()
   }
 
   handleChange = (e) => {
