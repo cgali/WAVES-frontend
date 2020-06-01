@@ -101,7 +101,7 @@ renderForm = () => {
         <form className="update-profile-form" onSubmit={this.handleUpdate}>
           <label className="update-profile-form-label" htmlFor="image"><strong>Image:</strong></label>
           <input
-            className="update-profile-form-input"
+            className="update-profile-form-input with-paragraph"
             type="text"
             name="image"
             id="image"
@@ -109,6 +109,7 @@ renderForm = () => {
             value={image}
             onChange={ this.handleChange }
           />
+          <p className="update-profile-form-paragraph">(URL of an internet image)</p>
           <label className="update-profile-form-label" htmlFor="name"><strong>Name:</strong></label>
           <input
             className="update-profile-form-input"
@@ -169,7 +170,7 @@ renderForm = () => {
           <p className="update-profile-form-paragraph">(small, medium, big or super big)</p>
           <label className="update-profile-form-label" htmlFor="frequentsBeaches"><strong>Frequents beaches:</strong></label>
           <input
-            className="update-profile-form-input"
+            className="update-profile-form-input with-paragraph"
             type="text"
             name="frequentsBeaches"
             id="frequentsBeaches"
@@ -177,6 +178,7 @@ renderForm = () => {
             value={frequentsBeaches}
             onChange={ this.handleChange }
           />
+          <p className="update-profile-form-paragraph">(Ex: Barceloneta, El Masnou, Sitges...)</p>
           <input className="update-profile-input-button" type="submit" value="Update" />
         </form>
       </div>

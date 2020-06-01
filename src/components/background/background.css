@@ -1,6 +1,7 @@
 .loading-container {
   display: flex;
   flex-direction: column;
+  z-index: 1;
 }
 
 .inside-top-part {
@@ -21,6 +22,6 @@
 
 .outisde-bottom-part {
   height: 50vh;
-  background-color: #51d9f1;
+  background-color: rgb(80, 217, 241);
   border-top-right-radius: 12.5rem;
 }

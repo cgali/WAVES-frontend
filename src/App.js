@@ -88,7 +88,7 @@ class App extends Component {
       })
       .catch((error) => {
         this.setState({
-          appSignupNotification: <p className="signup-form-notification">This <strong style={{ color: "#29d1d1"}}>EMAIL</strong>  already registered</p>,
+          appSignupNotification: <p className="signup-form-notification">This <strong style={{ color: "#29d1d1"}}>EMAIL</strong> already registered</p>,
           isLoggedIn: false,
           user: null,
         });
@@ -115,6 +115,16 @@ class App extends Component {
       appSignupNotification: null
     })
   }
+
+  handleAppStateNavbar = () => {
+    console.log("changing state")
+    this.setState({
+      surfersActive: '#26afe6',
+      beachesActive: '#26afe6',
+      eventsActive: '#b7f5fa',
+    })
+    console.log("Events state", this.state.eventsActive, "Surfes state:", this.state.surfersActive)
+  }
   
 
   render() {
@@ -126,7 +136,7 @@ class App extends Component {
       beachesActive,
       eventsActive,
       appLoginNotification,
-      appSignupNotification 
+      appSignupNotification
     } = this.state;
 
     return (
@@ -150,7 +160,8 @@ class App extends Component {
                     beachesActive: beachesActive,
                     eventsActive: eventsActive,
                     appLoginNotification: appLoginNotification,
-                    appSignupNotification: appSignupNotification
+                    appSignupNotification: appSignupNotification,
+                    handleAppStateNavbar: this.handleAppStateNavbar
                    }}>
                   <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} handleAppStateNotification={this.handleAppStateNotification}/>

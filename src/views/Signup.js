@@ -45,7 +45,7 @@ class Signup extends Component {
         return("no_num");
     } else if (password.search(/[a-zA-Z]/) === -1) {
         return("no_letter");
-    } else if (password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+]/) !== -1) {
+    } else if (password.search(/[^a-zA-Z0-9\\!\\@\\#\\$\\¢\\€\\∫\\œ\\®\\†\\¥\\ø\\π\\å\\∂\\ƒ\\\\™\\¶\\§\\~\\≤\\∑\\√\\ß\\µ\\„\\,\\…\\%\\^\\&\\*\\(\\)\\_\\+]/) !== -1) {
         return("bad_char");
     }
     return("ok");
@@ -90,7 +90,7 @@ class Signup extends Component {
       })
     } else if (this.validatePassword(password) === "bad_char") {
       this.setState({
-        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> invalid character.</p>
+        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> have invalid characters.</p>
       })
     } else {
         onSignup({ image, name, surname, email, password });
@@ -148,7 +148,7 @@ class Signup extends Component {
               </form>
               <Link onClick={this.handleAppState} className="signup-back-button" to="/login">Back</Link>
               <div className="signup-footer">
-                <img  style={{ width: '2rem' }} src="./logos/image-logo.gif" alt=""/>
+                <img  style={{ width: '2rem' }} src="./logos/image-logo.png" alt=""/>
                 <p>© WAVES Trademark</p>
               </div>
             </div>

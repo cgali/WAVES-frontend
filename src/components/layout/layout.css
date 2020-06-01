@@ -17,7 +17,7 @@
   justify-content: space-between;
   background-color: #26afe6;
   width: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #2983d8;
 }
 
 .burger-menu-and-buttons-box {
@@ -129,20 +129,22 @@
 .icon-button > h3 {
   margin: 0.7rem 0 0.7rem 0.3rem;
   font-size: 1rem;
-  color: black;
+  font-family: Questrial;
+  color: #505357;
+  letter-spacing: 0.1rem;
 }
 
 .surfers {
   border-top-left-radius: 1rem;
-  border: 1px solid black;
+  border: 1px solid #2983d8;
 }
 
 .beaches {
-  border: 1px solid black;
+  border: 1px solid #2983d8;
 
 }
 
 .events {
   border-top-right-radius: 1rem;
-  border: 1px solid black;
+  border: 1px solid #2983d8;
 }

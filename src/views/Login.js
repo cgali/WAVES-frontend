@@ -17,6 +17,12 @@ export default class Login extends Component {
     appLoginNotification: this.props.loginNotification,
   };
 
+  validateEmail = (email)  => {
+    // eslint-disable-next-line no-useless-escape
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
@@ -25,6 +31,11 @@ export default class Login extends Component {
       this.setState({
         loginNotification: <p className="login-form-notification">The <strong style={{ color: "#29d1d1"}}>EMAIL</strong> field cannot be empty</p>
       })
+    } else if (!this.validateEmail(email)) {
+      this.setState({
+        loginNotification: <p className="login-form-notification">The <strong style={{ color: "#29d1d1"}}>EMAIL</strong> format is incorrect.</p>
+      })
+      this.cleanForm();
     } else if (password === "") {
         this.setState({
           loginNotification: <p className="login-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> field cannot be empty</p>
@@ -64,12 +75,12 @@ export default class Login extends Component {
         {({ appLoginNotification }) => (
           <div>
             <div className="login-container">
-              <img className="logo-letters" src="./logos/waves-logo.png" style={{ width: '20rem' }} alt="logo letters"/>
-              <img className="logo-waves" src="./logos/image-logo.gif" style={{ width: '5rem' }} alt="logo letters"/>
+              <img className="logo-letters" src="./logos/waves-logo-login.png" style={{ width: '20rem' }} alt="logo letters"/>
+              <img className="logo-waves" src="./logos/image-logo-login.png" style={{ width: '5rem' }} alt="logo letters"/>
               <form className="login-form" onSubmit={this.handleSubmit}>
                 <input
                   className="login-input"
-                  type="email"
+                  type="text"
                   name="email"
                   id="email"
                   placeholder="📩Email"
@@ -91,7 +102,7 @@ export default class Login extends Component {
               </form>
               <Link onClick={this.handleAppState} className="link-signup" to="/signup">No account yet?<br/> <u>Sign up here!</u></Link>
               <div className="login-footer">
-                <img  style={{ width: '2rem' }} src="./logos/image-logo.gif" alt=""/>
+                <img  style={{ width: '2rem' }} src="./logos/image-logo.png" alt=""/>
                 <p>© WAVES Trademark</p>
               </div>
             </div>

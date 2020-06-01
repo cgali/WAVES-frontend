@@ -26,6 +26,7 @@ class Layout extends Component {
   }
 
   handleVisibility = () => {
+    console.log("layout surfersAtive:", this.state.surfersActive)
     this.setState({
       isVisible: !this.state.isVisible,
       backgroundColor: this.state.backgroundColor === '#26afe6' ? '#b7f5fa' : '#26afe6',
@@ -103,7 +104,7 @@ class Layout extends Component {
               </>
               )}
               <button className="logos-box" style={{ backgroundColor: backgroundColor }} onClick={this.handleVisibility}>
-                <img clasname="logos" style={{ width: "2.5rem", marginLeft: "0.5rem" }} src="../logos/image-logo.gif" alt="logo img"/>
+                <img clasname="logos" style={{ width: "2.5rem", marginLeft: "0.5rem" }} src="../logos/image-logo.png" alt="logo img"/>
                 <img clasname="logos" style={{ width: "6.5rem", marginLeft: "0.5rem" }} src="../logos/waves-logo.png" alt="logo letter"/>
               </button>
             </div>
