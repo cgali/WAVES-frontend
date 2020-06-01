@@ -76,9 +76,9 @@ class App extends Component {
       });
   };
 
-  handleSignup = ({ name, surname, email, password }) => {
+  handleSignup = ({ image, name, surname, email, password }) => {
     apiClient
-      .signup({ name, surname, email, password })
+      .signup({ image, name, surname, email, password })
       .then(({ data: user }) => {
         console.log('app.js', user)
         this.setState({

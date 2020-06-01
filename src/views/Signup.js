@@ -15,6 +15,7 @@ class Signup extends Component {
     surname: "",
     email: "",
     password: "",
+    image: "../surfers/standard.png",
     signupNotification: null,
   };
 
@@ -35,24 +36,37 @@ class Signup extends Component {
     return re.test(String(email).toLowerCase());
   }
 
+   validatePassword = (password) => {
+    if (password.length < 6) {
+        return("short");
+    } else if (password.length > 30) {
+        return("long");
+    } else if (password.search(/\d/) === -1) {
+        return("no_num");
+    } else if (password.search(/[a-zA-Z]/) === -1) {
+        return("no_letter");
+    } else if (password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+]/) !== -1) {
+        return("bad_char");
+    }
+    return("ok");
+}
+
   handleSubmit = (e) => {
     e.preventDefault();
-    const { history } = this.props;
-    console.log(history);
-    const { name, surname, email, password } = this.state;
+    const { image, name, surname, email, password } = this.state;
     const { onSignup } = this.props;
     this.setState({signupNotification: null})
     if (name === undefined || name === "") {
       this.setState({
-        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>NAME</strong> field cannot be empty</p>
+        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>NAME</strong> field cannot be empty.</p>
       })
     } else if (surname === undefined || surname === "") {
         this.setState({
-          signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>SURNAME</strong> field cannot be empty</p>
+          signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>SURNAME</strong> field cannot be empty.</p>
         })
     } else if (email === undefined || email === "") {
       this.setState({
-        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>EMAIL</strong> field cannot be empty</p>
+        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>EMAIL</strong> field cannot be empty.</p>
       })
     } else if (!this.validateEmail(email)) {
         this.setState({
@@ -60,14 +74,26 @@ class Signup extends Component {
         })
     } else if (password === undefined || password === "") {
       this.setState({
-        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> field cannot be empty</p>
+        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> field cannot be empty.</p>
       })
-    } else if (password.length < 6) {
+    } else if (this.validatePassword(password) === "short") {
       this.setState({
-        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> must have at least 6 characters</p>
+        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> must have at least 6 characters.</p>
+      })
+    } else if (this.validatePassword(password) === "no_num") {
+      this.setState({
+        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> must have a number.</p>
+      })
+    } else if (this.validatePassword(password) === "no_letter") {
+      this.setState({
+        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> must have a letter.</p>
+      })
+    } else if (this.validatePassword(password) === "bad_char") {
+      this.setState({
+        signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> invalid character.</p>
       })
     } else {
-        onSignup({ name, surname, email, password });
+        onSignup({ image, name, surname, email, password });
     }
   }
 
