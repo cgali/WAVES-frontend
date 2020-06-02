@@ -1,25 +1,28 @@
 import React, { Component } from "react";
-import { Switch, withRouter } from "react-router-dom";
-
 import Login from "./views/Login";
-import Loading from "./views/Loading";
+import Signup from "./views/Signup";
+import UserProfile from "./views/UserProfile";
+import UpdateProfileForm from "./views/UpdateProfileForm";
 import SurfersList from "./views/SurfersList";
 import SurferProfile from "./views/SurferProfile";
 import BeachesList from "./views/BeachesList";
 import BeachProfile from "./views/BeachProfile";
 import EventsList from "./views/EventsList";
 import EventProfile from "./views/EventProfile";
-import UserProfile from "./views/UserProfile";
-import Signup from "./views/Signup";
 import EventAddForm from "./views/EventAddForm";
-import UpdateProfileForm from "./views/UpdateProfileForm";
 import AboutUs from "./views/AboutUs";
+import Contact from "./views/Contact";
+import Loading from "./views/Loading";
+import Error500 from "./views/Error500";
 
+import Layout from "./components/layout/Layout";
+
+import { Switch, withRouter, Route } from "react-router-dom";
 import { AnonRoute, PrivateRoute } from "./components";
 import { UserContext } from "./context/UserContext";
 
 import apiClient from "./services/apiClient";
-import Layout from "./components/layout/Layout";
+
 
 
 
@@ -163,16 +166,19 @@ class App extends Component {
                     appSignupNotification: appSignupNotification,
                     handleAppStateNavbar: this.handleAppStateNavbar
                    }}>
-                  <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
+                  {/* <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} handleAppStateNotification={this.handleAppStateNotification}/>
-                  </AnonRoute>
+                  </AnonRoute> */}
                   <AnonRoute exact path={"/login"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} handleAppStateNotification={this.handleAppStateNotification}/>
                   </AnonRoute>
                   <AnonRoute exact path={"/signup"} isLoggedIn={isLoggedIn}>
                     <Signup onSignup={this.handleSignup} handleAppStateNotification={this.handleAppStateNotification}/>
                   </AnonRoute>
+                  <Route exact path={"/"} isLoggedIn={isLoggedIn} component={ Error500 } />
                   <PrivateRoute exact path={"/about-us"} isLoggedIn={isLoggedIn} component={ AboutUs } />
+                  <Route exact path={"/contact"} isLoggedIn={isLoggedIn} component={ Contact } />
+                  <Route exact path={"/loading"} isLoggedIn={isLoggedIn} component={ Loading } />
                   <PrivateRoute exact path={"/profile"} isLoggedIn={isLoggedIn} component={ UserProfile } />
                   <PrivateRoute exact path={"/profile-update"} isLoggedIn={isLoggedIn} component={ UpdateProfileForm } />
                   <PrivateRoute exact path={"/surfers-list"} isLoggedIn={isLoggedIn} component={ SurfersList } />

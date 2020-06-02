@@ -1,0 +1,110 @@
+.contact-hide-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3.2rem;
+  background-color: #26e6dc;
+  
+}
+
+.contact-container {
+  background-color: #48FEEB;
+}
+
+.contact-header {
+  background-image: url(../../images/contact.jpg);
+  background-position: center;
+  background-repeat: cover;
+  background-size: 24rem;
+  height: 10rem;
+  border-bottom-right-radius: 6rem;
+}
+
+.contact-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Questrial;
+  letter-spacing: 0.1rem;
+  font-size: 3rem;
+  color: white;
+  height: 10rem;
+  margin: 0;
+  border-bottom-right-radius: 6rem;
+  background-color: rgba(19, 145, 132, 0.712);
+}
+
+.contact-information-box {
+  background-color: teal;
+  color: white;
+  border-top-right-radius: 6rem;
+  border-bottom-left-radius: 6rem;
+  font-family: Mina;
+  font-size: 1.2rem;
+  padding: 1.5rem;
+}
+
+.contact-info-email-link {
+  text-decoration: none;
+  color: #48FEEB;
+}
+
+.contact-info-email, .contact-info-name {
+  text-align: center;
+}
+
+.contact-info-name {
+  font-size: 1.5rem;
+}
+
+.contact-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #27b6a8;
+  border-bottom-right-radius: 6rem;
+  border-top-left-radius: 6rem;
+  padding: 5rem 2rem 0 2rem;
+}
+
+.contact-info-social-logo-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-info-social-image {
+  width: 3rem;
+  margin: 0 0.5rem;
+}
+
+.contact-trademark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  padding-top: 3rem;
+  width: 100%;
+  color: #505357;
+}
+
+.contact-hide-footer {
+  height: 2.5rem;
+  background-color: #26e6dc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 6rem;
+}
+
+.contact-hide-footer-back-button {
+  border: 2px solid white;
+  background-color: #0b5c51;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-family: Mina-Bold;
+  padding: 0.2rem 0.7rem;
+}
