@@ -22,14 +22,28 @@
 }
 
 .signup-input {
-  border: 1px solid black;
+  border: 1px solid #1b8fc5;
   border-radius: 1rem;
   text-align: center;
-  box-shadow: 0px 1px 3px 0px black;
+  box-shadow: 0px 1px 3px 0px #1b8fc5;
   margin-top: 3rem;
   font-size: 1.1rem;
   font-family: Mina;
   height: 1.7rem;
+  animation-duration: 2s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 0%;
+    width: 0%
+  }
+
+  to {
+    margin-left: 0%;
+    width: 97%;
+  }
 }
 
 input:focus {

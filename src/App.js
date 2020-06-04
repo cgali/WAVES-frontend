@@ -24,8 +24,6 @@ import { UserContext } from "./context/UserContext";
 import apiClient from "./services/apiClient";
 
 
-
-
 class App extends Component {
   state = {
     isLoggedIn: false,
@@ -39,6 +37,10 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.handleWhoAmI()
+  }
+
+  handleWhoAmI = () => {
     apiClient
       .whoami()
       .then((user) => {
@@ -62,7 +64,6 @@ class App extends Component {
     apiClient
       .login({ email, password })
       .then((user) => {
-        console.log('app.js', user)
         this.setState({
           user,
           isLoggedIn: true,
@@ -83,7 +84,6 @@ class App extends Component {
     apiClient
       .signup({ image, name, surname, email, password })
       .then(({ data: user }) => {
-        console.log('app.js', user)
         this.setState({
           isLoggedIn: true,
           user,
@@ -119,25 +119,11 @@ class App extends Component {
     })
   }
 
-  handleAppStateNavbar = () => {
-    console.log("changing state")
-    this.setState({
-      surfersActive: '#26afe6',
-      beachesActive: '#26afe6',
-      eventsActive: '#b7f5fa',
-    })
-    console.log("Events state", this.state.eventsActive, "Surfes state:", this.state.surfersActive)
-  }
-  
-
   render() {
     const { 
       isLoggedIn,
       isLoading,
       user,
-      surfersActive,
-      beachesActive,
-      eventsActive,
       appLoginNotification,
       appSignupNotification
     } = this.state;
@@ -147,38 +133,28 @@ class App extends Component {
         {isLoading && <Loading />}
         {!isLoading && (
           <div className="App">
-            <Layout
-              isLoggedIn={ isLoggedIn }
-              onLogout={ this.handleLogout }
-              user={ user }
-              surfersActive={ surfersActive }
-              beachesActive={ beachesActive }
-              eventsActive= { eventsActive }
-            >
+            <Layout isLoggedIn={ isLoggedIn } onLogout={ this.handleLogout } user={ user } >
               <Switch>
                 <UserContext.Provider 
                   value={{ 
                     user: user,
-                    surfersActive: surfersActive,
-                    beachesActive: beachesActive,
-                    eventsActive: eventsActive,
                     appLoginNotification: appLoginNotification,
                     appSignupNotification: appSignupNotification,
-                    handleAppStateNavbar: this.handleAppStateNavbar
+                    handleAppStateNavbar: this.handleAppStateNavbar,
+                    handleLogginOut: this.handleLogout,
                    }}>
-                  {/* <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
+                  <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} handleAppStateNotification={this.handleAppStateNotification}/>
-                  </AnonRoute> */}
+                  </AnonRoute>
                   <AnonRoute exact path={"/login"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} handleAppStateNotification={this.handleAppStateNotification}/>
                   </AnonRoute>
                   <AnonRoute exact path={"/signup"} isLoggedIn={isLoggedIn}>
                     <Signup onSignup={this.handleSignup} handleAppStateNotification={this.handleAppStateNotification}/>
                   </AnonRoute>
-                  <Route exact path={"/"} isLoggedIn={isLoggedIn} component={ Error500 } />
-                  <PrivateRoute exact path={"/about-us"} isLoggedIn={isLoggedIn} component={ AboutUs } />
+                  <Route exact path={"/error"} isLoggedIn={isLoggedIn} component={ Error500 } />
                   <Route exact path={"/contact"} isLoggedIn={isLoggedIn} component={ Contact } />
-                  <Route exact path={"/loading"} isLoggedIn={isLoggedIn} component={ Loading } />
+                  <PrivateRoute exact path={"/about-us"} isLoggedIn={isLoggedIn} component={ AboutUs } />
                   <PrivateRoute exact path={"/profile"} isLoggedIn={isLoggedIn} component={ UserProfile } />
                   <PrivateRoute exact path={"/profile-update"} isLoggedIn={isLoggedIn} component={ UpdateProfileForm } />
                   <PrivateRoute exact path={"/surfers-list"} isLoggedIn={isLoggedIn} component={ SurfersList } />

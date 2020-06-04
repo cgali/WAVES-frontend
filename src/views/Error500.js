@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import "./css/error500.css";
 import Background from '../components/background/Background';
+
 import { Link } from 'react-router-dom';
+
+import "./css/error500.css";
 
 
 class Error500 extends Component {
@@ -16,7 +18,6 @@ class Error500 extends Component {
         </div>
         <Background />
       </div>
-      
     )
   }
 }

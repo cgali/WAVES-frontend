@@ -25,28 +25,26 @@ class BeachesList extends Component {
     status: STATUS.LOADING,
   }
 
+  componentDidMount() {
+    this.loadBeaches();
+  }
+
   loadBeaches = () => {
     apiClient
       .beachesList()
       .then(( response ) => {
-        console.log(response.data)
         this.setState({
           beaches: response.data.beaches,
           status: STATUS.LOADED,
         });
       })
       .catch((error) => {
-        console.log(error)
         this.setState({
           error: error.name,
           status: STATUS.ERROR,
         });
       });
   };
-
-  componentDidMount() {
-    this.loadBeaches();
-  }
 
   handleFilter = event => {
     this.setState({
@@ -70,22 +68,22 @@ class BeachesList extends Component {
 
   render() {
     const { status, beachesFilter } = this.state;
-    console.log(this.props)
 
     // eslint-disable-next-line default-case
     switch (status) {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return <div className="beaches-list-container">
+        return <div className="beaches-list-inside-background">
+          <div className="beaches-list-container">
           <SearchBar inputValue={beachesFilter} inputOnChange={this.handleFilter}/>
           { this.listingBeaches() }
       </div> 
+          </div>
       case STATUS.ERROR:
         return <Error500 />
     }
   }
 }
-
 
 export default withRouter(BeachesList);

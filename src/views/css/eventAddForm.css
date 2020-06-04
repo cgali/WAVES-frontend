@@ -30,11 +30,18 @@
   border-radius: 2rem;
 }
 
+.add-event-label-input-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .add-event-form-label {
   font-family: Questrial;
   font-size: 1.3rem;
   letter-spacing: 0.1rem;
   margin: 0;
+  padding-left: 1.5rem;
   color: white;
 }
 
@@ -46,10 +53,10 @@
 }
 
 .add-event-form-input, .add-event-form-select-input, .add-event-form-textarea-input {
-  border: 1px solid black;
+  border: 1px solid #096cee;
   border-radius: 1rem;
-  text-align: center;
-  box-shadow: 0px 1px 3px 0px black;
+  text-align: start;
+  box-shadow: 0px 1px 3px 0px #096cee;
   font-size: 1.1rem;
   font-family: Mina;
   margin-bottom: 1rem;

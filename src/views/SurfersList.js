@@ -24,28 +24,26 @@ class SurfersList extends Component {
     status: STATUS.LOADING,
   }
 
+  componentDidMount() {
+    this.loadSurfers();
+  }
+
   loadSurfers = () => {
     apiClient
       .surfersList()
       .then(( response ) => {
-        console.log(response.data)
         this.setState({
           surfers: response.data.surfers,
           status: STATUS.LOADED,
         });
       })
       .catch((error) => {
-        console.log(error)
         this.setState({
           error: error.name,
           status: STATUS.ERROR,
         });
       });
   };
-
-  componentDidMount() {
-    this.loadSurfers();
-  }
 
   handleFilter = event => {
     this.setState({
@@ -61,7 +59,7 @@ class SurfersList extends Component {
     return filteredSurfers.map((surfer, index) => {
       return (
         <div key={`${surfer.name}_${index}`}>
-          <Cart img={ surfer.image } name={ surfer.name } secondaryName={ surfer.surname } link={`/surfers-list/${surfer._id}`}/>
+          <Cart img={ surfer.image ? surfer.image : "../standard.png" } name={ surfer.name } secondaryName={ surfer.surname } link={`/surfers-list/${surfer._id}`}/>
         </div>
     )});
   }
@@ -74,15 +72,17 @@ class SurfersList extends Component {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return <div className="surfers-list-container">
-          <SearchBar inputValue={surfersFilter} inputOnChange={this.handleFilter}/>
-          { this.listingSurfers() }
-        </div> 
+        return <div className="surfers-list-inside-background">
+          <div className="surfers-list-container">
+            <SearchBar inputValue={surfersFilter} inputOnChange={this.handleFilter}/>
+            { this.listingSurfers() }
+          </div> 
+        </div>
+        
       case STATUS.ERROR:
         return <Error500 />
     }
   }
 }
-
 
 export default SurfersList;

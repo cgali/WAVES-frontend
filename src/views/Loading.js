@@ -14,7 +14,6 @@ class Loading extends Component {
         </div>
         <Background />
       </div>
-      
     )
   }
 }

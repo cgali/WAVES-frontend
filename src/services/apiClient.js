@@ -37,7 +37,7 @@ class ApiClient {
   }
 
   deleteProfile() {
-    return this.apiClient.delete("/profile")
+    return this.apiClient.delete("/profile/delete")
   }
 
 // SURFERS => ROUTES
@@ -66,10 +66,6 @@ class ApiClient {
     return this.apiClient.post(`/beaches-list/${id}/add-review`, body);
   }
 
-  updateBeachReview(id, _id, body) {
-    return this.apiClient.post(`/beaches-list/${id}/update-review/${_id}`, body);
-  }
-
   deleteBeachReview(id, _id, body) {
     return this.apiClient.post(`/beaches-list/${id}/delete-review/${_id}`, body);
   }
@@ -78,10 +74,6 @@ class ApiClient {
 
   createBeachRate(id, body) {
     return this.apiClient.post(`/beaches-list/${id}/add-rate`, body);
-  }
-
-  updateBeachRate(id, _id, body) {
-    return this.apiClient.post(`/beaches-list/${id}/update-rate/${_id}`, body);
   }
 
   deleteBeachRate(id, _id) {
@@ -140,10 +132,6 @@ class ApiClient {
 
   createEventReview(id, body) {
     return this.apiClient.post(`/events-list/${id}/add-review`, body);
-  }
-
-  updateEventReview(id, _id, body) {
-    return this.apiClient.post(`/events-list/${id}/update-review/${_id}`, body);
   }
 
   deleteEventReview(id, _id) {
