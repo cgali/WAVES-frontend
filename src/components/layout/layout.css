@@ -57,8 +57,9 @@
   line-height: 2rem;
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
-  z-index: 10;
+  z-index: 30;
 }
+
 
 .burguer-menu-link, .logout-button {
   font-family: Questrial;

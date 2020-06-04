@@ -6,16 +6,14 @@ function AnonRoute({ children, isLoggedIn, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-        !isLoggedIn ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/profile",
-              state: { from: location },
-            }}
-          />
-        )
+        !isLoggedIn 
+          ? ( children )
+          : ( <Redirect 
+                to={{ 
+                  pathname: "/profile",
+                  state: { from: location } 
+                }}/> 
+            )
       }
     />
   );

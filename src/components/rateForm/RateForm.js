@@ -62,5 +62,4 @@ class RateForm extends Component {
   }
 }
 
-
 export default RateForm;

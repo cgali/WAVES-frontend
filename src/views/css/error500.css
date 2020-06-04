@@ -1,10 +1,40 @@
 .error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Questrial;
+  color: #505357;
+  position: absolute;
+  margin-top: 9rem;
   width: 100%;
-  height: 100%;
-  padding-top: 3.2rem;
+  z-index: 3;
 }
 
 .error {
-  width: 100%;
-  height: 100%;
+  width: 23rem;
+}
+
+.error-paragraph {
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+.error-paragraph:first-child {
+  margin-bottom: 1rem;
+}
+
+.error-paragraph:last-child {
+  margin-top: 1rem;
+}
+
+.error-paragraph-footer {
+  font-size: 1.2rem;
+  margin-top: 3rem;
+}
+
+.error-paragraph-contact-footer {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
 }

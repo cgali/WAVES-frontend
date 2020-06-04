@@ -8,7 +8,7 @@ import { UserContext } from '../context/UserContext';
 
 
 
-export default class Login extends Component {
+class Login extends Component {
 
   state = {
     email: "",
@@ -83,7 +83,7 @@ export default class Login extends Component {
                   type="text"
                   name="email"
                   id="email"
-                  placeholder="📩Email"
+                  placeholder="  📩Email"
                   value={email}
                   onChange={this.handleChange}
                 />
@@ -92,7 +92,7 @@ export default class Login extends Component {
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="🔐Password"
+                  placeholder="  🔐Password"
                   value={password}
                   onChange={this.handleChange}
                 />
@@ -113,3 +113,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default Login;

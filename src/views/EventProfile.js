@@ -4,12 +4,12 @@ import Error500 from "../views/Error500";
 import EventUpdateForm from "../components/eventsForm/EventUpdateForm";
 import ReviewForm from "../components/eventsForm/ReviewForm";
 
-
 import "./css/eventProfile.css";
 
-import apiClient from "../services/apiClient";
 import { Link, withRouter } from "react-router-dom";
 import { UserContext } from '../context/UserContext';
+
+import apiClient from "../services/apiClient";
 
 
 
@@ -38,11 +38,14 @@ class EventProfile extends Component {
   }
 
   componentDidMount() {
+    this.hanldeBeachProfile();
+  }
+
+  hanldeBeachProfile = () => {
     const eventId = this.props.match.params.id;
     apiClient
       .eventProfile(eventId)
       .then((response) => {
-        console.log("data:", response);
         this.setState({
           event: response.data.event,
           status: STATUS.LOADED,
@@ -117,11 +120,9 @@ class EventProfile extends Component {
             },
             status: STATUS.LOADED
           })
-          console.log('EVENT UPDATED')
         })
         .catch((error) => {
           this.setState({ status: STATUS.ERROR })
-          console.log(error)
         })
     }
   }
@@ -138,11 +139,9 @@ class EventProfile extends Component {
       .then (() => {
         this.setState({ status: STATUS.LOADED })
         this.props.history.push('/events-list')
-        console.log('event deleted')
       })
       .catch((error) => {
         this.setState({ status: STATUS.ERROR })
-        console.log("THE ERROR IS:", error)
       })
   }
 
@@ -161,11 +160,9 @@ class EventProfile extends Component {
           participants: response.data.participants
         },
       })
-      console.log("JOIN IN:",response)
     })
     .catch((error) => {
       this.setState({ status: STATUS.ERROR })
-      console.log(error)
     });
   }
 
@@ -180,11 +177,9 @@ class EventProfile extends Component {
           participants: response.data.participants
         },
       })
-      console.log("DISJOIN:",response)
     })
     .catch((error) => {
       this.setState({ status: STATUS.ERROR })
-      console.log(error)
     });
   }
 
@@ -231,11 +226,9 @@ class EventProfile extends Component {
               reviewTitle: "",
               status: STATUS.LOADED
             })
-            console.log("REVIEW ADDED:", response)
           })
         .catch((error) => {
           this.setState({ status: STATUS.ERROR })
-          console.log(error)
         });
     }
   }
@@ -250,7 +243,6 @@ class EventProfile extends Component {
     apiClient
       .deleteEventReview(eventId, reviewId )
       .then ((response) => {
-        console.log(response.data)
         this.setState({
           event: {
             ...this.state.event,
@@ -258,11 +250,9 @@ class EventProfile extends Component {
           },
           status: STATUS.LOADED
          })
-        console.log('REVIEW DELETED:', response.data)
       })
       .catch((error) => {
         this.setState({ status: STATUS.ERROR })
-        console.log("THE ERROR IS:", error)
       })
   }
 
@@ -270,7 +260,7 @@ class EventProfile extends Component {
   eventProfile = () => {
     const { event, image, title, date, beach, description, reviewNotification, eventUpdateNotification } = this.state;
     const eventDate = new Date(event.date);
-    const formatEventDate = `${eventDate.getDate()}-${eventDate.getMonth()}-${eventDate.getFullYear()}`
+    const formatEventDate = `${eventDate.getDate()}-${eventDate.getMonth() + 1}-${eventDate.getFullYear()}`
     const formatEventTime = `${eventDate.getHours()}:${eventDate.getMinutes()}`
 
     if (event) {
@@ -373,7 +363,7 @@ class EventProfile extends Component {
                                 <p>{ formatReviewDate }</p>
                               </div>
                               { user.data._id === review.owner._id && (
-                                  <button className="delete-review-button" onClick={() => this.handleDeleteReview(review._id) }>Delete</button>
+                                <button className="delete-review-button" onClick={() => this.handleDeleteReview(review._id) }>Delete</button>
                               )}
                             </li>
                           )

@@ -11,13 +11,13 @@ class ReviewForm extends Component {
       <div className="review-form-container">
         <h2 className="review-form-title">Add a review</h2>
         { reviewNotification }
-        <form className="review-form" onSubmit={onSubmit}>
+        <form className="review-form" onSubmit={ onSubmit }>
           <input
             className="review-form-input"
             type="text"
             name="reviewTitle"
             id="reviewTitle"
-            placeholder="📣Title"
+            placeholder="  📣Title"
             value={ reviewTitle }
             onChange={ onChange }
           />
@@ -25,7 +25,7 @@ class ReviewForm extends Component {
             className="review-form-input"
             name="reviewDescription"
             id="reviewDescription"
-            placeholder="📝Description"
+            placeholder="  📝Description"
             rows="8" cols="25"
             value={ reviewDescription }
             onChange={ onChange }
@@ -34,7 +34,6 @@ class ReviewForm extends Component {
             <input className="review-form-input-button" type="submit" value={buttonName} />
             <button className="close-review-form-button" onClick={ onClick }>Close</button>
           </div>
-          
         </form>
       </div>
     )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import "../layout/layout.css";
 import { Link } from "react-router-dom";
+
+import "../layout/layout.css";
 
 class Layout extends Component {
   
@@ -8,9 +9,13 @@ class Layout extends Component {
   state = {
     isVisible: false,
     backgroundColor: '#26afe6',
-    surfersActive: this.props.surfersActive,
-    beachesActive: this.props.beachesActive,
-    eventsActive: this.props.eventsActive,
+    surfersActive: '#26afe6',
+    beachesActive: '#26afe6',
+    eventsActive: '#26afe6',
+  }
+
+  componentDidMount = () => {
+    console.log(window.location.pathname)
   }
 
   handleLayoutLogout = (e) => {
@@ -26,7 +31,6 @@ class Layout extends Component {
   }
 
   handleVisibility = () => {
-    console.log("layout surfersAtive:", this.state.surfersActive)
     this.setState({
       isVisible: !this.state.isVisible,
       backgroundColor: this.state.backgroundColor === '#26afe6' ? '#b7f5fa' : '#26afe6',
@@ -71,7 +75,6 @@ class Layout extends Component {
   }
 
   handleEvents = () => {
-    
     this.setState({
       isVisible: false,
       backgroundColor: '#26afe6',
@@ -83,10 +86,8 @@ class Layout extends Component {
 
 
   render() {
-
     const { user, children, isLoggedIn } = this.props;
     const { isVisible, backgroundColor, surfersActive, beachesActive, eventsActive } = this.state;
-    console.log('layout ', this.props)
     return (
       <div className="layout-container">
         { (isLoggedIn && user) && 
@@ -99,6 +100,7 @@ class Layout extends Component {
                 <Link className="burguer-menu-link" onClick={this.handleStateBurguer} to="/profile-update">Edit profile</Link>
                 <Link className="burguer-menu-link" onClick={this.handleStateBurguer} to="/add-event">New event</Link>
                 <Link className="burguer-menu-link" onClick={this.handleStateBurguer} to="/about-us">About us</Link>
+                <Link className="burguer-menu-link" onClick={this.handleStateBurguer} to="/contact">Contact</Link>
                 <button className="logout-button" onClick={this.handleLayoutLogout}>Logout</button>
               </div>
               </>
@@ -108,9 +110,7 @@ class Layout extends Component {
                 <img clasname="logos" style={{ width: "6.5rem", marginLeft: "0.5rem" }} src="../logos/waves-logo.png" alt="logo letter"/>
               </button>
             </div>
-            
-            
-            <Link onClick={this.handleOverlay} className="layout-profile-button" to="/profile" ><img className="img-profile-box" src={ user.data.image } alt="profile"/></Link>
+            <Link onClick={this.handleOverlay} className="layout-profile-button" to="/profile" ><img className="img-profile-box" src={ !user.data.image ? "../standard.png" : user.data.image   } alt="profile"/></Link>
           </header>
         }
         { children }
@@ -131,10 +131,8 @@ class Layout extends Component {
           </nav>
         }
       </div>
-      
     )
   }
 }
-
 
 export default Layout;

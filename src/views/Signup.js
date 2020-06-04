@@ -10,12 +10,12 @@ import { UserContext } from '../context/UserContext';
 
 
 class Signup extends Component {
+  
   state = {
     name: "",
     surname: "",
     email: "",
     password: "",
-    image: "../surfers/standard.png",
     signupNotification: null,
   };
 
@@ -53,7 +53,7 @@ class Signup extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { image, name, surname, email, password } = this.state;
+    const { name, surname, email, password } = this.state;
     const { onSignup } = this.props;
     this.setState({signupNotification: null})
     if (name === undefined || name === "") {
@@ -93,7 +93,7 @@ class Signup extends Component {
         signupNotification: <p className="signup-form-notification">The <strong style={{ color: "#29d1d1"}}>PASSWORD</strong> have invalid characters.</p>
       })
     } else {
-        onSignup({ image, name, surname, email, password });
+        onSignup({ name, surname, email, password });
     }
   }
 
@@ -111,7 +111,7 @@ class Signup extends Component {
                   type="text"
                   name="name"
                   id="name"
-                  placeholder="🏄‍♂️Name"
+                  placeholder="  🏄‍♂️Name"
                   value={name}
                   onChange={this.handleChange}
                 />
@@ -120,7 +120,7 @@ class Signup extends Component {
                   type="text"
                   name="surname"
                   id="surname"
-                  placeholder="🤙Surname"
+                  placeholder="  🤙Surname"
                   value={surname}
                   onChange={this.handleChange}
                 />
@@ -129,7 +129,7 @@ class Signup extends Component {
                   type="text"
                   name="email"
                   id="email"
-                  placeholder="📩Email"
+                  placeholder="  📩Email"
                   value={email}
                   onChange={this.handleChange}
                 />
@@ -138,7 +138,7 @@ class Signup extends Component {
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="🔐Password"
+                  placeholder="  🔐Password"
                   value={password}
                   onChange={this.handleChange}
                 />

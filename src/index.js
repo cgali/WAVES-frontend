@@ -4,6 +4,7 @@ import "./index.css";
 import "./fonts/Mina-Bold.ttf";
 import "./fonts/Mina-Regular.ttf";
 import "./fonts/Questrial-Regular.ttf";
+import "./fonts/OriginalSurfer-Regular.ttf";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";

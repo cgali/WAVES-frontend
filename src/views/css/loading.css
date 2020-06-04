@@ -5,24 +5,30 @@
   align-items: center;
   font-family: Questrial;
   position: absolute;
-  margin: 70% 0 0 32%;
+  margin-top: 13rem;
+  width: 100%;
+  z-index: 20;
 }
 
 .logo {
-  animation: stretch 2s ease-in-out 0s alternate infinite none running;
+  width: 20rem;
 }
 
 .logo-box > h2 {
-  margin-top: 2rem;
+  margin-top: 0rem;
   font-size: 2rem;
+  font-family: OriginalSurfer;
+  padding-left: 1rem;
 }
 
+
+animation: stretch 1.5s ease-in-out 0s alternate infinite none running;
 @keyframes stretch {
   0% {
     transform: scale(.8);
     border-radius: 100%;
   }
   100% {
-    transform: scale(1.4);
+    transform: scale(1.2);
   }
 }

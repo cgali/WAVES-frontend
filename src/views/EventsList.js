@@ -23,6 +23,10 @@ class EventsList extends Component {
     eventsFilter: "",
     status: STATUS.LOADING,
   }
+  
+  componentDidMount() {
+    this.loadEvents();
+  }
 
   loadEvents = () => {
     apiClient
@@ -42,10 +46,6 @@ class EventsList extends Component {
       });
   };
 
-  componentDidMount() {
-    this.loadEvents();
-  }
-
   handleFilter = event => {
     this.setState({
       eventsFilter: event.target.value
@@ -59,7 +59,7 @@ class EventsList extends Component {
     })
     return filteredEvents.map((event, index) => {
       const eventDate = new Date(event.date)
-      const formatDate = `${eventDate.getDate()} - ${eventDate.getMonth()} - ${eventDate.getFullYear()}`
+      const formatDate = `${eventDate.getDate()} - ${eventDate.getMonth() + 1} - ${eventDate.getFullYear()}`
       return (
         <div key={`${event.name}_${index}`}>
           <Cart className="events-list-cart-container" img={ event.image } name={ event.title } date={ formatDate } link={`/events-list/${event._id}`}/>
@@ -76,10 +76,12 @@ class EventsList extends Component {
       case STATUS.LOADING:
         return <Loading />;
       case STATUS.LOADED:
-        return <div className="events-list-container">
-          <SearchBar inputValue={eventsFilter} inputOnChange={this.handleFilter}/>
-          { this.listingEvents() }
-        </div> 
+        return <div className="events-list-inside-background">
+          <div className="events-list-container">
+            <SearchBar inputValue={eventsFilter} inputOnChange={this.handleFilter}/>
+            { this.listingEvents() }
+          </div>
+        </div>
       case STATUS.ERROR:
         return <Error500 />
     }

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Loading from "../views/Loading";
 import Error500 from "../views/Error500";
 
-
 import "./css/surferProfile.css";
 
-import apiClient from "../services/apiClient";
 import { Link } from "react-router-dom";
 import { UserContext } from '../context/UserContext';
+
+import apiClient from "../services/apiClient";
 
 
 
@@ -26,20 +26,20 @@ class SurferProfile extends Component {
   }
 
   componentDidMount() {
+    this.hanldeSurferProfile();
+  }
+
+  hanldeSurferProfile = () => {
     let surferId = this.props.match.params.id;
-    console.log(surferId)
     apiClient
       .surferProfile(surferId)
       .then((responseSurfer) => {
-        console.log("data", responseSurfer.data);
         apiClient
           .eventSurferOwner(surferId)
           .then((responseOwner) => {
-            console.log("EVENT OWNER:", responseOwner)
             apiClient
               .eventSurferParticipants(surferId)
               .then((responseParticipants) => {
-                console.log("EVENT PARTICIPANTS:", responseParticipants.data)
                 this.setState({
                   surfer: responseSurfer.data.surfer,
                   eventOwner: responseOwner.data,
@@ -130,8 +130,8 @@ class SurferProfile extends Component {
                 <Link className="surfer-profile-back-button" to="/surfers-list">Back</Link>
               </section>
             </div>
-        )}
-      </UserContext.Consumer>
+          )}
+        </UserContext.Consumer>
       ) 
     } 
   }
