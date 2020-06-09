@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import "../eventsForm/eventsForm.css";
 
 
-
 class ReviewForm extends Component {
   render() {
     const { onSubmit, reviewTitle, reviewNotification, reviewDescription, onChange, buttonName, onClick } = this.props;

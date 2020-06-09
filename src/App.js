@@ -89,9 +89,9 @@ class App extends Component {
           user,
         });
       })
-      .catch((error) => {
+      .catch(() => {
         this.setState({
-          appSignupNotification: <p className="signup-form-notification">This <strong style={{ color: "#29d1d1"}}>EMAIL</strong> already registered</p>,
+          appSignupNotification: <p className="signup-form-notification">This <strong style={{ color: "#29d1d1"}}>EMAIL</strong> is already registered</p>,
           isLoggedIn: false,
           user: null,
         });

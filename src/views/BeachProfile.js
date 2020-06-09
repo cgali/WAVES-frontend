@@ -95,6 +95,10 @@ class BeachProfile extends Component {
       this.setState({
         rateNotification: <p className="rate-form-notification">The <strong style={{ color: "#14a714"}}>SOCIAL ENVIRONMENT</strong> field cannot be empty</p>,
       }) 
+    } else if ( socialEnvironmentRate > 5 || socialEnvironmentRate < 1 || backgroundRate > 5 || backgroundRate < 1 || waveRate > 5 || waveRate < 1 ) {
+      this.setState({
+        rateNotification: <p className="rate-form-notification">The <strong style={{ color: "#14a714"}}>NUMBER</strong> must be between 1 and 5</p>,
+      }) 
     } else {
       this.setState({ status: STATUS.LOADING })
       apiClient

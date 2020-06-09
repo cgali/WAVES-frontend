@@ -20,8 +20,6 @@ class RateForm extends Component {
               type="number"
               name="waveRate"
               id="waveRate"
-              min="1"
-              max="5"
               value={ waveRate }
               onChange={ onChange }
             />
@@ -33,8 +31,6 @@ class RateForm extends Component {
               type="number"
               name="backgroundRate"
               id="backgroundRate"
-              min="1"
-              max="5"
               value={ backgroundRate }
               onChange={ onChange }
             />
@@ -46,8 +42,6 @@ class RateForm extends Component {
               type="number"
               name="socialEnvironmentRate"
               id="socialEnvironmentRate"
-              min="0"
-              max="5"
               value={ socialEnvironmentRate }
               onChange={ onChange }
             />

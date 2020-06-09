@@ -97,10 +97,9 @@ handleDeleteProfile = (handleLogginOut) => {
     .deleteProfile()
     .then (() => {
       handleLogginOut()
-      console.log('Im here')
     })
     .catch((error) => {
-      console.log("EEEERRRRROOOOORRRR")
+      console.log(error)
     })
 }
 

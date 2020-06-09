@@ -19,8 +19,8 @@ class Layout extends Component {
   }
 
   handleLayoutLogout = (e) => {
-    const { onLogout } = this.props;
     e.preventDefault();
+    const { onLogout } = this.props;
     onLogout()
     this.handleOverlay()
     this.setState({
@@ -84,6 +84,15 @@ class Layout extends Component {
     })
   }
 
+  handleImage = () => {
+    const { user } = this.props;
+    if (user.image === undefined) {
+      return "../standard.png"
+    } else {
+      return user.data.image
+    }
+  }
+
 
   render() {
     const { user, children, isLoggedIn } = this.props;
@@ -106,11 +115,11 @@ class Layout extends Component {
               </>
               )}
               <button className="logos-box" style={{ backgroundColor: backgroundColor }} onClick={this.handleVisibility}>
-                <img clasname="logos" style={{ width: "2.5rem", marginLeft: "0.5rem" }} src="../logos/image-logo.png" alt="logo img"/>
-                <img clasname="logos" style={{ width: "6.5rem", marginLeft: "0.5rem" }} src="../logos/waves-logo.png" alt="logo letter"/>
+                <img className="logos" style={{ width: "2.5rem", marginLeft: "0.5rem" }} src="../logos/image-logo.png" alt="logo img"/>
+                <img className="logos" style={{ width: "6.5rem", marginLeft: "0.5rem" }} src="../logos/waves-logo.png" alt="logo letter"/>
               </button>
             </div>
-            <Link onClick={this.handleOverlay} className="layout-profile-button" to="/profile" ><img className="img-profile-box" src={ !user.data.image ? "../standard.png" : user.data.image   } alt="profile"/></Link>
+            <Link onClick={this.handleOverlay} className="layout-profile-button" to="/profile" ><img className="img-profile-box" src={ this.handleImage() } alt="profile"/></Link>
           </header>
         }
         { children }
