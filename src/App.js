@@ -49,6 +49,7 @@ class App extends Component {
           isLoading: false,
           isLoggedIn: true,
         });
+        console.log("app:", this.state.user)
       })
       .catch((error) => {
         this.setState({
@@ -117,6 +118,13 @@ class App extends Component {
       appLoginNotification: null,
       appSignupNotification: null
     })
+  }
+
+  handleStateUser = (updatedUser) => {
+    this.setState({
+      user: updatedUser
+    })
+    console.log("HANDLE STATE USER")
   }
 
   render() {

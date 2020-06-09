@@ -60,8 +60,7 @@ handleChange = (e) => {
   });
 };
 
-handleUpdate = (e) => {
-  e.preventDefault();
+handleUpdate = (handleStateUser) => {
   const { userModified, userData } = this.state;
   userModified.frequentsBeaches && (userModified.frequentsBeaches = userModified.frequentsBeaches.split(','))
   userModified.typeOfWaves && (userModified.typeOfWaves = userModified.typeOfWaves.split(','))
@@ -75,13 +74,8 @@ handleUpdate = (e) => {
       this.setState ({
         updateProfileNotification: <p className="update-profile-form-notification">The <strong style={{ color: "#14a714"}}>SURNAME</strong> field cannot be empty</p>,
       })
-  } else if ((userData.level === undefined || userData.level === "")
-    && (userModified.level === undefined || userModified.level === "")) {
-      this.setState ({
-        updateProfileNotification: <p className="update-profile-form-notification">The <strong style={{ color: "#14a714"}}>LEVEL</strong> field cannot be empty</p>,
-      })
   } else {
-      apiClient
+    apiClient
       .updateProfile(userModified)
       .then(() => {
         this.props.history.push('/profile')
@@ -118,7 +112,6 @@ renderForm = () => {
     <UserContext.Consumer>
       {({ handleLogginOut }) => (
         <div className="update-profile-form-container" style={{ backgroundImage: `url(${Background})`}}>
-          
             { deleteNotification && (
               <>
               <div className="update-profile-overlay" />

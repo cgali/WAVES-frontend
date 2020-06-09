@@ -90,6 +90,10 @@
   margin-top: 1.4rem;
 }
 
+.update-profile-input-button:focus, .update-profile-delete-button:focus, .update-profile-back-button:focus {
+  outline: none;
+}
+
 .update-profile-back-button {
   background-color: #ff8800;
 }

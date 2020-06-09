@@ -15,7 +15,8 @@ class Layout extends Component {
   }
 
   componentDidMount = () => {
-    console.log(window.location.pathname)
+    const {user} = this.props;
+    console.log('layout:',user)
   }
 
   handleLayoutLogout = (e) => {
@@ -86,7 +87,7 @@ class Layout extends Component {
 
   handleImage = () => {
     const { user } = this.props;
-    if (user.image === undefined) {
+    if (user.data === undefined || user.data.image === "" ) {
       return "../standard.png"
     } else {
       return user.data.image

@@ -65,8 +65,8 @@ class UserProfile extends Component {
             <div className="surfer-info-info">
               <h2 className="surfer-info-name">{ user.name} { user.surname }</h2>
               <div>
-                <p className="surfer-info-title"><strong>Level:</strong> { user.level }.</p>
-                <p className="surfer-info-title"><strong>Favorite board:</strong> { user.favoriteBoard }.</p>
+                <p className="surfer-info-title"><strong>Level:</strong> { user.level }</p>
+                <p className="surfer-info-title"><strong>Favorite board:</strong> { user.favoriteBoard }</p>
                 <div>
                   <p className="surfer-info-title"><strong>Waves:</strong></p>
                   <ul className="surfer-info-list-style">
