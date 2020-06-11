@@ -106,12 +106,11 @@ handleStateDelete = () => {
 renderForm = () => {
   const { updateProfileNotification, deleteNotification } = this.state;
   const { image, name, surname, level, favoriteBoard, typeOfWaves, frequentsBeaches } = this.state.userData;
-  const Background = 'https://k62.kn3.net/taringa/7/7/E/1/F/B/Nosha/550x978_1E3.jpg'
 
   return (
     <UserContext.Consumer>
       {({ handleLogginOut }) => (
-        <div className="update-profile-form-container" style={{ backgroundImage: `url(${Background})`}}>
+        <div className="update-profile-form-container" >
             { deleteNotification && (
               <>
               <div className="update-profile-overlay" />
