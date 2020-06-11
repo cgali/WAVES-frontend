@@ -292,13 +292,16 @@ class BeachProfile extends Component {
                       onChange={ this.handleChange } 
                       buttonName="Rate"
                       onClick={ this.handleStateAddRate }
+                      beach={ beach }
+                      user={ user }
+                      onDelete= { this.handleDeleteRate }
                     />
-                    {beach.rate.map((rate, index) => {
+                    {/* {beach.rate.map((rate, index) => {
                       console.log("wave:", this.state.waveRate, "background:", this.state.backgroundRate, "social:", this.state.socialEnvironmentRate)
                       return(
                         user.data._id === rate.owner && (<button className="delete-rate-button" key={`${rate.owner.name}_${index}`} onClick={ () => this.handleDeleteRate(rate._id)}>Delete</button>)
                       )
-                    })}
+                    })} */}
                   </>
                 )}
               </section>

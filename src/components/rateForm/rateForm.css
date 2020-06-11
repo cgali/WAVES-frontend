@@ -40,7 +40,7 @@
   justify-content: flex-start;
 }
 
-.close-rate-form-button, .input-rate-form-button {
+.close-rate-form-button, .input-rate-form-button, .delete-rate-button {
   border: 2px solid white;
   background-color: #e7961d;
   border-radius: 1rem;
@@ -51,6 +51,11 @@
   padding: 0.1rem 0.7rem;
   height: 2.5rem;
   margin-top: 1.4rem;
+}
+
+.delete-rate-button {
+  background-color: red;
+  margin-right: 1rem;
 }
 
 .input-rate-form-button {

@@ -5,8 +5,13 @@ import "../rateForm/rateForm.css";
 
 
 class RateForm extends Component {
+
+  state = {
+    delete: false,
+  }
+
   render() {
-    const { onSubmit, rateNotification, waveRate, backgroundRate, socialEnvironmentRate, onChange, buttonName, onClick } = this.props;
+    const { onSubmit, rateNotification, waveRate, backgroundRate, socialEnvironmentRate, onChange, buttonName, onClick, beach, user, onDelete } = this.props;
     return(
       <div className="rate-form-container">
         <h2 className="rate-form-title">Add a rate</h2>
@@ -47,6 +52,12 @@ class RateForm extends Component {
             />
           </div>
           <div className="rate-form-buttons-box">
+            {beach.rate.map((rate, index) => {
+              return(
+                user.data._id === rate.owner && (
+                <button className="delete-rate-button" key={`${rate.owner.name}_${index}`} onClick={ () => onDelete(rate._id)}>Delete</button>)
+              )
+            })}
             <input className="input-rate-form-button" type="submit" value={ buttonName } />
             <button className="close-rate-form-button" onClick={ onClick }>Close</button>
           </div>
