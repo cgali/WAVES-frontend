@@ -11,6 +11,11 @@
 
 **http://localhost:3000**
 
+## _*Credentials*_
+
+* User: james@gmail.com
+* Password: 12345a
+
 ## _*Description*_
 This project is based on the idea of various webpages like [PureSurfers social networking by surfers for surfing. | By surfers for surfers.](http://www.puresurfers.com/)[Surf Reports, Surf Forecasts and Surfing Photos - Magicseaweed.com](https://magicseaweed.com/), , [World Surf League - The global home of surfing](https://www.worldsurfleague.com/),[Facebook - Entrar o registrarse](https://www.facebook.com/)…and many other. The idea is to connect the surfers of all of the country to go surfing together, know more about each other and help the surfing community to grow healthy. For that, the surfers can make events and published them at the app, so people can join in and go. These types of events could be competitions, training, beach bbq or just go surfing. In the other hand, like a user of the app you can rate some specs of every beach like the quality of water or sand, the height of the waves... so and app made for a surfer to surfers. Aloha!! 🤙
 
@@ -18,7 +23,6 @@ This project is based on the idea of various webpages like [PureSurfers social n
 I'm always searching for the conditions of waves and seeing a lot of app I'm the only surfer in my family and I'm always going surfing alone. Some times it's cool to be alone in the water but if you don't share your time, your waves and your passion... is like that is missing something... For that reason, I decided to make a social network for surfers.
 
 ## _*User Stories*_
-* **404 page** - As a user, I need to see a 404 page when I want to go to a non-existing page, to know that it's my problem and not of the web page. Like a bonus, If I can I would make a complete error page.
 
 * **500 page**  - As a user, I need to see a 500 error page when it's something go wrong but it isn't my fault. Like the 404 error page, I will try to do a complete error page.
 
@@ -28,21 +32,21 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 
 * **Surfers list page** - As a user, I want to see all the surfers’ profile available.
 
-* **Surfer detail page** - As a user, I want to see the surfer’s profile information (name, level, frequent beaches, the board that it have….). And have the possibility of following that surfer.
+* **Surfer detail page** - As a user, I want to see the surfer’s profile information (name, level, frequent beaches, the board that it have….).
 
 * **Events page form** - As a user, I want to be able to make a new event.
 
 * **Events list page** - As a  user, I want to see a list of all events and search it by name, type or beach.
 
-* **Event detail page** - As a user, I want to have the option to modify the information inside the event for fix typos error, to add more information or to change the beach or date.
+* **Event detail page** - As a user, I want to have the option to modify the information inside the event for fix typos error, to add more information or to change the beach or date of the event that I'm the owner. For other events, I have the opportunity to Join in or Disjoin. Also you can make a review and delete your reviews.
 
-* **Beach list page** - As a user, I want to see a list (or a map) with all the available beaches.
+* **Beach list page** - As a user, I want to see a list with all the available beaches.
 
-* **Beach detail page** - As a user, I want to see the details of the beach like height of waves, the quality of water and sand, the type of background… Also I want to see the reviews of other users about that beach.
-
-* **Beach review form** - As a user, I want to be able to make, update or delete a review of that beach and rate that beach. As a user master, I need to be able to delete all the reviews that not respect other users or don’t have sense.
+* **Beach detail page** - As a user, I want to see the details of the beach like height of waves, the quality of water and sand, the type of background… Also I want to see the reviews of other users about that beach. And finally rate the differents specifications about the beach.
 
 * **About us page** - As a user, I can go to that page to know about the web developer of that app.
+
+* **Contact page** - As a user, I can go to that page to see the contact information.
 
 ## _*MVP*_
 * Make a navbar  for the footer (sticky).
@@ -115,16 +119,16 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 | Sign up            | `/signup`     | Sign up page     | User |
 | Profile             | `/profile`     | Profile page     | User |
 | Update profile             | `/profile/update`     | Update profile info     | User |
-| Protected        | `/protected` | Protected view | ???|
+| Contact        | `/contact` | Contact information | For all|
+| Abouts us        | `/about-us` | Web developer information | For all|
 | Surfer list            | `/surfer-list`     | All the articles posted | User |
 | Surfer details            | `/surfer-list/:id`     | Details of an article | User |
 | Event list            | `/events-list`     | All the surfer profiles  | User|
 | Event detail            | `/events-list/:id`     | All the surfer profiles  | User|
 | Add event            | `/events-list/add`     | Add new post | User |
-| Update event            | `/events-list/update`     | Update a post | User |
 | Beaches list            | `/beaches-list`     | All the beaches available | User |
 | Beach detail            | `/beaches-list`     | Details of a beach | User |
-| 404 error            | `/error-404`     | 404 error page     | User/Master |
+| Loading            | `/loading`     | Loading page     | User |
 | 500 error            | `/error-500`     | 500 error page     | User/Master |
 
 ## _*Links*_
@@ -135,10 +139,10 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 ### *Git*
 The url to the repository and to the deployed project
 
-https://github.com/cgali/WAVE-frontend
-https://github.com/cgali/WAVE-backend
+Frontend: https://github.com/cgali/WAVE-frontend
+Backend: https://github.com/cgali/WAVE-backend
 
-[Deploy Link](http://heroku.com/)
+[Deploy Link](https://waves-app.netlify.app/login)
 
 ### *Slides*
-[Slides Link](http://slides.com/)
+[Slides Link](https://slides.com/carlesgali/deck-bb83ca)
