@@ -1,6 +1,7 @@
 .add-event-form-container {
   padding: 2.8rem 0 2rem 0;
   height: 100%;
+  background-image: url(../../images/back-van.jpg);
 }
 
 .add-event-form-title {

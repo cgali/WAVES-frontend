@@ -71,10 +71,9 @@ class EventAddForm extends Component {
 
   renderForm = () => {
     const { image, title, date, description, eventCreateNotification } = this.state;
-    const Background = 'https://k62.kn3.net/taringa/5/5/D/B/2/A/Nosha/550x977_957.jpg';
     
     return(
-      <div className="add-event-form-container" style={{ backgroundImage: `url(${Background})`}}>
+      <div className="add-event-form-container">
         <div className="add-event-form-box">
           <h2 className="add-event-form-title">Create event</h2>
           { eventCreateNotification }
