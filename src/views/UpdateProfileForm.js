@@ -110,7 +110,11 @@ renderForm = () => {
   return (
     <UserContext.Consumer>
       {({ handleLogginOut }) => (
+<<<<<<< HEAD
         <div className="update-profile-form-container" >
+=======
+        <div className="update-profile-form-container">
+>>>>>>> master
             { deleteNotification && (
               <>
               <div className="update-profile-overlay" />
