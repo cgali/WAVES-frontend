@@ -42,6 +42,9 @@ class Layout extends Component {
     this.setState({
       isVisible: false,
       backgroundColor: '#26afe6',
+      surfersActive: '#26afe6',
+      beachesActive: '#26afe6',
+      eventsActive: '#26afe6',
     })
   }
 
@@ -120,7 +123,7 @@ class Layout extends Component {
                 <img className="logos" style={{ width: "6.5rem", marginLeft: "0.5rem" }} src="../logos/waves-logo.png" alt="logo letter"/>
               </button>
             </div>
-            <Link onClick={this.handleOverlay} className="layout-profile-button" to="/profile" ><img className="img-profile-box" src={ this.handleImage() } alt="profile"/></Link>
+            <Link className="layout-profile-button" to="/profile" ><img onClick={this.handleOverlay} className="img-profile-box" src={ this.handleImage() } alt="profile"/></Link>
           </header>
         }
         { children }

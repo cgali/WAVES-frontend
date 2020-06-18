@@ -348,7 +348,7 @@ class EventProfile extends Component {
                       <ul className="event-profile-reviews-ul">
                         {event.reviews.map((review, index) => {
                           const reviewDate = new Date(review.created_at);
-                          const formatReviewDate = `${reviewDate.getDate()}-${reviewDate.getMonth()}-${reviewDate.getFullYear()} // ${reviewDate.getHours()}:${reviewDate.getMinutes()}:${reviewDate.getSeconds()}`
+                          const formatReviewDate = `${reviewDate.getDate()}-${reviewDate.getMonth() + 1}-${reviewDate.getFullYear()} // ${reviewDate.getHours()}:${reviewDate.getMinutes()}:${reviewDate.getSeconds()}`
                           return (
                             <li className="event-profile-single-review-box" key={`${review.owner.name}_${index}`}>
                               <p><strong>{ review.reviewTitle }</strong></p>

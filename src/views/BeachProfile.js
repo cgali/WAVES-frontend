@@ -326,7 +326,7 @@ class BeachProfile extends Component {
                 <ul className="beach-profile-reviews-ul">
                   { beach.reviews.map((review, index) => {
                     const reviewDate = new Date(review.created_at);
-                    const formatReviewDate = `${reviewDate.getDate()}-${reviewDate.getMonth()}-${reviewDate.getFullYear()} // ${reviewDate.getHours()}:${reviewDate.getMinutes()}:${reviewDate.getSeconds()}`
+                    const formatReviewDate = `${reviewDate.getDate()}-${reviewDate.getMonth() + 1}-${reviewDate.getFullYear()} // ${reviewDate.getHours()}:${reviewDate.getMinutes()}:${reviewDate.getSeconds()}`
                     return (
                       <li className="beach-profile-single-review-box" key={`${review.owner.name}_${index}`}>
                         <p><strong>{ review.reviewTitle }</strong></p>

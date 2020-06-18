@@ -49,18 +49,19 @@ handleUpdateProfile = () => {
 
 handleChange = (e) => {
   this.setState({
-    userModified: {
-      ...this.state.userModified,
-      [e.target.name]: e.target.value,
-    },
     userData: {
       ...this.state.userData,
+      [e.target.name]: e.target.value,
+    },
+    userModified: {
+      ...this.state.userModified,
       [e.target.name]: e.target.value,
     }
   });
 };
 
-handleUpdate = (handleStateUser) => {
+handleUpdate = (e) => {
+  e.preventDefault();
   const { userModified, userData } = this.state;
   userModified.frequentsBeaches && (userModified.frequentsBeaches = userModified.frequentsBeaches.split(','))
   userModified.typeOfWaves && (userModified.typeOfWaves = userModified.typeOfWaves.split(','))

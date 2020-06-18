@@ -150,6 +150,7 @@ class App extends Component {
                     appSignupNotification: appSignupNotification,
                     handleAppStateNavbar: this.handleAppStateNavbar,
                     handleLogginOut: this.handleLogout,
+                    handleStateUser: this.handleStateUser,
                   }}>
                   <AnonRoute exact path={"/"} isLoggedIn={isLoggedIn}>
                     <Login onLogin={this.handleLogin} handleAppStateNotification={this.handleAppStateNotification}/>
