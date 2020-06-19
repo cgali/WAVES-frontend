@@ -70,7 +70,7 @@ class SurferProfile extends Component {
         <UserContext.Consumer>
           {({ handleAppStateNavbar }) => (
             <div className="surfer-profile-container">
-              <img className="surfer-profile-image" src={ surfer.image} alt="surfer"/>
+              <img className="surfer-profile-image" src={ surfer.image ? surfer.image : "../standard.png" } alt="surfer"/>
               <section className="surfer-info-box">
                 <div className="surfer-info-info">
                   <h2 className="surfer-info-name">{ surfer.name} { surfer.surname }</h2>
