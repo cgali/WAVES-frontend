@@ -44,7 +44,19 @@ class UserProfile extends Component {
                   status: STATUS.LOADED
                 })
               })
+              .catch((error) => {
+                this.setState({
+                  error: error.name,
+                  status: STATUS.ERROR,
+                });
+              });
           })
+          .catch((error) => {
+            this.setState({
+              error: error.name,
+              status: STATUS.ERROR,
+            });
+          });
       })
       .catch((error) => {
         this.setState({
